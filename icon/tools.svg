@@ -1,0 +1,25 @@
+<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <ellipse stroke-width="8" stroke="#ffffff" ry="9" rx="9" id="svg_9" cy="25" cx="25" fill="none"/>
+  <g transform="rotate(120 25 25)" id="svg_35">
+   <rect transform="rotate(-101 10.3878 27.8607)" stroke="#ffffff" stroke-width="0.3" id="svg_15" height="5.69969" width="4.17014" y="25.0109" x="8.30275" fill="#ffffff"/>
+   <rect transform="rotate(-280 39.6012 22.4533)" stroke="#ffffff" stroke-width="0.3" id="svg_14" height="5.77634" width="4.17014" y="19.56511" x="37.51608" fill="#ffffff"/>
+   <rect transform="rotate(-114 11.3682 31.0168)" stroke="#ffffff" stroke-width="0.3" id="svg_21" height="5.69946" width="4.17014" y="28.16706" x="9.28318" fill="#ffffff"/>
+   <rect transform="rotate(-114 38.5433 18.9962)" stroke="#ffffff" stroke-width="0.3" id="svg_22" height="5.76325" width="4.17014" y="16.11456" x="36.45821" fill="#ffffff"/>
+  </g>
+  <g id="svg_40">
+   <rect transform="rotate(-101 10.3315 27.7118)" stroke="#ffffff" stroke-width="0.3" id="svg_36" height="5.69969" width="4.17014" y="24.86196" x="8.24643" fill="#ffffff"/>
+   <rect transform="rotate(-280 39.5448 22.3043)" stroke="#ffffff" stroke-width="0.3" id="svg_37" height="5.77634" width="4.17014" y="19.41618" x="37.45976" fill="#ffffff"/>
+   <rect transform="rotate(-114 11.3119 30.8678)" stroke="#ffffff" stroke-width="0.3" id="svg_38" height="5.69946" width="4.17014" y="28.01812" x="9.22685" fill="#ffffff"/>
+   <rect transform="rotate(-114 38.487 18.8472)" stroke="#ffffff" stroke-width="0.3" id="svg_39" height="5.76325" width="4.17014" y="15.96562" x="36.40189" fill="#ffffff"/>
+  </g>
+  <g transform="rotate(60 25 25)" id="svg_45">
+   <rect transform="rotate(-101 10.3878 27.8607)" stroke="#ffffff" stroke-width="0.3" id="svg_41" height="5.69969" width="4.17014" y="25.0109" x="8.30275" fill="#ffffff"/>
+   <rect transform="rotate(-280 39.6012 22.4533)" stroke="#ffffff" stroke-width="0.3" id="svg_42" height="5.77634" width="4.17014" y="19.56511" x="37.51608" fill="#ffffff"/>
+   <rect transform="rotate(-114 11.3682 31.0168)" stroke="#ffffff" stroke-width="0.3" id="svg_43" height="5.69946" width="4.17014" y="28.16706" x="9.28318" fill="#ffffff"/>
+   <rect transform="rotate(-114 38.5433 18.9962)" stroke="#ffffff" stroke-width="0.3" id="svg_44" height="5.76325" width="4.17014" y="16.11456" x="36.45821" fill="#ffffff"/>
+  </g>
+ </g>
+
+</svg>

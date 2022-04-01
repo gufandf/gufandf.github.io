@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="refresh" content="">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./icon/headimg.png" />
+    <link rel="bookmark"href="./icon/headimg.png" />
+    <title>gufandf的小破站</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="javaScript.js"></script>
+    <style>
+        body::-webkit-scrollbar
+        {
+            width: 0px;
+            height: 0px;
+        }
+        ::-webkit-scrollbar
+        {
+            width: 10px;
+            height: 16px;
+            background-color: #00000000;
+        }
+
+        /*定义滚动条轨道 内阴影+圆角*/
+        ::-webkit-scrollbar-track
+        {
+            border-radius: 10px;
+            background-color: #00000000;
+        }
+
+        /*定义滑块 内阴影+圆角*/
+        ::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            background-color: #1d2325;
+        }
+    </style>
+</head>
+<body>
+    <div class="myself" id="myselfClose" onclick="myselfOpen();closeAll()">
+        <h1>为什么是<br>Gufandf</h1>
+        <p>这件事要从2018年说起。当时的明日之后很火，我也去玩。在创建角色的时候不知道叫什么，就乱打一通，便成了这个名字的雏形“孤帆df”。在这之后，无论什么游戏，我的id都叫孤帆df，我的小号就叫“孤帆fd”。后来，迷上了steam，注册账号时用了全英文的名字，也就是 gufandf。</p>
+    </div>
+    <div class="card">
+        <h1>这是哪？我可以从这里得到什么？</h1>
+    </div>
+    <div class="card">
+        <p>以普遍理性而言，你什么也得不到，这就是我建的一个小破站（你指望得到什么？）。或许你可以翻翻数据库，说不定我上传了什么╮(╯▽╰)╭</p>
+        <p>但是，我可能会不定期在里上面发一下我做的游戏或者找到的工具什么的，还会有歌曲推荐和歌单推荐</p>
+        <p><a href="https://music.163.com/#/user/home?id=1923366995">https://music.163.com/#/user/home?id=1923366995</a><br>网易云主页</p>
+        <p><a href="https://space.bilibili.com/449104347">https://space.bilibili.com/449104347</a><br>B站账号</p>
+    </div>
+    <!-- 工具推荐 -->
+    <div class="card foldable toolsShare" id="open">
+        <div class="foldhead" onclick="changeFold('toolsShare')">
+            <img src="./icon/tools.svg" alt="">
+            <h1>工具推荐</h1>
+            <img class="strange" src="./icon/下拉.svg" alt="">
+        </div>
+        <div class="body">
+            <h1>我认为很好用的工具都在这里</h1>
+            <li class="unfoldable"><h1><img src="./icon/Snipaste.svg" alt="图无书砸">Snipaste</h1><a class="button" href="https://zh.snipaste.com/" target="_blank" download>Download</a></li>
+            <p>Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！下载并打开 Snipaste，按下 F1 来开始截图，再按 F3，截图就在桌面置顶显示了。就这么简单！</p>
+            <li class="unfoldable"><h1><img src="./icon/OBS.png" alt="图无书砸">OBS Studio</h1><a class="button" href="https://obsproject.com/" target="_blank" download>Download</a></li>
+            <p>用于视频录制和直播的免费开源软件 OBS。</p>
+            <li class="unfoldable"><h1><img src="./icon/BlockBench.png" alt="图无书砸">BlockBench</h1><a class="button" href="http://www.electronjs.org/apps/blockbench" target="_blank" download>Download</a></li>
+            <p>Blockbench是一款免费的现代模型编辑器，适用于具有像素艺术纹理的低多边形和方形模型。模型可以导出为标准格式，以便共享、渲染、3D打印或在游戏引擎中使用。Minecraft Java和基岩版也有多种专用格式，具有特定格式的功能。</p>
+            <li class="unfoldable"><h1><img src="./icon/Bandizip.ico" alt="图无书砸">Bandisoft</h1><a class="button" href="http://www.bandisoft.com/" target="_blank" download>Download</a></li>
+            <p>Bandizip 是一个强大的多功能压缩文件管理工具，可提供很快的解压缩速度和其他各种实用功能。 这是一个免费的软件，其付费版本更是可以使用更多的实用功能。<br>Honeyview 是一款快速的图片查看器，支持多种格式。</p>
+            <li class="unfoldable"><h1><img src="./icon/utools.png" alt="图无书砸">uTools</h1><a class="button" href="http://www.bandisoft.com/" target="_blank" download>Download</a></li>
+            <p>uTools 插件应用；轻量、安全、简洁、无广告、不流氓。在任何界面下通过快捷键「Alt + 空格」呼出 uTools，或是点击鼠标中键呼出超级面板一个软件该有的样子：即用即走，无打扰，不中断你当下的工作。</p>
+        </div>
+    </div>
+    <!-- 歌曲推荐 -->
+    <div class="card foldable musicShare" id="open">
+        <div class="foldhead" onclick="changeFold('musicShare')">
+            <img src="./icon/clouldmusic.png" alt="">
+            <h1>歌曲推荐</h1>
+            <img class="strange" src="./icon/下拉.svg" alt="">
+        </div>
+        <div class="body">
+        <li class="unfoldable">
+            <h1><img src="http://p1.music.126.net/iSQWcLMBKjSH92t37PvvNQ==/109951164578636695.jpg?param=130y130" alt="图无书砸">Checklist (feat. Chromeo)</h1>
+            <a class="button" href="https://music.163.com/?from=itab#/song?id=1411899517" target="_blank">listen</a>
+        </li>
+        <li class="unfoldable">
+            <h1><img src="http://p1.music.126.net/8E-x2iuU5Lw9rcOxUfnaAg==/109951165985927023.jpg?param=130y130" alt="图无书砸">Break My Face</h1>
+            <a class="button" href="https://music.163.com/?from=itab#/song?id=1361129266" target="_blank">listen</a>
+        </li>
+        <li class="unfoldable">
+            <h1><img src="http://p1.music.126.net/qJR45hKvrvRf-vjmN1BDrA==/109951166086029047.jpg?param=130y130" alt="图无书砸">ブラウニー 布朗尼 Brownie</h1>
+            <a class="button" href="https://music.163.com/?from=itab#/song?id=1853173505" target="_blank">listen</a>
+        </li>
+        <li class="unfoldable">
+            <h1><img src="http://p1.music.126.net/D1JBUYpg1pwsmvABb_IJlg==/2532175279670288.jpg?param=130y130" alt="图无书砸">Mellohi</h1>
+            <a class="button" href="https://music.163.com/?from=itab#/song?id=27961168" target="_blank">listen</a>
+        </li>
+        <li class="unfoldable">
+            <h1><img src="http://p1.music.126.net/RVtNNlBi20vY6sCvjdIOkQ==/109951165062961416.jpg?param=130y130" alt="图无书砸">White Lie</h1>
+            <a class="button" href="https://music.163.com/?from=itab#/song?id=1610477" target="_blank">listen</a>
+        </li>
+        <li class="unfoldable">
+            <h1><img src="http://p2.music.126.net/kc4cdEZ15oFdBCqkzQp4mw==/109951165983231522.jpg?param=130y130" alt="图无书砸">Sucker for You</h1>
+            <a class="button" href="https://music.163.com/?from=itab#/song?id=511678913" target="_blank">listen</a>
+        </li>
+        <li class="unfoldable">
+            <h1><img src="http://p1.music.126.net/48JmysoLt2kNVX7z01sSpA==/109951163779857324.jpg?param=130y130" alt="图无书砸">Drama</h1>
+            <a class="button" href="https://music.163.com/?from=itab#/song?id=1337130734" target="_blank">listen</a>
+        </li>
+        </div>
+    </div>
+    <!-- BTV -->
+    <div class="card foldable bili" id="open">
+        <div class="foldhead" onclick="changeFold('bili')">
+            <img src="./icon/bilibili.png" alt="">
+            <h1>BTV</h1>
+            <img class="strange" src="./icon/下拉.svg" alt="">
+        </div>
+        <iframe style="width: 100%;height: 550px;border-radius: 20px;box-shadow: #1d2325 0 0 10px;" src="http://player.bilibili.com/player.html?aid=382562749&bvid=BV14Z4y1B7Pm&cid=557601039&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <style>
+            .foldable.bili#open{
+                height: 620px;
+                transition: all ease-in-out 0.2s;
+            }
+            .foldable.bili#open .body{
+                height: 620px;
+                transition: all ease-in-out 0.2s;
+            }
+        </style>
+    </div>
+    <!-- steam -->
+    <div class="card foldable steam" id="open">
+        <div class="foldhead" onclick="changeFold('steam')">
+            <img src="./icon/steam.png" alt="">
+            <h1>Steam好游</h1>
+            <img class="strange" src="./icon/下拉.svg" alt="">
+        </div>
+        <div class="body">
+            <li class="unfoldable" style="background-color: #3b6374;"><h1><img src="https://media.st.dl.pinyuncloud.com/steam/apps/620/header.jpg?t=1610490805" alt="图无书砸">
+                Portal2</h1>
+                <a class="button" href="https://store.steampowered.com/app/620/Portal_2/" target="_blank" download>
+                    Steam 商店</a></li>
+            <li class="unfoldable" style="background-color: #e668e6;"><h1><img src="https://media.st.dl.pinyuncloud.com/steam/apps/774171/header.jpg?t=1644560182" alt="图无书砸">
+                Muse Dash</h1>
+                <a class="button" href="https://store.steampowered.com/app/774171/Muse_Dash/" target="_blank" download>
+                    Steam 商店</a></li>
+            <li class="unfoldable" style="background-color: #000000;"><h1><img src="https://media.st.dl.pinyuncloud.com/steam/apps/753640/header.jpg?t=1633026544" alt="图无书砸">
+                Outer Wilds</h1>
+                <a class="button" href="https://store.steampowered.com/app/753640/Outer_Wilds/" target="_blank" download>
+                    Steam 商店</a></li>
+        </div>
+    </div>
+    <!-- 高木同学 -->
+    <div class="card foldable tak" id="close">
+        <div class="foldhead" onclick="changeFold('tak')">
+            <img style="border-radius: 20px;" src="https://i2.hdslb.com/bfs/face/9618509b0e74f4427f0e6ae53f28eaab7dbcaf89.jpg@240w_240h_1c_1s.webp" alt="">
+            <h1>高木同学天下第一！</h1>
+            <img class="strange" src="./icon/下拉.svg" alt="">
+        </div>
+        <div class="body">
+            <!-- <p>“捉弄”缩短了二人的距离，2022年想要守候的初恋就在这里!</p> -->
+            <a style="text-decoration: none;" href="https://www.bilibili.com/bangumi/media/md28221403/?spm_id_from=666.25.b_6d656469615f6d6f64756c65.1" target="_blank">
+            <li class="unfoldable" style="background-image: url('https://i0.hdslb.com/bfs/bangumi/4c7324327dd9ae035007c3e9bc40cd2ce08635b1.jpg@450w_600h.webp');background-size: cover;height: 270px;background-position: center;">
+                <!-- <img style="width: 225px;height: 300px;display: block;border-radius: 20px;" src="https://i0.hdslb.com/bfs/bangumi/4c7324327dd9ae035007c3e9bc40cd2ce08635b1.jpg@450w_600h.webp" alt="图无书砸"> -->
+                <!-- <h1 style="width: 70%;text-shadow: #000000 0 0 2px;">“今天一定要捉弄高木同学，让她害羞！”某所初中里，邻座女生高木同学总是捉弄男生西片。西片为了反过来戏弄高木同学，每天都在奋斗着……高木同学和西片的全力“捉弄”青春之战就此开始。</h1> -->
+                <!-- <a style="width: 25%" class="button" href="https://www.bilibili.com/bangumi/media/md28221403/?spm_id_from=666.25.b_6d656469615f6d6f64756c65.1" target="_blank" download>追番</a> -->
+            </li>
+            </a>
+            <a style="text-decoration: none;" href="https://www.bilibili.com/bangumi/media/md28235860/?spm_id_from=666.25.b_6d656469615f6d6f64756c65.1" target="_blank">
+            <li class="unfoldable" style="background-image: url('https://i0.hdslb.com/bfs/bangumi/image/b56ed5170780b398a545fa0e142af678b90bfda8.jpg@450w_600h.webp');background-size: cover;height: 270px;background-position: center;">
+                <!-- <img style="width: 225px;height: 300px;display: block;border-radius: 20px;" src="https://i0.hdslb.com/bfs/bangumi/image/b56ed5170780b398a545fa0e142af678b90bfda8.jpg@450w_600h.webp" alt="图无书砸"> -->
+                <!-- <h1 style="width: 100%;text-shadow: #000000 0 0 2px;">“捉弄”缩短了二人的距离，2022年想要守候的初恋就在这里。然而随着时间变化的不止是季节，还有西片的心境？看似占据优势的高木似乎也发生了让她动摇的事情？是看对方喜欢自己，还是将喜欢展现给对方看——让人止不住微笑和心动的“捉弄战争”，终于要进入最终回合！？</h1> -->
+                <!-- <a style="width: 25%" class="button" href="https://www.bilibili.com/bangumi/media/md28235860/?spm_id_from=666.25.b_6d656469615f6d6f64756c65.1" target="_blank" download>追番</a> -->
+            </li>
+            </a>
+        </div>
+        <!-- <style>
+            .foldable.tak#open{
+                height: 700px;
+                transition: all ease-in-out 0.2s;
+            }
+            .foldable.tak#open .body{
+                height: 700px;
+                transition: all ease-in-out 0.2s;
+            }
+        </style> -->
+    </div>
+
+</body>
+
+<!-- 数据库 -->
+<div class="jumpCard dataBase" id="jumpCardDown">
+    <div class="closeAll" onclick="jumpCardChange('dataBase')"><img src="./icon/X.svg" alt=""></div>
+    <h1 style="display: flex;justify-content: center;">Data Base</h1>
+    <li class="unfoldable"><h1><img src="./dataBase/icon/portalGun.png" alt="图无书砸">传送枪</h1><a class="button" href="./dataBase/PortalGun.zip" target="_blank" download>Download</a></li>
+    <li class="unfoldable"><h1><img src="./dataBase/icon/传送门移动墙壁.png" alt="图无书砸">传送门机械臂</h1><a class="button" href="./dataBase/传送门机械臂 2.0.zip" target="_blank" download>Download</a></li>
+</div>
+<!-- 服务器 -->
+<div class="jumpCard sever" id="jumpCardDown">
+    <div class="closeAll" onclick="jumpCardChange('sever')"><img src="./icon/X.svg" alt=""></div>
+    <h1 style="display: flex;justify-content: center;">S e v e r</h1>
+    <li class="unfoldable"><h1><img src="./icon/dataBase/loading.gif" alt="图无书砸">No connect</h1><a class="button">???</a></li>
+</div>
+<!-- 关于 -->
+<div class="jumpCard about" id="jumpCardDown">
+    <div class="closeAll" onclick="jumpCardChange('about')"><img src="./icon/X.svg" alt=""></div>
+    <h1 style="display: flex;justify-content: center;">A b o u t</h1>
+    <li class="unfoldable"><h1><img src="./icon/headimg.png" alt="图无书砸">Code by gufandf</h1><a class="button" href="https://space.bilibili.com/449104347">bilibili</a></li>
+    <li class="unfoldable"><h1><img src="./icon/CC0.jpg" alt="图无书砸">完全开源<br>(虽然没用)</h1><a class="button download" title="下载源码" href="./html.zip">Download</a></li>
+</div>
+
+<div class="topbar" id="open">
+    <a class="button" title="关于" id="about" onclick="jumpCardChange('about')">A B O U T</a>
+    <a class="button" id="sever" onclick="jumpCardChange('sever')">S E V E R</a>
+    <a class="button" title="数据库无法得出结论" id="dataBase" onclick="jumpCardChange('dataBase')">DATA BASE</a>
+</div>
+</html>
