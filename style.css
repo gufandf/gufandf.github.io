@@ -1,4 +1,5 @@
 body{
+    position:absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,10 +12,20 @@ body{
     background-image: url("https://api.loliurl.club/api/setu/?tag=hutao");
     background-size: cover;
     background-repeat: no-repeat;
+    transition: all ease 0.5s;
+    top: 0vw;
 
 }
 
-
+body#down{
+    top: 150vw;
+    opacity: 0.8;
+    transition: all ease-in-out 0.5s;
+}
+body#up{
+    top: 0vw;
+    transition: all ease-in-out 0.5s;
+}
 .topbar{
     top: 0;
     height: 80px;
@@ -123,7 +134,7 @@ a.button#dataBase:hover,.dataBase a.button:hover,a.button.download:hover{
     z-index: -1;
 }
 
-.jumpCard li.unfoldable img,.card li.unfoldable img{
+.jumpCard li.unfoldable img,.card li.unfoldable img,.hidebody li.unfoldable img{
     margin-right: 20px;
     width: 75px;
     height: 75px;
@@ -131,20 +142,21 @@ a.button#dataBase:hover,.dataBase a.button:hover,a.button.download:hover{
     object-fit: cover;
 }
 
-.card li.unfoldable img{
+.card li.unfoldable img,.hidebody li.unfoldable img{
     border-radius: 0;
 }
 
-.jumpCard h1,.card li.unfoldable h1{
+.jumpCard h1,.card li.unfoldable h1,.hidebody li.unfoldable h1{
+    font-size: 20px;
     display: flex;
     align-items: center;
     position: relative;
     margin: 0;
-    width: 300px;
+    width: 400px;
     color: #e0e2e4;
 }
 
-.jumpCard li.unfoldable,.card li.unfoldable{
+.jumpCard li.unfoldable,.card li.unfoldable,.hidebody li.unfoldable{
     width: 90%;
     margin: auto;
     margin-top: 10px;
@@ -179,6 +191,7 @@ a.button#dataBase:hover,.dataBase a.button:hover,a.button.download:hover{
 }
 
 #myselfClose{
+    margin-top: 0;
     overflow: hidden;
     height: 500px;
     width: 100%;
@@ -194,6 +207,8 @@ a.button#dataBase:hover,.dataBase a.button:hover,a.button.download:hover{
     box-shadow: #000000 0 15px 0;
     transition: all cubic-bezier(.36,.01,.37,1.28) 0.2s;
 }
+
+
 @media screen and (max-width: 900px) {
     #myselfOpen{
     transform: scale(0.8);
@@ -300,7 +315,7 @@ p a{
     font-size: 20px;
 }
 
-.foldable li.unfoldable img{
+.foldable li.unfoldable img,.hidebody li.unfoldable img{
     border-radius: 10px;
 }
 
@@ -322,7 +337,6 @@ p a{
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
 
 .foldable#open img.strange{
     transform: rotate(180deg) scale(0.6);

@@ -1,3 +1,4 @@
+var clickTimes = 0
 
 function sleep(number){
     var now = new Date();
@@ -11,7 +12,6 @@ function sleep(number){
 
 function closeAll(){
     var cards = document.getElementsByClassName("jumpCard")
-    var body = document.getElementsByTagName("body")[0]
     for (i in cards){
         cards[i].id = "jumpCardDown";
     }
@@ -78,3 +78,34 @@ function getScrollOffset() {
 }
 
 
+function pageScroll(){
+    var myself = document.getElementsByClassName("myself")[0]
+    var body = document.getElementsByTagName("body")[0]
+    var topbar = document.getElementsByClassName("topbar")[0]
+    var hidebody = document.getElementsByClassName("hidebody")[0]
+    if (getScrollOffset().y == 0){
+        clickTimes += 1
+        body.id = "up";
+        console.log(clickTimes);
+        myself.id = "myselfClose";
+        body.style.overflow="auto";
+        topbar.id="open";
+        hidebody.id = "close"
+        closeAll()
+        if (clickTimes == 5){
+            body.id = "down";
+            topbar.id="close";
+            hidebody.id = "open"
+            body.style.overflow="hidden";
+            clickTimes = 0;
+        }
+    }else{
+        hidebody.id = "close"
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        clickTimes = 0;
+        body.id = "up";
+        body.style.overflow="auto";
+        topbar.id="open";
+        closeAll()
+    }
+}
