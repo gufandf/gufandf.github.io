@@ -276,9 +276,9 @@ p a{
     color: #e95037;
 }
 .closeAll{
-    position:absolute;
-    top: 20px;
-    right: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 6
 }
 
 .closeAll img{
