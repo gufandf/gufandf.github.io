@@ -1,363 +1,113 @@
-body{
-    position:absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    user-select: none;
+/* 滚动条 */
+body::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;}
+::-webkit-scrollbar{
+    width: 0px;
+    height: 16px;
+    background-color: #00000000;}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: #00000000;}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: #1d2325;}
+
+
+*{
     margin: 0;
     padding: 0;
-    width: 100%;
-    color: #e0e2e4;
-    background-color: #1e2527;
-    background-image: url("https://api.loliurl.club/api/setu/?tag=hutao");
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: all ease 0.5s;
-    top: 0vw;
-
+    color: aliceblue;
 }
-
-body#down{
-    top: 150vw;
-    opacity: 0.8;
-    transition: all ease-in-out 0.5s;
-}
-body#up{
-    top: 0vw;
-    transition: all ease-in-out 0.5s;
-}
-.topbar{
-    top: 0;
-    height: 80px;
-    right: 0;
+body{
+    background-color:#1d2325;
+    min-width: 900px;
+    height: 100vh;
     display: flex;
-    position: fixed;
     flex-direction: row;
-    align-items: center;
 }
-.topbar#close{
-    top: -100px;
-    transition: all ease-in-out 0.3s;
+a{
+    text-decoration: none;
 }
-.topbar#open{
+.top{
     top: 0;
-    transition: all ease-in-out 0.3s;
-}
-
-
-
-a.button{
+    left: 0;
+    width: 100px;
+    height: 100%;
+    background-color: #191f20;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 100;
-
-    width: 170px;
-    height: 40px;
-    margin: 10px;
-    padding: 5px;
-
-    transition: all ease-in-out 0.2s;
-    border-image: none;
-    border: #e0e2e4;
-    border-radius: 15px;
-    border-style: solid;
-
-    box-shadow: #3a3a3a 0 0 10px;
-    text-shadow: #000000 0 0 10px;
-    text-decoration: none;
-    color: #e0e2e4;
-    font-size: 1.5em;
+    flex-direction: column;
+}
+.topbutton{
+    width: 100px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(160, 160, 160);
+    text-decoration-line: none;
+}
+.topbutton:hover{
+    background-color: #161a1b;
+    color: white;
 }
 
-.topbar a.button{
-    background: #252b2d;
+.body{
+    width: 800px;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
-a.button:hover{
-    transition: all ease-in-out 0.3s;
-    color: #252b2d;
-    background: #e0e2e4;
-    box-shadow: #6e6e6e 0 0 10px;
-}
-
-a.button#dataBase,.dataBase a.button,a.button.download{
-    border-color: #1db809;
-    color: #1db809;
-    box-shadow: #00000000 0 0 10px;
-}
-
-a.button#dataBase:hover,.dataBase a.button:hover,a.button.download:hover{
-    border-color: #1db809;
-    color: #e0e2e4;
-    background: #1db809;
-    box-shadow: #1db809 0 0 10px;
-}
-
-.jumpCard{
-    position: fixed;
-    width: 700px;
-    height: 520px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    padding: 20px;
+.chunk{
+    background-color: #80808010;
+    box-shadow: rgb(27, 27, 27) 0 0 10px;
     border-radius: 20px;
-    display: flex;
-    background-color: #252b2d;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: #141414 0 0 20px;
+    margin: 7px;
+    padding: 20px;
 }
-
-#jumpCardUp{
-    /* 居中定位 */
-    transition: all cubic-bezier(.58,1.23,.87,.99) 0.25s;
-    margin: auto;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    transform: scale(1);
-    opacity: 1;
-    z-index: 4;
-}
-
-#jumpCardDown{
-    transition: all ease 0.15s;
-    margin: auto;
-    left:0;
-    right:0;
-    top: 1500px;;
-    bottom: 0px;
-    transform: scale(0,1);
-    opacity: 0.8;
-    z-index: -1;
-}
-
-.jumpCard li.unfoldable img,.card li.unfoldable img,.hidebody li.unfoldable img{
-    margin-right: 20px;
-    width: 75px;
-    height: 75px;
-    border-radius: 25px;
-    object-fit: cover;
-}
-
-.card li.unfoldable img,.hidebody li.unfoldable img{
-    border-radius: 0;
-}
-
-.jumpCard h1,.card li.unfoldable h1,.hidebody li.unfoldable h1{
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin: 0;
-    width: 400px;
-    color: #e0e2e4;
-}
-
-.jumpCard li.unfoldable,.card li.unfoldable,.hidebody li.unfoldable{
-    width: 90%;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 7px;
-    padding: 7px 15px 7px 15px;
-    border-radius: 25px;
-    color: #e0e2e4;
-    background-color: #222525a4;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: #00000080 0 0 10px;
-    transition: all ease-in-out 0.1s;
-}
-
-.jumpCard li:hover,.card li:hover{
-    background-color: #333636a4;
-    transform: scale(1.01);
-    transition: all ease-in-out 0.05s;
-}
-
-.jumpCard .button{
-    margin: 0;
-}
-
-.myself{
-    background-color: #181d1f;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 0;
-}
-
-#myselfClose{
-    margin-top: 0;
-    overflow: hidden;
-    height: 500px;
-    width: 100%;
-    transition: all cubic-bezier(.36,.01,.37,1.28) 0.2s;
-}
-#myselfOpen{
-    border-radius: 50px;
-    margin-top: 10px;
-    overflow: hidden;
-    transform: scale(0.8);
-    width: 80%;
-    height: 800px;
-    box-shadow: #000000 0 15px 0;
-    transition: all cubic-bezier(.36,.01,.37,1.28) 0.2s;
-}
-
-
-@media screen and (max-width: 900px) {
-    #myselfOpen{
-    transform: scale(0.8);
-    width: 100%;
-    height: 1000px;
-}
-}
-
-/* .myself#myselfOpen:hover{
-    transform: scale(0.81);
-    transition: all cubic-bezier(.36,.01,.37,1.28) 0.2s;
-} */
-
-.myself#myselfClose:hover{
-    transform: scale(1.01);
-    transition: all ease 0.2s;
-}
-
-.myself h1{
+.chunk h2{
+    display: inline;
     color: #ffc93a;
-    display: flex;
-    align-items: center;
-    margin-top: 120px;
-    height: 300px;
-    font-size: 13vw;
-    transition: all ease-in-out 0.2s;
 }
-
-.myself p{
-    padding: 20px;
-    font-size: 25px;
-    width: 60vw;
+.downloadCard{
     border-radius: 20px;
-    border-style: solid;
-    border-color: #e95037;
-}
-
-.card p{
-    font-size: 20px;
     margin: 10px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-.card h1{
-    margin:10px;
-}
-
-.card{
-    width: 60%;
-    min-height: 40px;
-    padding: 7px;
-    margin: 10px;
-    border-radius: 20px;
-    background-color: #252b2d;
-    transition: all ease-in-out 0.2s;
-}
-
-.card:hover{
-    background-color: #282e30;
-    transition: all ease-in-out 0.2s;
-}
-
-p a{
-    color: #e95037;
-}
-.closeAll{
-    position: sticky;
-    top: 0;
-    z-index: 6
-}
-
-.closeAll img{
-    width: 30px;
-    height: 30px;
-}
-
-
-/* li foldable */
-.foldable{
+    padding: 10px;
+    height: 250px;
+    width: 200px;
+    background-color: #80808010;
+    box-shadow: rgb(27, 27, 27) 0 0 10px;
     overflow: hidden;
-}
-
-.foldable .foldhead{
-    width: 100%;
-    height: 50px;
-    margin-bottom: 20px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 }
-
-.foldable .foldhead img{
-    width: 50px;
-    height: 50px;
+.downloadCard .downloadImg{
+    width: 200px;
+    height: 200px;
+    border-radius: 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.foldable .foldhead h1{
-    margin: 0;
-}
 
-.foldable li h1{
+
+
+/* 字体 */
+h3{
+    margin: 10px 0 10px 0;
     font-size: 20px;
+    color: rgb(255, 255, 255);
 }
-
-.foldable li.unfoldable img,.hidebody li.unfoldable img{
-    border-radius: 10px;
-}
-
-.foldable#close{
-    height: 50px;
-    transition: all ease-in-out 0.15s;
-}
-.foldable#open{
-    height: 500px;
-    transition: all ease-in-out 0.2s;
-}
-
-.foldable#close .body{
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.foldable#open .body{
-    height: calc(100% - 60px);
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.foldable#open img.strange{
-    transform: rotate(180deg) scale(0.6);
-    transition: all ease-in-out 0.2s;
-}
-.foldable#close img.strange{
-    transform: rotate(0deg) scale(0.6);
-    transition: all ease-in-out 0.15s;
-}
-
-
-
-
-@media screen and (max-width: 1150px) {
-    .myself h1{
-        font-size: 17vw;
-    }
-    .card{
-        width: 80%;
-    }
-    .jumpCard{
-        width: 70%;
-    }
+h4{
+    font-size: 23px;
+    display: inline;
+    color: #ff823a;
 }
