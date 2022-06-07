@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color:#1d2325;
+    min-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chunk{
+    background-color: #80808010;
+    box-shadow: rgb(27, 27, 27) 0 0 10px;
+    border-radius: 20px;
+    width: 800px;
+    margin: 7px;
+    padding: 20px;
+}
+
+h1,h2,h3,h4{
+    margin-top: 0;
+    text-align: center;
+    color: white;
+}
+p,li{
+    color: white;
+    text-indent: 2em;
+}
+
+a#back{
+    position:static;
+    top: 0;
+    left: 0;
+    font-size: 30px;
+    margin: 0;
+    text-decoration: none;
+    color: #ebc718;
+    background-color: #80808010;
+    border-radius: 5px;
+    padding: 5px;
+    height: 50px;
+    width: 100px;
+}
+/* 滚动条 */
+body::-webkit-scrollbar{
+    width: 10px;
+    height: 50px;}
+::-webkit-scrollbar{
+    width: 10px;
+    height: 16px;
+    background-color: #00000000;}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: #00000000;}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: #2f3f44;}
+
+a#link{
+    margin: 10px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: rgb(27, 27, 27) 0 0 10px;
+    background-color: #80808010;
+    display: flex;
+    text-decoration: none;
+}
+a#link #img{
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 150px;
+    height: 100px;
+}
+a#link #text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-left: 15px;
+}
+a#link h2{
+    margin: 0;
+    text-align: left;
+}
+a#link p{
+    margin: 0;
+    color: rgb(172, 172, 172);
+    text-indent: 0;
+    text-align: left;
+}
