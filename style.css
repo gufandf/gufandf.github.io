@@ -41,6 +41,7 @@ html, body { margin: 0; padding: 0; background-color: #ffffff; }
 
 .markdown-body img {
   border-style: none;
+  border-radius: 10px;
 }
 
 .markdown-body code,
