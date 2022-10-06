@@ -527,3 +527,17 @@ html, body { margin: 0; padding: 0; background-color: #ffffff; }
 .markdown-body mark {
   background-color: #fff8c5;
 }
+@keyframes loading1 {
+  0%{
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100%{
+    opacity: 100;
+    transform: scale(1);
+  }
+}
+*{
+  transform-origin: top;
+  animation: loading1 0.2s ease-out;
+}
