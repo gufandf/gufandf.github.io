@@ -7,7 +7,7 @@
       </head>
 <body>
 <article class="markdown-body">
-<h2><a href="../content.html">返回</a></h2>
+<h2><a href="../content.html"><返回</a></h2>
 <p><img src="./梦境世界headimg.png" alt="梦境世界.jpg" style="width: 100%;"></p>
 <h2>地图信息</h2>
 <ul>
@@ -42,6 +42,7 @@
 <li>开启 <strong>移动光源</strong></li>
 <li>粒子效果 <strong>全部</strong></li>
 <li>资源包与解密部分 <strong>无关</strong></li>
+<li>如是服务端需要将 <strong>server.properties</strong> 中的 <strong>enable-command-block</strong> 改为 <strong>true</strong></li>
 <li>最重要！<strong>多读书！</strong></li>
 </ul>
 <blockquote>
@@ -49,7 +50,7 @@
 </blockquote>
 <h2>作者的话</h2>
 <h3><a href="https://space.bilibili.com/449104347">作者主页</a></h3>
-<h3>灵感来自另一款我非常喜欢的游戏 <a href="https://store.steampowered.com/app/753640/Outer_Wilds/">《星际拓荒》</a></h3>
+<h3>灵感来自另一款我非常喜欢的游戏 <a href="https://store.steampowered.com/app/753640/Outer_Wilds/">「星际拓荒」</a></h3>
 <table>
 <thead>
 <tr>
@@ -79,7 +80,7 @@
 </tr>
 </tbody>
 </table>
-<h3>通关地图后如想<strong>参观</strong>或<strong>炸图</strong>,请使用以下两条指令：</h3>
+<h3>通关地图后如想<strong>参观</strong>或<strong>炸图</strong>, 请使用以下两条指令：</h3>
 <blockquote>
 <p>/team join op @s</p>
 <p>/gamemode creative</p>
@@ -115,3 +116,19 @@
 </table>
 </article>
 </body>
+<style>
+  @keyframes loading1 {
+    0%{
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100%{
+      opacity: 100;
+      transform: scale(1);
+    }
+  }
+
+  *{
+    animation: loading1 0.4s ease-out;
+  }
+</style>
