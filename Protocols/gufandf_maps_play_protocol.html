@@ -12,8 +12,11 @@
     <p>Version 1, 2022/10/11</p>
     <p>Copyright (C) 2022 gufandf  &lt;gufandf.top	&gt;</p>
     <p>本协议适用范围：由 gufandf 制作或主导制作的地图</p>
-    <h4>严禁对原地图或私自修改的地图进行二次发布</h4>
-    <h4>严禁使用地图进行不健康的内容创作</h4>
+    <div class="content">
+      <h4>严禁对原地图或私自修改的地图进行二次发布</h4>
+      <h4>严禁未经允许的转载甚至收费</h4>
+      <h4>严禁使用地图进行不健康的内容创作</h4>
+    </div>
 </article>
 </body>
 </html>
@@ -26,7 +29,10 @@
   p{
     padding: 0 120px 0 120px;
   }
-  markdown-body h4{
+  .content h4{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 10px;
   }
 </style>
