@@ -149,8 +149,12 @@
   </article>
 </body>
 <script>
+  var clicktimes = 0;
   function playAlert() {
-    alert("下载即代表您同意协议《gufandf地图游玩协议》")
+    if (clicktimes == 0){
+      clicktimes += 1;
+      alert("下载即代表您同意协议《gufandf地图游玩协议》")
+    }
   }
 </script>
 <style>
