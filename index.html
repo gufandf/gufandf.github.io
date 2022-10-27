@@ -6,45 +6,64 @@
   <meta charset="utf-8" />
   <title>孤帆gufandf|主页</title>
   <link rel="stylesheet" href="./style.css">
-  <link rel="icon" type="image/x-icon" href="./icon.png" />
+  <link rel="icon" type="image/x-icon" href="./icon/icon.png" />
 </head>
 
 <body>
   <article class="markdown-body">
+    <img src="./icon/gufandf-website.png" alt="">
     <h2>Wellcome to gufandf.top</h2>
-    <h3>你可能在找：</h3>
-    <ul>
-      <li><a href="./maps/content.html">地图下载</a></li>
-      <li><a href="./models/content.html">模型下载</a></li>
-      <li><a href="./MapCollection/index.html">地图征集计划</a></li>
-      <li><a href="./Protocols/content.html">协议列表</a></li>
-    </ul>
-    <table>
-      <thead>
-        <tr>
-          <th>平台</th>
-          <th>名称</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>bilibili</td>
-          <td><a href="https://space.bilibili.com/449104347">孤帆gufandf</a></td>
-        </tr>
-        <tr>
-          <td>网易云</td>
-          <td><a href="https://music.163.com/?from=itab#/user/home?id=1923366995">孤帆gufandf</a></td>
-        </tr>
-        <tr>
-          <td>steam</td>
-          <td><a href="https://steamcommunity.com/id/gufandf/">孤帆gufandf</a></td>
-        </tr>
-        <tr>
-          <td>github</td>
-          <td><a href="https://github.com/gufandf">gufandf</a></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="cards">
+      <a href="./maps/content.html">
+        <div class="card">
+          <img src="./icon/12w34b_-_map_zoom1.webp" alt="">
+          <h2>地图下载</h2>
+        </div>
+      </a>
+      <a href="./models/content.html">
+        <div class="card">
+          <img src="./icon/Structure_Block_JE2_BE1.webp" alt="">
+          <h2>模型下载</h2>
+        </div>
+      </a>
+      <a href="./MapCollection/index.html">
+        <div class="card">
+          <img src="./icon/Cartography_Table_JE3_BE2.webp" alt="">
+          <h2>地图征集</h2>
+        </div>
+      </a>
+      <a href="./Protocols/content.html">
+        <div class="card">
+          <img src="./icon/Bookshelf_JE4_BE2.webp" alt="">
+          <h2>协议列表</h2>
+        </div>
+      </a>
+    </div>
+    <style>
+      .cards{
+        display: flex;
+        justify-content: space-between;
+      }
+      .card{
+        border-radius: 10px;
+        background-color: rgba(167, 167, 167, 0.418);
+        padding: 20px;
+        width: 200px;
+        height: 270px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #24292e;
+      }
+      .card img:hover{
+        transform: scale(1.1);
+        transition: all ease-out 0.1s;
+      }
+      .card img{
+        width: 100%;
+        transition: all ease-out 0.1s;
+      }
+    </style>
   </article>
 </body>
 
