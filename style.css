@@ -37,7 +37,7 @@ img{
 }
 @keyframes body-ease-in {
     0%{
-        transform: scale(0.9);
+        transform: scale(0.95);
         opacity: 0%;
     }
     100%{
@@ -51,7 +51,7 @@ img{
         opacity: 100%;
     }
     100%{
-        transform: scale(0.9);
+        transform: scale(0.95);
         opacity: 0%;
     }
 }
