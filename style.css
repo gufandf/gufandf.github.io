@@ -200,3 +200,19 @@ img{
     height: 85px;
     width: auto;
 }
+p{
+    font-size: large;
+}
+
+a.download-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 5px 0;
+    height: 75px;
+    width: 220px;
+    background-color: #2770d4;
+}
+a.download-button:hover{
+    background-color: #4084e2;
+}
