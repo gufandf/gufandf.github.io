@@ -61,7 +61,7 @@ img{
     left: 0;
     width: 100%;
     height: auto;
-    top: calc(-250px + var(--headimg-off));
+    top: calc(-30vh + var(--headimg-off));
 }
 .main{
     display: flex;
