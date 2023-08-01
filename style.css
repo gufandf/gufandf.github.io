@@ -27,7 +27,7 @@ img{
     height: 100%;
 }
 .scalebox{
-    min-width: 1400px;
+    min-width: 900px;
     height:100vh;
     overflow: scroll;
     animation: body-ease-in forwards 0.3s ease-out;
@@ -61,7 +61,7 @@ img{
     left: 0;
     width: 100%;
     height: auto;
-    top: calc(-30vh + var(--headimg-off));
+    top: calc(-250px + var(--headimg-off));
 }
 .main{
     display: flex;
