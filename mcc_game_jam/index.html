@@ -7,16 +7,16 @@
     <link rel="shortcut icon" href="./img/MCC_M.svg" type="image/x-icon">
     <title>MCC Game Jam 我的世界小游戏开发大赛</title>
 </head>
-<body style="background-image: url(./img/MCC_BG.jpg);">
+<body>
     
-    <div class="block" id="head">
+    <div class="block" id="head" >
         <img id="Text" src="./img/MCC_Text.png" alt="">
     </div>
-    <div class="block" id="body" style="background-image: url(./img/MCC_BG.jpg);">
+    <div class="block" id="body">
         <div style="background-color: #222222cc;height: 100%;width: 100%;display: flex;justify-content: center;">
             <div class="content" style="padding-top: 10px;">
                 <div class="title">大赛介绍</div>
-                <p>MCC Game Jam(Minecraft Creativity Game Jam)是由 孤帆Gufandf 和 甜橙猫酱Cat_Sauce 举办的我的世界小游戏地图制作大赛，旨在促进我的世界小游戏地图社区的发展和制作者的交流。参赛选手需要围绕主题，在 72 小时内做出可以游玩的小游戏地图。</p>
+                <p>MCC Game Jam(Minecraft Creativity Game Jam)是由 <a target="_blank" href="https://space.bilibili.com/449104347">孤帆Gufandf</a> 和 <a target="_blank" href="https://space.bilibili.com/491930441">甜橙猫酱Cat_Sauce</a> 举办的我的世界小游戏地图制作大赛，旨在促进我的世界小游戏地图社区的发展和制作者的交流。参赛选手需要围绕主题，在 72 小时内做出可以游玩的小游戏地图。</p>
                 <!-- <div class="card-box">
                     <div class="card"><a href="">比赛规则</a></div>
                     <div class="card"><a href="">报名参加</a></div>
@@ -30,14 +30,19 @@
 </html>
 
 <style>
+    :root{
+        --color_bule:#4080DD;
+        --color_white:#f5f5f5;
+    }
     body{
-        color: white;
+        color: var(--color_white);
         margin: 0;
         padding: 0;
         overflow-y: overlay;
-        overflow-x: hidden; 
+        overflow-x: hidden;
     }
     .block{
+        background-image: url(./img/MCC_BG.jpg);
         background-size: cover;
         background-position: center;
     }
@@ -49,7 +54,6 @@
     .block#head{
         height: 100vh;
         display: flex;
-
     }
 
     .block#head img#Text{
@@ -67,18 +71,13 @@
         100% {transform: rotate(-1deg);}
     }
 
-
-
-
-    .block#body {
-    }
     .card-box{
         display: flex;
         flex-wrap: wrap;
     }
     .title{
         font-size: 30px;
-        box-shadow: 0 1px 0 #fff;
+        box-shadow: 0 1px 0 var(--color_white);
         display: flex;
         align-items: center;
         justify-items: center;
@@ -92,7 +91,7 @@
         border-width: 1px;
         padding: 10px;
         border: solid;
-        border-color: #fff;
+        border-color: var(--color_white);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -101,8 +100,11 @@
         width: 46%;
     }
     a{
-        color: #fff;
+        color: var(--color_white);
         text-decoration: none;
+    }
+    p a{
+        color: var(--color_bule);
     }
 </style>
 <script>
