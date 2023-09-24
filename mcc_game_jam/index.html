@@ -17,6 +17,18 @@
             <div class="content" style="padding-top: 10px;">
                 <div class="title">大赛介绍</div>
                 <p>MCC Game Jam(Minecraft Creativity Game Jam)是由 <a target="_blank" href="https://space.bilibili.com/449104347">孤帆Gufandf</a> 和 <a target="_blank" href="https://space.bilibili.com/491930441">甜橙猫酱Cat_Sauce</a> 主办的我的世界小游戏地图制作大赛，旨在促进我的世界小游戏地图社区的发展和制作者的交流。参赛选手需要围绕主题，在 72 小时内做出可以游玩的小游戏地图。</p>
+                <div class="title">比赛规则</div>
+                <p>请以 <a target="_blank" href="https://docs.qq.com/doc/DVG5BTFNGT3JaS0JH">参赛手册</a> 为准</p>
+                <li>围绕本届主题进行游戏制作。</li>
+                <li>使用最新的Java正式版（1.20.2）制作游戏。</li>
+                <li>每小队人数不得超过3人。</li>
+                <li>地图中需要包含制作小组的信息。</li>
+                <li>比赛过程中允许场外求助和远程协助。</li>
+                <li>禁止抄袭、偷盗、毁坏他人劳动成果。</li>
+                <li>地图中禁止包含违反中华人民共和国法律的内容。</li>
+                <li>如无违反规则的情况，地图版权归参赛者所有。</li>
+                <div class="title">报名参加</div>
+                <p>请填写报名表格 <a target="_blank" href="https://docs.qq.com/form/page/DR3pTcnpNeFdTTU9s">点击打开报名表</a></p>
                 <!-- <div class="card-box">
                     <div class="card"><a href="">比赛规则</a></div>
                     <div class="card"><a href="">报名参加</a></div>
@@ -36,6 +48,7 @@
     }
     body{
         color: var(--color_white);
+        overflow: overlay;
         margin: 0;
         padding: 0;
         overflow-y: overlay;
@@ -106,11 +119,14 @@
     p a{
         color: var(--color_bule);
     }
+    ::-webkit-scrollbar{
+        width: 0;
+    }
 </style>
 <script>
     var icon_move = function(){
-        document.getElementById("Text").style.top = window.scrollY/4+"px";
-        console.log(window.scrollY);
+        document.getElementById("Text").style.top = window.scrollY/2.5+"px";
+        // console.log(window.scrollY);
     }
     setInterval(icon_move,10);
 </script>
