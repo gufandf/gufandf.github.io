@@ -13,7 +13,7 @@
         <img id="Text" src="./img/MCC_Text.png" alt="">
     </div>
     <div class="block" id="body">
-        <div style="background-color: #222222cc;height: 100%;width: 100%;display: flex;justify-content: center;">
+        <div style="background-color: #222222cc;height: 100%;width: 100%;display: flex;justify-content: center;z-index: 1;">
             <div class="content" style="padding-top: 10px;">
                 <div class="title">大赛介绍</div>
                 <p>MCC Game Jam(Minecraft Creativity Game Jam)是由 <a target="_blank" href="https://space.bilibili.com/449104347">孤帆Gufandf</a> 和 <a target="_blank" href="https://space.bilibili.com/491930441">甜橙猫酱Cat_Sauce</a> 主办的我的世界小游戏地图制作大赛，旨在促进我的世界小游戏地图社区的发展和制作者的交流。参赛选手需要围绕主题，在 72 小时内做出可以游玩的小游戏地图。</p>
@@ -34,6 +34,7 @@
                     <div class="card"><a href="">报名参加</a></div>
                     <div class="card"><a href="">注意事项</a></div>
                 </div> -->
+                <div style="height:10000px;"></div>
             </div>
         </div>
     </div>
@@ -67,12 +68,12 @@
     .block#head{
         height: 100vh;
         display: flex;
+        overflow: hidden;
     }
 
     .block#head img#Text{
-        z-index: 0;
         position: relative;
-        top: 0px;
+        top: min(50vh ,var(--top)) ;
         width: min(85vw,1020px);
         margin: auto;
         animation: come-in 3s infinite ease-in-out;
@@ -125,7 +126,7 @@
 </style>
 <script>
     var icon_move = function(){
-        document.getElementById("Text").style.top = window.scrollY/2.5+"px";
+        document.body.style.setProperty('--top', window.scrollY/1.5+"px");
         // console.log(window.scrollY);
     }
     setInterval(icon_move,10);
