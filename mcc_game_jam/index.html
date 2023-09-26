@@ -19,13 +19,16 @@
             <p>9月30日上午10点 至 10月3日上午10点，请在 9月30日0点 前完成报名。</p>
             <h1>比赛规则</h1>
             <p>请以 <a target="_blank" href="https://docs.qq.com/doc/DVG5BTFNGT3JaS0JH">参赛手册</a> 为准</p>
-            <li>围绕本届主题进行游戏制作。</li>
-            <li>使用最新的Java正式版(1.20.2) 制作游戏。</li>
-            <li>每小队人数不得超过3人。</li>
-            <li>地图中需要包含制作小组的信息。</li>
-            <li>禁止抄袭、偷盗、毁坏他人劳动成果。</li>
-            <li>地图中禁止包含违反中华人民共和国法律的内容。</li>
-            <li>如无违反规则的情况，地图版权归参赛者所有。</li>
+            <ul>
+                <li>围绕本届主题进行游戏制作。</li>
+                <li>使用最新的Java正式版(1.20.2) 制作游戏。</li>
+                <li>每小队人数不得超过3人。</li>
+                <li>地图中需要包含制作小组的信息。</li>
+                <li>禁止抄袭、偷盗、毁坏他人劳动成果。</li>
+                <li>地图中禁止包含违反中华人民共和国法律的内容。</li>
+                <li>如无违反规则的情况，地图版权归参赛者所有。</li>
+            </ul>
+            
             <h1>报名参加</h1>
             <p>请填写 <a target="_blank" href="https://docs.qq.com/form/page/DR3pTcnpNeFdTTU9s">报名表</a></p>
             <!-- <div class="card-box">
@@ -68,8 +71,8 @@
         /* background-color: #fff; */
     }
     .block#head{
-        /* position: sticky; */
-        /* top: 0; */
+        position: sticky;
+        top: 0;
         background-image: url(./img/MCC_BG.jpg);
         height: 100vh;
         /* width: 100vw; */
@@ -89,7 +92,7 @@
 
     .block#head img#Text{
         position: relative;
-        top: min(25vh ,var(--top)) ;
+        /* top: min(25vh ,var(--top)) ; */
         width: min(85vw,1020px);
         transition: all 0.05s;
         margin: auto;
