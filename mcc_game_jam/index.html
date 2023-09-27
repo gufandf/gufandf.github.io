@@ -8,6 +8,12 @@
     <title>MCC Game Jam 我的世界小游戏开发大赛</title>
 </head>
 <body>
+    <div class="topbar">
+        <div class="block">
+            <!-- <a href=""><img class="item" src="./img/MCC_Icon.svg" alt=""></a> -->
+            <a href="">参赛手册</a>
+        </div>
+    </div>
     <div class="block" id="head" >
         <img id="Text" src="./img/MCC_Text.png" alt="">
     </div>
@@ -39,6 +45,10 @@
             <div style="height:100px;"></div>
         </div>
     </div>
+    <!-- <div class="block" id="bottom">
+        <a href="">参赛手册</a>
+        <a href="">报名表</a>
+    </div> -->
 </body>
 </html>
 
@@ -47,7 +57,9 @@
         --color_bule:#4080DD;
         --color_white:#f5f5f5;
         --color_black:#222222;
+        --color_gray:#444444;
         background-color: var(--color_black);
+        font-size: 1rem;
 
     }
 
@@ -89,6 +101,12 @@
         justify-content: center;
         z-index: 1;
     }
+    .block#bottom{
+        background-color: #222222dd;
+        padding: 20px;
+        display: flex;
+        align-content: center;
+    }
 
     .block#head img#Text{
         position: relative;
@@ -110,6 +128,7 @@
         flex-wrap: wrap;
     }
     h1{
+        font-size: 2rem;
         box-shadow: 0 1px 0 var(--color_white);
         display: flex;
         align-items: center;
@@ -119,7 +138,7 @@
         width: 100%;
     }
     .card{
-        font-size: 40px;
+        font-size: 2rem;
         /* border-radius: 10px; */
         border-width: 1px;
         padding: 10px;
@@ -146,8 +165,24 @@
     p a{
         color: var(--color_bule);
     }
+    #bottom a{
+        color: var(--color_gray);
+    }
     ::-webkit-scrollbar{
         width: 0;
+    }
+    .topbar{
+        position: sticky;
+        top: 0;
+        height: 0;
+        overflow: none;
+    }
+    .topbar .block{
+        height: 55px;
+        padding: 5px;
+    }
+    .topbar .item{
+        height: 45px;
     }
 </style>
 <script>
