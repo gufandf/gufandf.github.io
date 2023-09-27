@@ -71,8 +71,8 @@
         /* background-color: #fff; */
     }
     .block#head{
-        position: sticky;
-        top: 0;
+        /* position: sticky; */
+        /* top: 0; */
         background-image: url(./img/MCC_BG.jpg);
         height: 100vh;
         /* width: 100vw; */
@@ -92,9 +92,9 @@
 
     .block#head img#Text{
         position: relative;
-        /* top: min(25vh ,var(--top)) ; */
+        top: min(25vh ,var(--top)) ;
         width: min(85vw,1020px);
-        transition: all 0.05s;
+        /* transition: all 0.1s; */
         margin: auto;
         animation: come-in 3s infinite ease-in-out;
     }
@@ -152,8 +152,8 @@
 </style>
 <script>
     var icon_move = function(){
-        document.body.style.setProperty('--top', window.scrollY/2.5+"px");
+        document.body.style.setProperty('--top', window.scrollY/1.5+"px");
         // console.log(window.scrollY);
     }
-    setInterval(icon_move,10);
+    setInterval(icon_move,1);
 </script>
