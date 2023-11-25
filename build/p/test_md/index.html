@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的世界数据包进阶教程系列</title>
+    {{header}}
+</head>
+<body class="scalebox">
+    <div class="body">
+        <div class="topbar">
+            <a class="topbar-button" href="https://www.gufandf.top/">HOME</a>
+            <a class="topbar-button" href="https://www.gufandf.top/p/mcc">MCC</a>
+            <a class="topbar-button" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
+            <a class="topbar-button" href="https://afdian.net/a/gufandf">爱发电</a>
+            <a class="topbar-button" href="https://github.com/gufandf">Github</a>
+        </div>
+        <img class="headimg" src="./outer wilds.jpg" alt="">
+        <div class="main">
+            <article>
+                <!-- title: 我的世界数据包进阶教程系列 -->
+<!-- headimg: ./outer wilds.jpg -->
+<!-- date: 2023/11/07 -->
+
+<!--
+文章标题：我的世界数据包进阶教程系列
+作者：孤帆Gufandf
+校对：
+启动日期：2023年11月7日
+资料来源：
+- [Minecraft Wiki](https://minecraft.wiki/)
+-->
+
+<h1 id="_1">我的世界数据包进阶教程系列</h1>
+<h1 id="_2">射线检测</h1>
+<h2 id="_3">导语</h2>
+<p>射线检测是一种通过发射射线来检测某个方向上方块或者实体的方式。这在一些场景下会经常用到，如确定子弹的命中情况、测量距离、判断玩家视线是否看向某个位置、又或许检测玩家所看的是什么方块。</p>
+<h2 id="_4">原理详解</h2>
+<p>射线检测的过程分为以下几步：</p>
+<ol>
+<li>发射</li>
+<li>步进</li>
+<li>判断</li>
+<li>循环</li>
+</ol>
+<p>在数据包内新建一个名为 ray.mcfunction 的文件，方便我们使用射线检测。</p>
+<p>我们需要生成一个帮助我们检测的实体，一般使用 marker，低版本也可以使用隐身的盔甲架。同时，给它他添加一个名为 ray 的标签，方便我们在后面选择它。</p>
+<pre><code class="language-mcfunction"># /ray.mcfunction
+
+summon marker ~ ~ ~ {Tags:[&quot;ray&quot;]}
+</code></pre>
+<p>将这个 marker 的角度设置为和玩家视角方向相同</p>
+<pre><code class="language-mcfunction">data modify entity @e[tag=ray,limit=1] Rotation set from entity @s Rotation
+</code></pre>
+<p>接下来，创建 step.mcfunction 文件， marker 每一次需要步进时都要运行这个函数，在 marker 生成后也需要调用这个函数来开始第一次步进。由此，ray.mcfunction 文件变成了这样。</p>
+<pre><code class="language-mcfunction"># /ray.mcfunction
+
+# 生成
+summon marker ~ ~ ~ {Tags:[&quot;ray&quot;]}
+# 转向
+data modify entity @e[tag=ray,limit=1] Rotation set from entity @s Rotation
+# 启动第一次步进
+execute as @e[tag=ray] at @s run function ray:step
+</code></pre>
+<p>步进时， marker 需要前进一小段距离，运行检测程序。如果需要判断的条件不成立，就继续前进，直到条件成立。因此，这个循环被我称为步进。在这一过程中，使用了递归的思想，即在函数内调用本函数来进行循环判断。</p>
+<pre><code class="language-mcfunction"># /step.mcfunction
+
+tp @s ^ ^ ^0.1
+
+function ray:step
+</code></pre>
+<p>为了避免陷入死循环，射线需要有一个步进次数限制。</p>
+<pre><code class="language-mcfunction"># /load.mcfunction
+
+scoreboard objectives add Raylimit dummy
+</code></pre>
+<pre><code class="language-mcfunction"># 步进次数限制
+scoreboard players add @s Raylimit 1
+execute if score @s Raylimit matches ..49 run function ray:step
+execute if score @s Raylimit matches 50.. run kill @s
+</code></pre>
+<p>这样，只有当步数小于一定值时，递归才会进行下去。</p>
+<p>当然为了方便以后添加更多提前中断递归的条件（比如检测玩家面向的方块，在碰到方块后就可以结束递归了），在递归需要中断时给 marker 添加一个标签 即可。</p>
+<pre><code class="language-mcfunction"># 步进次数限制
+scoreboard players add @s Raylimit 1
+execute if score @s Raylimit matches 50.. run tag @s add RayOver
+execute if entity @s[tag=!RayOver] run function ray:step
+execute if entity @s[tag=RayOver] run kill @s
+</code></pre>
+<p>在这里，当步进步数达到 50 时，marker 会给自己添加 RayOver 标签，下一次递归不会运行，本 marker 也会在最后删除。</p>
+<p>$$恭喜你成功发射了一条射线！ （虽然它还没有任何功能$$</p>
+<p>接下来，我们要添加一些判断条件让这变得更有趣。</p>
+<pre><code class="language-mcfunction"># 条件判断
+execute if block ~ ~ ~ grass_block run say this is grass_block!
+execute if block ~ ~ ~ grass_block run tag @s add RayOver
+</code></pre>
+<p>$$# /execute是非常强大的指令，在判断方面我们有求于他$$</p>
+<p>在这条指令中，当 marker 所在方块为草方块时（可以理解为射线和草方块发生了碰撞），marker 会发送一句话，同时给自己添加 RayOver 标签。</p>
+<p>由于这两句的判断条件相同，可以考虑把这两行整合进同一个函数。</p>
+<pre><code class="language-mcfunction"># 条件判断
+execute if block ~ ~ ~ grass_block run function ray:ray_conditions# /collision_grass_block
+</code></pre>
+<pre><code class="language-mcfunction"># /ray_conditions# /collision_grass_block
+
+say this is grass_block!
+tag @s add RayOver
+</code></pre>
+<p>在条件判断部分我们还可以加更多的条件进行更复杂的判断。</p>
+<pre><code class="language-mcfunction">execute if entity @e[type=ender_dragon,distance=..10] run function ray:ray_conditions# /kill_the_dragon
+</code></pre>
+<pre><code class="language-mcfunction"># /ray_conditions# /kill_the_dragon
+
+kill @e[type=ender_dragon,sort=nearest,limit=1]
+tag @s add RayOver
+</code></pre>
+<p>由此，整个 step.mcfunction 变成了这样。</p>
+<pre><code class="language-mcfunction"># /step.mcfunction
+
+tp @s ^ ^ ^0.1
+
+# 条件判断
+execute if block ~ ~ ~ grass_block run function ray:ray_conditions# /collision_grass_block
+execute if entity @e[type=ender_dragon,distance=..10] run function ray:ray_conditions# /kill_the_dragon
+
+# 步进次数限制
+scoreboard players add @s Raylimit 1
+execute if score @s Raylimit matches 50.. run tag @s add RayOver
+execute if entity @s[tag=!RayOver] run function ray:step
+execute if entity @s[tag=RayOver] run kill @s
+</code></pre>
+<h2 id="_5">实战演练</h2>
+<p>还没写</p>
+                
+            </article>
+            <div class="ending">
+        </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!-- <a href=""><div class="game-box"><div>
+    <img src="./test/outer wilds.jpg" alt=""><span>
+    <h2>梦境世界</h2>
+    <p>探索</p></span></div></div>
+</a> -->
+
+
+<style>
+    :root{
+        background-color: #111;
+        --ui_text_color: white;
+        --ui_background_color: #212121;
+        --ui_topbar_color: #333;
+        --ui_codeground_color: #333;
+        --ui_gray: #444;
+        --headimg-off: 0px;
+    }
+    body{
+        margin: 0;
+        padding: 0;
+        color: var(--ui_text_color);
+        background-color: var(--ui_background_color);
+    }
+    a{
+        color: var(--ui_text_color);
+        text-decoration-line: none;
+    }
+    ::-webkit-scrollbar{
+        width: 8px;
+        background-color: var(--ui_background_color);
+    }
+    ::-webkit-scrollbar-thumb{
+        background-color: var(--ui_gray);
+    }
+    img{
+        width: 100%;
+    }
+    .space{
+        height: 1000vh;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        margin-top: -10vh;
+        width: 100vw;
+        background-color: #161616a6;
+        backdrop-filter: blur(50px);
+    }
+    article p,h1,h2,h3,h4,h5,h6,code{
+        width: 100%;
+    }
+    article{
+        min-height: 40vh;
+        align-self: center;
+        margin: auto;
+        width: min(90%,900px);
+        height: 100%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    h1,h2{
+        border-style: solid;
+        border-width: 0 0 1.5px 0;
+        border-color: var(--ui_gray);
+    }
+    h1{
+        font-size: 2rem;
+    }
+    h2{
+        font-size: 1.5rem;
+    }
+    p.left,h1.left,h2.left,h3.left,h4.left,h5.left,h6.left{
+        text-align: left;
+    }
+    p.center,h1.center,h2.center,h3.center,h4.center,h5.center,h6.center{
+        text-align: center;
+    }
+    p.right,h1.right,h2.right,h3.right,h4.right,h5.right,h6.right{
+        text-align: right;
+    }
+    .right{
+        align-self: right;
+    }
+    .center{
+        align-self: center;
+    }
+    .left{
+        align-self: left;
+    }
+    article code{
+        font-family: 'Consolas';
+        display: block;
+        width: calc(100% - 2rem);
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: var(--ui_codeground_color);
+    }
+    article a{
+        color: #2770d4;
+    }
+    a.download-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 3px 5px 4px;
+        height: 75px;
+        width: 220px;
+        font-size: 1.7rem;
+        color: var(--ui_text_color);
+        background-color: #2770d4;
+    }
+    a.download-button:hover{
+        background-color: #4084e2;
+    }
+    .scalebox{
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        /* animation: body-ease-in forwards 0.3s ease-out; */
+    }
+    .body{
+        height: 100vh;
+        background-position: center;
+        background-repeat: repeat-y;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .scalebox.html_jump{
+        height: 100vh;
+        /* animation: body-ease-out forwards 0.1s ease-out; */
+    }
+    @keyframes body-ease-in {
+        0%{
+            transform: scale(0.95);
+            opacity: 0%;
+        }
+        100%{
+            transform: scale(1);
+            opacity: 100%;
+        }
+    }
+    @keyframes body-ease-out {
+        0%{
+            transform: scale(1);
+            opacity: 100%;
+        }
+        100%{
+            transform: scale(0.95);
+            opacity: 0%;
+        }
+    }
+    .topbar{
+        z-index: 10;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        height: 60px;
+        background-color: var(--ui_topbar_color);
+        position: absolute;
+        top: 0;
+    }
+    .topbar-button{
+        height: 100%;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+    .topbar-button:hover{
+        cursor: pointer;
+        background-color: #444;
+    }
+    .headimg{
+        position: relative;
+        height: 70vh;
+        object-fit: cover;
+        object-position: center;
+        /* background-size: cover;
+        background-position: center;
+        width: 100vw;
+        height: 60vh; */
+    }
+    
+    
+    .game-box{
+        width: 100%;
+    }
+    .game-box {
+        color: var(--ui_text_color);
+        margin: 2px 0 2px 0;
+        padding: 0;
+        height: 100px;
+        background-color: #151515cc;
+    }
+    .game-box div{
+        height: 100px;
+        display: flex;
+    }
+    .game-box span{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-around; */
+    }
+    .game-box img{
+        height: 100%;
+        width: 230px;
+        object-fit: cover;
+        object-position: center;
+    }
+    .game-box h2,.game-box p{
+        border: 0;
+        margin: 7px 0px 0 0;
+        object-fit: cover;
+        object-position: center;
+    }
+    .ending{
+        height: 200px;
+    }
+
+</style>
+<script>
+    function html_jump() {
+      var div = document.getElementById('offsetTop');
+      div.className += ' html_jump';
+    }
+    
+</script>
