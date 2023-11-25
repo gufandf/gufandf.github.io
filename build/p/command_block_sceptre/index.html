@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孤帆Gufandf|梦境世界</title>
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+</head>
+<body id="scalebox">
+    <div class="body">
+        <div class="topbar">
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
+        </div>
+        <img class="headimg" src="./bg.jpg" alt="">
+        <div class="main">
+            <article>
+                
+    <a href="https://gufandf.lanzoue.com/b03vo1kmh"><div class="game-box"><div>
+        <img src="./command_block.png" alt=""><span>
+        <h2>下载</h2>
+        <p>蓝奏云</p></span></div></div>
+    </a>
+
+    <a href="https://www.bilibili.com/video/BV1EK411k7N2"><div class="game-box"><div>
+        <img src="./command_block.png" alt=""><span>
+        <h2>宣传视频</h2>
+        <p>Bilibili</p></span></div></div>
+    </a>
+
+    <h1>信息</h1>
+        <li>数据包版本 v2</li>
+        <li>下载密码 1234</li>
+    <h1>反馈</h1>
+        <li>如出现bug请通过B站私信联系</li>
+        <li>地图带有资源包和数据包，如果因为各种原因没有正确加载，可以自行下载后手动加装。</li>
+
+
+                
+            </article>
+            <div class="ending">
+        </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!-- <a href=""><div class="game-box"><div>
+    <img src="./test/outer wilds.jpg" alt=""><span>
+    <h2>梦境世界</h2>
+    <p>探索</p></span></div></div>
+</a> -->
+
+
+<style>
+    :root{
+        background-color: #111;
+        --ui_text_color: white;
+        --ui_background_color: #212121;
+        --ui_topbar_color: #333;
+        --ui_codeground_color: #333;
+        --ui_gray: #444;
+        --headimg-off: 0px;
+    }
+    body{
+        margin: 0;
+        padding: 0;
+        color: var(--ui_text_color);
+        background-color: var(--ui_background_color);
+    }
+    a{
+        color: var(--ui_text_color);
+        text-decoration-line: none;
+    }
+    ::-webkit-scrollbar{
+        width: 8px;
+        background-color: var(--ui_background_color);
+    }
+    ::-webkit-scrollbar-thumb{
+        background-color: var(--ui_gray);
+    }
+    img{
+        width: 100%;
+    }
+    .space{
+        height: 1000vh;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        margin-top: -10vh;
+        width: 100vw;
+        background-color: #161616a6;
+        backdrop-filter: blur(50px);
+    }
+    article p,h1,h2,h3,h4,h5,h6,code{
+        width: 100%;
+    }
+    article{
+        min-height: 40vh;
+        align-self: center;
+        margin: auto;
+        width: min(90%,900px);
+        height: 100%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    h1,h2{
+        border-style: solid;
+        border-width: 0 0 1.5px 0;
+        border-color: var(--ui_gray);
+    }
+    h1{
+        font-size: 2rem;
+    }
+    h2{
+        font-size: 1.5rem;
+    }
+    p.left,h1.left,h2.left,h3.left,h4.left,h5.left,h6.left{
+        text-align: left;
+    }
+    p.center,h1.center,h2.center,h3.center,h4.center,h5.center,h6.center{
+        text-align: center;
+    }
+    p.right,h1.right,h2.right,h3.right,h4.right,h5.right,h6.right{
+        text-align: right;
+    }
+    .right{
+        align-self: right;
+    }
+    .center{
+        align-self: center;
+    }
+    .left{
+        align-self: left;
+    }
+    article code{
+        font-family: 'Consolas';
+        display: block;
+        width: calc(100% - 2rem);
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: var(--ui_codeground_color);
+    }
+    article a{
+        color: #2770d4;
+    }
+    a.download-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 3px 5px 4px;
+        height: 75px;
+        width: 220px;
+        font-size: 1.7rem;
+        color: var(--ui_text_color);
+        background-color: #2770d4;
+    }
+    a.download-button:hover{
+        background-color: #4084e2;
+    }
+    #scalebox{
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        animation: body-ease-in forwards 0.3s ease-out;
+    }
+    .body{
+        height: 100vh;
+        background-position: center;
+        background-repeat: repeat-y;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    #scalebox.html_jump{
+        height: 100vh;
+        animation: body-ease-out forwards 0.1s ease-out;
+    }
+    @keyframes body-ease-in {
+        0%{
+            transform: scale(0.95);
+            opacity: 0%;
+        }
+        100%{
+            transform: scale(1);
+            opacity: 100%;
+        }
+    }
+    @keyframes body-ease-out {
+        0%{
+            transform: scale(1);
+            opacity: 100%;
+        }
+        100%{
+            transform: scale(0.95);
+            opacity: 0%;
+        }
+    }
+    .topbar{
+        z-index: 10;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        height: 60px;
+        background-color: var(--ui_topbar_color);
+        position: absolute;
+        top: 0;
+    }
+    .topbar-button{
+        height: 100%;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+    .topbar-button:hover{
+        cursor: pointer;
+        background-color: #444;
+    }
+    .headimg{
+        position: relative;
+        height: 70vh;
+        object-fit: cover;
+        object-position: center;
+        /* background-size: cover;
+        background-position: center;
+        width: 100vw;
+        height: 60vh; */
+    }
+    
+    
+    .game-box{
+        width: 100%;
+    }
+    .game-box {
+        color: var(--ui_text_color);
+        margin: 2px 0 2px 0;
+        padding: 0;
+        height: 100px;
+        background-color: #151515cc;
+    }
+    .game-box div{
+        height: 100px;
+        display: flex;
+    }
+    .game-box span{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-around; */
+    }
+    .game-box img{
+        height: 100%;
+        width: 230px;
+        object-fit: cover;
+        object-position: center;
+    }
+    .game-box h2,.game-box p{
+        border: 0;
+        margin: 7px 0px 0 0;
+        object-fit: cover;
+        object-position: center;
+    }
+    .ending{
+        height: 200px;
+    }
+
+</style>
+<script>
+    function html_jump() {
+      var div = document.getElementById('scalebox');
+      div.className += ' html_jump';
+    }
+    
+</script>

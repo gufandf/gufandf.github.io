@@ -6,14 +6,14 @@
     <title>孤帆Gufandf|梦境世界</title>
     <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
 </head>
-<body class="scalebox">
+<body id="scalebox">
     <div class="body">
         <div class="topbar">
-            <a class="topbar-button" href="https://www.gufandf.top/">HOME</a>
-            <a class="topbar-button" href="https://www.gufandf.top/p/mcc">MCC</a>
-            <a class="topbar-button" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
-            <a class="topbar-button" href="https://afdian.net/a/gufandf">爱发电</a>
-            <a class="topbar-button" href="https://github.com/gufandf">Github</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
         </div>
         <img class="headimg" src="./bg.jpg" alt="">
         <div class="main">
@@ -165,7 +165,7 @@
     a.download-button:hover{
         background-color: #4084e2;
     }
-    .scalebox{
+    #scalebox{
         overflow: hidden;
         height: 100vh;
         width: 100vw;
@@ -178,9 +178,9 @@
         overflow-y: auto;
         overflow-x: hidden;
     }
-    .scalebox.html_jump{
+    #scalebox.html_jump{
         height: 100vh;
-        /* animation: body-ease-out forwards 0.1s ease-out; */
+        animation: body-ease-out forwards 0.1s ease-out;
     }
     @keyframes body-ease-in {
         0%{
@@ -275,7 +275,7 @@
 </style>
 <script>
     function html_jump() {
-      var div = document.getElementById('offsetTop');
+      var div = document.getElementById('scalebox');
       div.className += ' html_jump';
     }
     
