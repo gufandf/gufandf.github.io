@@ -327,7 +327,7 @@ execute if entity @s[tag=RayOver] run kill @s
         animation: body-ease-in forwards 0.2s ease-out;
     }
 
-    @keyframes body-ease-in {
+    @keyframes body-ease-out {
         0% {
             transform: scale(0.95);
             opacity: 0%;
@@ -339,7 +339,7 @@ execute if entity @s[tag=RayOver] run kill @s
         }
     }
 
-    @keyframes body-ease-out {
+    @keyframes body-ease-in {
         0% {
             transform: scale(1);
             opacity: 100%;
@@ -433,13 +433,13 @@ execute if entity @s[tag=RayOver] run kill @s
     }
 </style>
 <script>
-    window.onload = function () {
-        var div = document.getElementById('scalebox');
-        div.classList.add("html_jump");
-    };
+    // window.onload = function () {
+    //     var div = document.getElementById('scalebox');
+    //     div.classList.add("html_jump");
+    // };
     function html_jump() {
         var div = document.getElementById('scalebox');
-        div.classList.remove("html_jump");
+        div.classList.add("html_jump");
     }
 
 </script>
