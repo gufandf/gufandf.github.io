@@ -5,9 +5,11 @@ import json
 templatesRoot = "./templates/"
 modelsRoot = "./models/"
 postsRoot = "./site/p/"
+siteRoot = "./site/"
+buildRoot = "./docs/"
 
-shutil.rmtree("./docs")
-shutil.copytree("./site", "./docs", True)
+shutil.rmtree(buildRoot)
+shutil.copytree(siteRoot, buildRoot, True)
 
 
 def coPath(path1: str, path2: str):
@@ -40,7 +42,7 @@ models = readFileIn(modelsRoot)
 
 # post title headimg content
 
-for fileOrg in os.walk("./build"):
+for fileOrg in os.walk(buildRoot):
     # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
     for fileName in fileOrg[2]:
         fileType = fileName.split(".")[-1]

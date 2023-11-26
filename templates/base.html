@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     {{header}}
 </head>
+
 <body id="scalebox">
     <div class="body">
         <div class="topbar">
@@ -19,14 +21,15 @@
         <div class="main">
             <article>
                 {{content}}
-                
+
             </article>
             <div class="ending">
-        </div>
+            </div>
 
         </div>
     </div>
 </body>
+
 </html>
 
 
@@ -38,7 +41,7 @@
 
 
 <style>
-    :root{
+    :root {
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
@@ -47,30 +50,37 @@
         --ui_gray: #444;
         --headimg-off: 0px;
     }
-    body{
+
+    body {
         margin: 0;
         padding: 0;
         color: var(--ui_text_color);
         background-color: var(--ui_background_color);
     }
-    a{
+
+    a {
         color: var(--ui_text_color);
         text-decoration-line: none;
     }
-    ::-webkit-scrollbar{
+
+    ::-webkit-scrollbar {
         width: 8px;
         background-color: var(--ui_background_color);
     }
-    ::-webkit-scrollbar-thumb{
+
+    ::-webkit-scrollbar-thumb {
         background-color: var(--ui_gray);
     }
-    img{
+
+    img {
         width: 100%;
     }
-    .space{
+
+    .space {
         height: 1000vh;
     }
-    .main{
+
+    .main {
         display: flex;
         flex-direction: column;
         margin-top: -10vh;
@@ -78,49 +88,87 @@
         background-color: #161616a6;
         backdrop-filter: blur(50px);
     }
-    article p,h1,h2,h3,h4,h5,h6,code{
+
+    article p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    code {
         width: 100%;
     }
-    article{
+
+    article {
         min-height: 40vh;
         align-self: center;
         margin: auto;
-        width: min(90%,900px);
+        width: min(90%, 900px);
         height: 100%;
         padding: 1rem;
         display: flex;
         flex-direction: column;
     }
-    h1,h2{
+
+    h1,
+    h2 {
         border-style: solid;
         border-width: 0 0 1.5px 0;
         border-color: var(--ui_gray);
     }
-    h1{
+
+    h1 {
         font-size: 2rem;
     }
-    h2{
+
+    h2 {
         font-size: 1.5rem;
     }
-    p.left,h1.left,h2.left,h3.left,h4.left,h5.left,h6.left{
+
+    p.left,
+    h1.left,
+    h2.left,
+    h3.left,
+    h4.left,
+    h5.left,
+    h6.left {
         text-align: left;
     }
-    p.center,h1.center,h2.center,h3.center,h4.center,h5.center,h6.center{
+
+    p.center,
+    h1.center,
+    h2.center,
+    h3.center,
+    h4.center,
+    h5.center,
+    h6.center {
         text-align: center;
     }
-    p.right,h1.right,h2.right,h3.right,h4.right,h5.right,h6.right{
+
+    p.right,
+    h1.right,
+    h2.right,
+    h3.right,
+    h4.right,
+    h5.right,
+    h6.right {
         text-align: right;
     }
-    .right{
+
+    .right {
         align-self: right;
     }
-    .center{
+
+    .center {
         align-self: center;
     }
-    .left{
+
+    .left {
         align-self: left;
     }
-    article code{
+
+    article code {
         font-family: 'Consolas';
         display: block;
         width: calc(100% - 2rem);
@@ -128,10 +176,12 @@
         border-radius: 10px;
         background-color: var(--ui_codeground_color);
     }
-    article a{
+
+    article a {
         color: #2770d4;
     }
-    a.download-button{
+
+    a.download-button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -142,47 +192,56 @@
         color: var(--ui_text_color);
         background-color: #2770d4;
     }
-    a.download-button:hover{
+
+    a.download-button:hover {
         background-color: #4084e2;
     }
-    #scalebox{
-        overflow: hidden;
-        height: 100vh;
-        width: 100vw;
-        animation: body-ease-in forwards 0.3s ease-out;
-    }
-    .body{
+
+    .body {
         height: 100vh;
         background-position: center;
         background-repeat: repeat-y;
         overflow-y: auto;
         overflow-x: hidden;
     }
-    #scalebox.html_jump{
+
+    #scalebox {
+        overflow: hidden;
         height: 100vh;
+        width: 100vw;
         animation: body-ease-out forwards 0.1s ease-out;
     }
+
+    #scalebox.html_jump {
+        animation: body-ease-in forwards 0.2s ease-out;
+    }
+
     @keyframes body-ease-in {
-        0%{
+        0% {
             transform: scale(0.95);
             opacity: 0%;
         }
-        100%{
+
+        100% {
             transform: scale(1);
             opacity: 100%;
         }
     }
+
     @keyframes body-ease-out {
-        0%{
+        0% {
             transform: scale(1);
             opacity: 100%;
+
         }
-        100%{
+
+        100% {
             transform: scale(0.95);
             opacity: 0%;
         }
     }
-    .topbar{
+
+    .topbar {
         z-index: 10;
         display: flex;
         justify-content: flex-end;
@@ -192,7 +251,8 @@
         position: absolute;
         top: 0;
     }
-    .topbar-button{
+
+    .topbar-button {
         height: 100%;
         width: 100px;
         display: flex;
@@ -200,11 +260,13 @@
         justify-content: center;
         justify-items: center;
     }
-    .topbar-button:hover{
+
+    .topbar-button:hover {
         cursor: pointer;
         background-color: #444;
     }
-    .headimg{
+
+    .headimg {
         position: relative;
         height: 70vh;
         object-fit: cover;
@@ -214,11 +276,12 @@
         width: 100vw;
         height: 60vh; */
     }
-    
-    
-    .game-box{
+
+
+    .game-box {
         width: 100%;
     }
+
     .game-box {
         color: var(--ui_text_color);
         margin: 2px 0 2px 0;
@@ -226,37 +289,46 @@
         height: 100px;
         background-color: #151515cc;
     }
-    .game-box div{
+
+    .game-box div {
         height: 100px;
         display: flex;
     }
-    .game-box span{
+
+    .game-box span {
         padding: 10px;
         display: flex;
         flex-direction: column;
         /* justify-content: space-around; */
     }
-    .game-box img{
+
+    .game-box img {
         height: 100%;
         width: 230px;
         object-fit: cover;
         object-position: center;
     }
-    .game-box h2,.game-box p{
+
+    .game-box h2,
+    .game-box p {
         border: 0;
         margin: 7px 0px 0 0;
         object-fit: cover;
         object-position: center;
     }
-    .ending{
+
+    .ending {
         height: 200px;
     }
-
 </style>
 <script>
+    window.onload = function () {
+        var div = document.getElementById('scalebox');
+        div.classList.add("html_jump");
+    };
     function html_jump() {
-      var div = document.getElementById('scalebox');
-      div.className += ' html_jump';
+        var div = document.getElementById('scalebox');
+        div.classList.remove("html_jump");
     }
-    
+
 </script>
