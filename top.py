@@ -6,8 +6,8 @@ templatesRoot = "./templates/"
 modelsRoot = "./models/"
 postsRoot = "./site/p/"
 
-shutil.rmtree("./build")
-shutil.copytree("./site", "./build", True)
+shutil.rmtree("./docs")
+shutil.copytree("./site", "./docs", True)
 
 
 def coPath(path1: str, path2: str):
