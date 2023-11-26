@@ -1,5 +1,5 @@
 <!-- title: 我的世界数据包进阶教程系列 -->
-<!-- headimg: ./outer wilds.jpg -->
+<!-- headimg: ./headimg.png -->
 <!-- date: 2023/11/07 -->
 
 <!--
@@ -12,8 +12,9 @@
 -->
 
 
-# 我的世界数据包进阶教程系列
+<h1>我的世界数据包进阶教程系列</h1>
 
+[TOC]
 # 射线检测
 
 ## 导语
@@ -107,7 +108,7 @@ execute if block ~ ~ ~ grass_block run say this is grass_block!
 execute if block ~ ~ ~ grass_block run tag @s add RayOver
 ```
 
-$$# /execute是非常强大的指令，在判断方面我们有求于他$$
+$$ /execute是非常强大的指令，在判断方面我们有求于他$$
 
 在这条指令中，当 marker 所在方块为草方块时（可以理解为射线和草方块发生了碰撞），marker 会发送一句话，同时给自己添加 RayOver 标签。
 

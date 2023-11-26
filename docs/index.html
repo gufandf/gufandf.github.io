@@ -9,7 +9,7 @@
 </head>
 
 <body id="scalebox">
-    <div class="body">
+    <div class="body" style="background-image: url('./assets/bg.jpg');">
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
@@ -21,7 +21,14 @@
         <div class="main">
             <article>
                 
-    <h1>游戏地图</h1>
+    <h1>教程</h1>
+    <a onclick="html_jump();" href="./p/tutorials/minecraft_datapack/"><div class="game-box"><div>
+        <img src="./assets/imgs/封面/数据包教程.png" alt=""><span>
+        <h2>数据包进阶教程</h2>
+        <p></p></span></div></div>
+    </a>
+
+    <h1>地图</h1>
     <a onclick="html_jump();" href="./p/dreamworld/"><div class="game-box"><div>
         <img src="./assets/imgs/封面/梦境世界小封面.png" alt=""><span>
         <h2>梦境世界</h2>
@@ -40,13 +47,12 @@
         <p>来自 火柴人vs我的世界</p></span></div></div>
     </a>
 
-    <h1>模型目录</h1>
+    <h1>模型</h1>
     <a onclick="html_jump();" href="./p/models/"><div class="game-box"><div>
         <img src="./assets/imgs/封面/模型目录.png" alt=""><span>
         <h2>模型目录</h2>
         <p></p></span></div></div>
     </a>
-
 
             </article>
             <div class="ending">
@@ -71,8 +77,9 @@
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
-        --ui_topbar_color: #333;
-        --ui_codeground_color: #333;
+        --ui_topbar_color: #303030aa;
+        --ui_main_color: #161616aa;
+        --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
     }
@@ -111,7 +118,7 @@
         flex-direction: column;
         margin-top: -10vh;
         width: 100vw;
-        background-color: #161616a6;
+        background-color: #101010cc;
         backdrop-filter: blur(50px);
     }
 
@@ -194,13 +201,14 @@
         align-self: left;
     }
 
-    article code {
+    article code,article .toc {
         font-family: 'Consolas';
         display: block;
         width: calc(100% - 2rem);
         padding: 1rem;
         border-radius: 10px;
         background-color: var(--ui_codeground_color);
+        border: solid 1px var(--ui_gray);
     }
 
     article a {
@@ -274,6 +282,7 @@
         width: 100%;
         height: 60px;
         background-color: var(--ui_topbar_color);
+        backdrop-filter: blur(50px);
         position: absolute;
         top: 0;
     }
@@ -346,6 +355,8 @@
     .ending {
         height: 200px;
     }
+
+
 </style>
 <script>
     function html_jump() {

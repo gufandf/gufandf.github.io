@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>孤帆Gufandf|梦境世界</title>
-    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{icon}}" type="image/x-icon">
 </head>
 
 <body id="scalebox">
-    <div class="body">
+    <div class="body" style="background-image: url('./bg.jpg');">
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
@@ -41,7 +41,6 @@
         <li>地图带有资源包和数据包，如果因为各种原因没有正确加载，可以自行下载后手动加装。</li>
 
 
-
             </article>
             <div class="ending">
             </div>
@@ -65,8 +64,9 @@
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
-        --ui_topbar_color: #333;
-        --ui_codeground_color: #333;
+        --ui_topbar_color: #303030aa;
+        --ui_main_color: #161616aa;
+        --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
     }
@@ -105,7 +105,7 @@
         flex-direction: column;
         margin-top: -10vh;
         width: 100vw;
-        background-color: #161616a6;
+        background-color: #101010cc;
         backdrop-filter: blur(50px);
     }
 
@@ -188,13 +188,14 @@
         align-self: left;
     }
 
-    article code {
+    article code,article .toc {
         font-family: 'Consolas';
         display: block;
         width: calc(100% - 2rem);
         padding: 1rem;
         border-radius: 10px;
         background-color: var(--ui_codeground_color);
+        border: solid 1px var(--ui_gray);
     }
 
     article a {
@@ -268,6 +269,7 @@
         width: 100%;
         height: 60px;
         background-color: var(--ui_topbar_color);
+        backdrop-filter: blur(50px);
         position: absolute;
         top: 0;
     }
@@ -340,6 +342,8 @@
     .ending {
         height: 200px;
     }
+
+
 </style>
 <script>
     function html_jump() {

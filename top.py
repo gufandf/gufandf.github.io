@@ -41,8 +41,9 @@ models = readFileIn(modelsRoot)
 # print("models: "+json.dumps(models)+"\n")
 
 # post title headimg content
-
+print("[build]building...")
 for fileOrg in os.walk(buildRoot):
+    print(f"[build]build {fileOrg[0]}...")
     # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
     for fileName in fileOrg[2]:
         fileType = fileName.split(".")[-1]
@@ -68,11 +69,10 @@ for fileOrg in os.walk(buildRoot):
             f = open(coPath(fileOrg[0], fileName), "r", encoding="UTF-8")
             file = f.read()
             f.close()
-            print(file)
             childs = {}
             for i in re.findall("<!-- (.*): (.*) -->", file):
                 childs[i[0]] = i[1].strip()
-            childs["content"] = markdown.markdown(file,extensions=['markdown.extensions.toc','markdown.extensions.fenced_code','markdown.extensions.tables'])
+            childs["content"] = markdown.markdown(file,extensions=['markdown.extensions.toc','markdown.extensions.fenced_code','markdown.extensions.tables','pymdownx.arithmatex'])
 
             # 填充模版
             html = templates["base"]
