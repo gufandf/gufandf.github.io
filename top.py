@@ -1,6 +1,5 @@
 import markdown
 import shutil, os, re
-import json
 
 templatesRoot = "./templates/"
 modelsRoot = "./models/"
