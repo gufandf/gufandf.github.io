@@ -41,9 +41,9 @@ models = readFileIn(modelsRoot)
 # print("models: "+json.dumps(models)+"\n")
 
 # post title headimg content
-print("[build]building...")
+print("[build] building...")
 for fileOrg in os.walk(buildRoot):
-    print(f"[build]build {fileOrg[0]}...")
+    print(f"[build] build {fileOrg[0]}...")
     # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
     for fileName in fileOrg[2]:
         fileType = fileName.split(".")[-1]
