@@ -1,15 +1,11 @@
 import markdown
-import shutil, os, re
+import shutil, os, re, time
 
-templatesRoot = "./templates/"
+templatesRoot = "./site/templates/"
 modelsRoot = "./models/"
 postsRoot = "./site/p/"
 siteRoot = "./site/"
 buildRoot = "./docs/"
-
-shutil.rmtree(buildRoot)
-shutil.copytree(siteRoot, buildRoot, True)
-
 
 def coPath(path1: str, path2: str):
     path1 = path1.replace("./", "")
@@ -32,51 +28,76 @@ def readFileIn(root):
             pass
     return d
 
+def walkPath(Path):
+    files = []
+    for fileOrg in os.walk(Path):
+        for fileName in fileOrg[2]:
+            filePath = fileOrg[0]+"/"+fileName
+            files.append(filePath)
+    return files
 
-templates = readFileIn(templatesRoot)
-models = readFileIn(modelsRoot)
+def build():
+    shutil.rmtree(buildRoot)
+    shutil.copytree(siteRoot, buildRoot, True)
 
-# print("templates: "+json.dumps(templates)+"\n")
-# print("models: "+json.dumps(models)+"\n")
+    templates = readFileIn(templatesRoot)
+    # models = readFileIn(modelsRoot)
 
-# post title headimg content
-print("[build] building...")
-for fileOrg in os.walk(buildRoot):
-    print(f"[build] build {fileOrg[0]}...")
-    # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
-    for fileName in fileOrg[2]:
-        fileType = fileName.split(".")[-1]
-        if fileType == "html":
-            f = open(coPath(fileOrg[0], fileName), "r", encoding="UTF-8")
-            file = f.read()
-            f.close()
-            # 如果使用模板
-            if len(re.findall('<template src=".+?">', file)) == 0:
-                break
-            templateName = re.findall('<template src=".+?">', file)[0][15:-2]
-            childs = re.findall('<child id="(.+?)">([^*]*?)</child>', file)
-            # print("childs: "+json.dumps(childs))
+    # print("[build] building...")
+    for fileOrg in os.walk(buildRoot):
+        # print(f"[build] build {fileOrg[0]}...")
+        # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
+        for fileName in fileOrg[2]:
+            fileType = fileName.split(".")[-1]
+            if fileType == "html":
+                f = open(coPath(fileOrg[0], fileName), "r", encoding="UTF-8")
+                file = f.read()
+                f.close()
+                # 如果使用模板
+                if len(re.findall('<template src=".+?">', file)) == 0:
+                    break
+                templateName = re.findall('<template src=".+?">', file)[0][15:-2]
+                childs = re.findall('<child id="(.+?)">([^*]*?)</child>', file)
+                # print("childs: "+json.dumps(childs))
 
-            # 填充模版
-            html = templates[templateName]
-            for child in childs:
-                html = html.replace(f'{{{{{child[0]}}}}}', child[1])
-            f = open(coPath(fileOrg[0], fileName), "w", encoding="UTF-8")
-            f.write(html)
-            f.close()
-        elif fileType == "md":
-            f = open(coPath(fileOrg[0], fileName), "r", encoding="UTF-8")
-            file = f.read()
-            f.close()
-            childs = {}
-            for i in re.findall("<!-- (.*): (.*) -->", file):
-                childs[i[0]] = i[1].strip()
-            childs["content"] = markdown.markdown(file,extensions=['markdown.extensions.toc','markdown.extensions.fenced_code','markdown.extensions.tables','pymdownx.arithmatex'])
+                # 填充模版
+                html = templates[templateName]
+                for child in childs:
+                    html = html.replace(f'{{{{{child[0]}}}}}', child[1])
+                f = open(coPath(fileOrg[0], fileName), "w", encoding="UTF-8")
+                f.write(html)
+                f.close()
+            elif fileType == "md":
+                f = open(coPath(fileOrg[0], fileName), "r", encoding="UTF-8")
+                file = f.read()
+                f.close()
+                childs = {}
+                for i in re.findall("<!-- (.*): (.*) -->", file):
+                    childs[i[0]] = i[1].strip()
+                childs["content"] = markdown.markdown(file,extensions=['markdown.extensions.toc','markdown.extensions.fenced_code','markdown.extensions.tables','pymdownx.arithmatex'])
 
-            # 填充模版
-            html = templates["base"]
-            for child in childs:
-                html = html.replace(f'{{{{{child}}}}}', childs[child])
-            f = open(coPath(fileOrg[0], fileName)[:-3]+".html", "w", encoding="UTF-8")
-            f.write(html)
-            f.close()
+                # 填充模版
+                html = templates["base"]
+                for child in childs:
+                    html = html.replace(f'{{{{{child}}}}}', childs[child])
+                f = open(coPath(fileOrg[0], fileName)[:-3]+".html", "w", encoding="UTF-8")
+                f.write(html)
+                f.close()
+
+watchList = {}
+
+while True:
+    filePaths = walkPath(siteRoot)
+    for filePath in filePaths:
+        nowTime = f"{time.localtime().tm_hour}:{time.localtime().tm_min}:{time.localtime().tm_sec}"
+        try:
+            if watchList[filePath] != os.path.getmtime(filePath):
+                print(nowTime+" [Change] "+filePath)
+                watchList[filePath] = os.path.getmtime(filePath)
+                build()
+        except FileNotFoundError:
+            print(nowTime+" [Change] "+filePath)
+            build()
+        except KeyError:
+            watchList[filePath] = os.path.getmtime(filePath)
+    time.sleep(0.1)
