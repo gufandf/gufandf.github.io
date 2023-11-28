@@ -13,13 +13,11 @@
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
             <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
             <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
-<<<<<<< HEAD
-=======
-            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
->>>>>>> parent of a166ad1 (topbar)
         </div>
+        <img class="headimg" src="./headimg.png" alt="">
         <div class="main">
             <article>
                 <!-- title: 我的世界数据包进阶教程系列 -->
@@ -153,7 +151,6 @@ execute if entity @s[tag=RayOver] run kill @s
             </article>
             <div class="ending">
             </div>
-
         </div>
     </div>
 </body>
@@ -212,7 +209,6 @@ execute if entity @s[tag=RayOver] run kill @s
     .main {
         display: flex;
         flex-direction: column;
-        margin-top: 60;
         width: 100vw;
         background-color: var(--ui_main_color);
         /* backdrop-filter: blur(20px); */
@@ -401,7 +397,7 @@ execute if entity @s[tag=RayOver] run kill @s
     .headimg {
         z-index: -100;
         position: relative;
-        height: 70vh;
+        height: 60vh;
         object-fit: cover;
         object-position: center;
         /* background-size: cover;

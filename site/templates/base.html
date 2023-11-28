@@ -13,16 +13,17 @@
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
             <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
             <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
         </div>
+        <img class="headimg" src="{{headimg}}" alt="">
         <div class="main">
             <article>
                 {{content}}
             </article>
             <div class="ending">
             </div>
-
         </div>
     </div>
 </body>
@@ -81,7 +82,6 @@
     .main {
         display: flex;
         flex-direction: column;
-        margin-top: 60;
         width: 100vw;
         background-color: var(--ui_main_color);
         /* backdrop-filter: blur(20px); */
@@ -270,7 +270,7 @@
     .headimg {
         z-index: -100;
         position: relative;
-        height: 70vh;
+        height: 60vh;
         object-fit: cover;
         object-position: center;
         /* background-size: cover;
