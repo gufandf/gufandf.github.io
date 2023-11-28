@@ -8,8 +8,8 @@
     <link rel="shortcut icon" href="{{icon}}" type="image/x-icon">
 </head>
 
-<body id="scalebox">
-    <div class="body" style="background-image: url('./mcc_bg.jpg');">
+<body id="scalebox" style="background-image: url('./mcc_bg.jpg');">
+    <div class="body">
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
@@ -62,13 +62,8 @@
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
-<<<<<<< HEAD
         --ui_topbar_color: #303030;
         --ui_main_color: #161616fa;
-=======
-        --ui_topbar_color: #303030aa;
-        --ui_main_color: #161616aa;
->>>>>>> parent of d83e514 (heroimg)
         --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
@@ -108,13 +103,8 @@
         flex-direction: column;
         margin-top: -10vh;
         width: 100vw;
-<<<<<<< HEAD
         background-color: var(--ui_main_color);
-        /* backdrop-filter: blur(20px); */
-=======
-        background-color: #101010cc;
-        backdrop-filter: blur(50px);
->>>>>>> parent of d83e514 (heroimg)
+        backdrop-filter: blur(20px);
     }
 
     article p,
@@ -229,14 +219,14 @@
 
     .body {
         height: 100vh;
-        background-position: center;
-        background-repeat: repeat-y;
         overflow-y: auto;
         overflow-x: hidden;
     }
 
     #scalebox {
         overflow: hidden;
+        background-position: center;
+        background-repeat: repeat-y;
         height: 100vh;
         width: 100vw;
         animation: body-ease-in forwards 0.3s ease-out;
@@ -277,15 +267,9 @@
         justify-content: flex-end;
         width: 100%;
         height: 60px;
-<<<<<<< HEAD
         /* backdrop-filter: blur(5px); */
         background-color: var(--ui_topbar_color);
         position: sticky;
-=======
-        background-color: var(--ui_topbar_color);
-        backdrop-filter: blur(50px);
-        position: absolute;
->>>>>>> parent of d83e514 (heroimg)
         top: 0;
     }
 
@@ -304,14 +288,11 @@
     }
 
     .headimg {
+        z-index: -1;
         position: relative;
         height: 70vh;
         object-fit: cover;
         object-position: center;
-        /* background-size: cover;
-        background-position: center;
-        width: 100vw;
-        height: 60vh; */
     }
 
 
