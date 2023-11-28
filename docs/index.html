@@ -18,7 +18,6 @@
             <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
             <div style="width: 10px;"></div>
         </div>
-        <img class="headimg" src="./assets/bg.jpg" alt="">
         <div class="main">
             <article>
                 
@@ -79,7 +78,7 @@
         --ui_text_color: white;
         --ui_background_color: #212121;
         --ui_topbar_color: #303030;
-        --ui_main_color: #161616ec;
+        --ui_main_color: #161616fa;
         --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
@@ -117,10 +116,10 @@
     .main {
         display: flex;
         flex-direction: column;
-        margin-top: -10vh;
+        margin-top: 60;
         width: 100vw;
         background-color: var(--ui_main_color);
-        backdrop-filter: blur(50px);
+        /* backdrop-filter: blur(20px); */
     }
 
     article p,
@@ -285,7 +284,7 @@
         height: 60px;
         background-color: var(--ui_topbar_color);
         /* backdrop-filter: blur(5px); */
-        position: absolute;
+        position: sticky;
         top: 0;
     }
     
@@ -304,6 +303,7 @@
     }
 
     .headimg {
+        z-index: -100;
         position: relative;
         height: 70vh;
         object-fit: cover;
