@@ -89,7 +89,7 @@ watchList = {}
 while True:
     filePaths = walkPath(siteRoot)
     for filePath in filePaths:
-        nowTime = f"{time.localtime().tm_hour}:{time.localtime().tm_min}:{time.localtime().tm_sec}"
+        nowTime = f"{str(time.localtime().tm_hour).rjust(2,"0")}:{str(time.localtime().tm_min).rjust(2,"0")}:{str(time.localtime().tm_sec).rjust(2,"0")}"
         try:
             if watchList[filePath] != os.path.getmtime(filePath):
                 print(nowTime+" [Change] "+filePath)

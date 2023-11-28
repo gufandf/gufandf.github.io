@@ -44,8 +44,8 @@
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
-        --ui_topbar_color: #303030aa;
-        --ui_main_color: #161616aa;
+        --ui_topbar_color: #303030;
+        --ui_main_color: #161616ec;
         --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
@@ -85,7 +85,7 @@
         flex-direction: column;
         margin-top: -10vh;
         width: 100vw;
-        background-color: #101010cc;
+        background-color: var(--ui_main_color);
         backdrop-filter: blur(50px);
     }
 
@@ -168,13 +168,13 @@
         align-self: left;
     }
 
-    article code,article .toc {
+    article code{
         font-family: 'Consolas';
         display: block;
         width: calc(100% - 2rem);
         padding: 1rem;
         overflow-x: auto;
-        border-radius: 10px;
+        border-radius: 4px;
         background-color: var(--ui_codeground_color);
         border: solid 1px var(--ui_gray);
     }
@@ -249,12 +249,11 @@
         justify-content: flex-end;
         width: 100%;
         height: 60px;
-        background-color: var(--ui_topbar_color);
-        backdrop-filter: blur(50px);
+        /* backdrop-filter: blur(5px); */
         position: absolute;
         top: 0;
     }
-
+    
     .topbar-button {
         height: 100%;
         width: 100px;
@@ -262,6 +261,7 @@
         align-items: center;
         justify-content: center;
         justify-items: center;
+        /* background-color: var(--ui_topbar_color); */
     }
 
     .topbar-button:hover {
@@ -323,8 +323,23 @@
     .ending {
         height: 200px;
     }
-
-
+    article .toc{
+        font-family: 'Consolas';
+        padding: 0 2rem 0 2rem;
+        overflow-x: auto;
+        border-radius: 4px;
+        background-color: var(--ui_codeground_color);
+        border: solid 1px var(--ui_gray);
+    }
+    .toc ul,.toc li{
+        padding-left: 0.5rem;
+    }
+    .heroimg{
+        width: min(100%,500px);
+        align-self: center;
+        margin: auto;
+        margin-top: -50px;
+    }
 </style>
 <script>
     function html_jump() {
