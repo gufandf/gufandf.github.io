@@ -76,8 +76,13 @@
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
+<<<<<<< HEAD
         --ui_topbar_color: #303030;
         --ui_main_color: #161616fa;
+=======
+        --ui_topbar_color: #303030aa;
+        --ui_main_color: #161616aa;
+>>>>>>> parent of d83e514 (heroimg)
         --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
@@ -115,9 +120,15 @@
     .main {
         display: flex;
         flex-direction: column;
+        margin-top: -10vh;
         width: 100vw;
+<<<<<<< HEAD
         background-color: var(--ui_main_color);
         /* backdrop-filter: blur(20px); */
+=======
+        background-color: #101010cc;
+        backdrop-filter: blur(50px);
+>>>>>>> parent of d83e514 (heroimg)
     }
 
     article p,
@@ -199,13 +210,13 @@
         align-self: left;
     }
 
-    article code{
+    article code,article .toc {
         font-family: 'Consolas';
         display: block;
         width: calc(100% - 2rem);
         padding: 1rem;
         overflow-x: auto;
-        border-radius: 4px;
+        border-radius: 10px;
         background-color: var(--ui_codeground_color);
         border: solid 1px var(--ui_gray);
     }
@@ -280,11 +291,18 @@
         justify-content: flex-end;
         width: 100%;
         height: 60px;
+<<<<<<< HEAD
         /* backdrop-filter: blur(5px); */
+        background-color: var(--ui_topbar_color);
         position: sticky;
+=======
+        background-color: var(--ui_topbar_color);
+        backdrop-filter: blur(50px);
+        position: absolute;
+>>>>>>> parent of d83e514 (heroimg)
         top: 0;
     }
-    
+
     .topbar-button {
         height: 100%;
         width: 100px;
@@ -292,7 +310,6 @@
         align-items: center;
         justify-content: center;
         justify-items: center;
-        /* background-color: var(--ui_topbar_color); */
     }
 
     .topbar-button:hover {
@@ -301,9 +318,8 @@
     }
 
     .headimg {
-        z-index: -100;
         position: relative;
-        height: 60vh;
+        height: 70vh;
         object-fit: cover;
         object-position: center;
         /* background-size: cover;
@@ -355,23 +371,8 @@
     .ending {
         height: 200px;
     }
-    article .toc{
-        font-family: 'Consolas';
-        padding: 0 2rem 0 2rem;
-        overflow-x: auto;
-        border-radius: 4px;
-        background-color: var(--ui_codeground_color);
-        border: solid 1px var(--ui_gray);
-    }
-    .toc ul,.toc li{
-        padding-left: 0.5rem;
-    }
-    .heroimg{
-        width: min(100%,500px);
-        align-self: center;
-        margin: auto;
-        margin-top: -50px;
-    }
+
+
 </style>
 <script>
     function html_jump() {
