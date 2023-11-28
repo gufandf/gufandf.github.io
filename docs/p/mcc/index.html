@@ -13,9 +13,10 @@
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
             <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">BiliBili</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
+            <div style="width: 10px;"></div>
         </div>
         <img class="headimg" src="./mcc_bg.jpg" alt="">
         <div class="main">
@@ -268,6 +269,7 @@
         justify-content: flex-end;
         width: 100%;
         height: 60px;
+        background-color: var(--ui_topbar_color);
         /* backdrop-filter: blur(5px); */
         position: absolute;
         top: 0;
@@ -275,12 +277,11 @@
     
     .topbar-button {
         height: 100%;
-        width: 100px;
+        width: 70px;
         display: flex;
         align-items: center;
         justify-content: center;
         justify-items: center;
-        /* background-color: var(--ui_topbar_color); */
     }
 
     .topbar-button:hover {
