@@ -85,7 +85,7 @@ def build():
                 f.close()
 
 watchList = {}
-
+build()
 while True:
     filePaths = walkPath(siteRoot)
     for filePath in filePaths:
