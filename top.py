@@ -89,7 +89,7 @@ build()
 while True:
     filePaths = walkPath(siteRoot)
     for filePath in filePaths:
-        nowTime = f"{time.localtime().tm_hour}:{time.localtime().tm_min}:{time.localtime().tm_sec}"
+        nowTime = f"{str(time.localtime().tm_hour).ljust(2,'0')}:{str(time.localtime().tm_min).ljust(2,'0')}:{str(time.localtime().tm_sec).ljust(2,'0')}"
         try:
             if watchList[filePath] != os.path.getmtime(filePath):
                 print(nowTime+" [Change] "+filePath)
@@ -101,5 +101,7 @@ while True:
         except KeyError:
             watchList[filePath] = os.path.getmtime(filePath)
         except PermissionError:
-            print(nowTime+"文件被占用: "+filePath)
-    time.sleep(0.1)
+            print(nowTime+" [Error] 文件被占用: "+filePath)
+        except:
+            print(nowTime+" [Error] 未知错误: "+filePath)
+    time.sleep(0.5)
