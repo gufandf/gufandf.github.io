@@ -100,4 +100,6 @@ while True:
             build()
         except KeyError:
             watchList[filePath] = os.path.getmtime(filePath)
+        except PermissionError:
+            print(nowTime+"文件被占用: "+filePath)
     time.sleep(0.1)
