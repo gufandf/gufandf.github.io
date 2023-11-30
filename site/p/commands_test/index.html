@@ -1,0 +1,13 @@
+<template src="base">
+
+<child id="title">孤帆Gufandf|命令方块指令测试</child>
+<child id="headimg">./headimg.png</child>
+
+<child id="content">
+    <div class="cb-group">
+        <div class="repeating-cb"><div class="commands">scoreboard players add @a[score_钓竿使用_min=1] aimbot 1</div></div>
+        <div class="chain-cb"><div class="commands">scoreboardp layers set @a [score_钓竿使用_min=1] 钓竿使用 0</div></div>
+        <div class="chain-cb"><div class="commands">scoreboard players set @a[score_aimbot_min=3] aimbot 1</div></div>
+        <div class="chain-cb"><div class="commands">scoreboard players set @a[score_usebow_min=l] usebow0</div></div>
+    </div>
+</child>
