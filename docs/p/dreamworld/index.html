@@ -12,13 +12,13 @@
     <div class="body">
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/mcc/">MCC</a>
             <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
             <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
             <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
         </div>
-        <img class="headimg" src="./bg/bg2.jpg" alt="">
         <div class="main">
+            <img class="headimg" src="./bg/bg2.jpg" alt="">
             <article>
                 
         <img class="heroimg" src="./img/DREAMWROLD.png" alt="">
@@ -71,8 +71,8 @@
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
-        --ui_topbar_color: #303030;
-        --ui_main_color: #2e2e2e;
+        --ui_topbar_color: rgba(29, 32, 34);
+        --ui_main_color: rgba(29, 32, 34, 0.877);
         --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
@@ -110,10 +110,9 @@
     .main {
         display: flex;
         flex-direction: column;
-        margin-top: -10vh;
         width: 100vw;
         background-color: var(--ui_main_color);
-        /* backdrop-filter: blur(20px); */
+        backdrop-filter: blur(20px);
     }
 
     article p,
@@ -300,7 +299,7 @@
     .headimg {
         z-index: -1;
         position: relative;
-        height: 70vh;
+        height: 60vh;
         object-fit: cover;
         object-position: center;
     }
@@ -315,7 +314,7 @@
         margin: 2px 0 2px 0;
         padding: 0;
         height: 100px;
-        background-color: #151515cc;
+        background-color: #151515b9;
     }
 
     .game-box div {

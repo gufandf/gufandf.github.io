@@ -4,47 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的世界数据包进阶教程系列</title>
+    <title>孤帆Gufandf|模型目录</title>
     <link rel="shortcut icon" href="{{icon}}" type="image/x-icon">
 </head>
 
-<body id="scalebox" style="background-image: url('./2023-12-03_16.40.40.png');">
+<body id="scalebox" style="background-image: url('./bg.png');">
     <div class="body">
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/p/mcc">MCC</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/mcc/">MCC</a>
             <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
             <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
             <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
         </div>
-        <img class="headimg" src="./2023-12-03_16.40.40.png" alt="">
         <div class="main">
+            <img class="headimg" src="./bg.png" alt="">
             <article>
-                <!-- title: 我的世界数据包进阶教程系列 -->
-<!-- headimg: ./2023-12-03_16.40.40.png -->
-<!-- date: 2023/12/03 -->
+                
+    <h1>资源分享协议 <u>CC-BY-SA 4.0</u></h1>
+    <a onclick="html_jump();" href="./models/命令方块权杖Java模型.zip" download><div class="game-box"><div>
+        <img src="./icon/命令方块权杖.png" alt=""><span>
+        <h2>命令方块权杖</h2>
+        <p>火柴人 vs 我的世界</p></span></div></div>
+    </a>
 
-<!--
-文章标题：厨房大作战开发日志
-作者：孤帆Gufandf
-启动日期：2023年12月03日
--->
-<div class="toc">
-<ul>
-<li><a href="#_1">敬请期待</a></li>
-<li><a href="#20231203">2023/12/03</a></li>
-<li><a href="#20230731">2023/07/31</a></li>
-</ul>
-</div>
-<h1 id="_1">敬请期待</h1>
-<h1 id="20231203">2023/12/03</h1>
-<p>项目重启，开始进行项目整理。</p>
-<ul>
-<li>与交互实体交互次数：6033</li>
-<li>重载次数：521</li>
-</ul>
-<h1 id="20230731">2023/07/31</h1>
-<p>暑假的最后一天，在暑假期完成了游戏的合成和配方的全部框架。</p>
+    <a onclick="html_jump();" href="./models/传送门机械臂 2.0.zip" download><div class="game-box"><div>
+        <img src="./icon/传送门移动墙壁.png" alt=""><span>
+        <h2>传送门机械臂</h2>
+        <p>包含十余个关节，与原作一致</p></span></div></div>
+    </a>
+
+    <a onclick="html_jump();" href="./models/传送枪.zip" download><div class="game-box"><div>
+        <img src="./icon/portalGun.png" alt=""><span>
+        <h2>传送枪</h2>
+        <p></p></span></div></div>
+    </a>
+    
+    <a onclick="html_jump();" href="./models/OuterWilds飞船.zip" download><div class="game-box"><div>
+        <img src="./icon/OuterWilds飞船.png" alt=""><span>
+        <h2>OuterWilds飞船</h2>
+        <p></p></span></div></div>
+    </a>
+
+    <a onclick="html_jump();" href="./models/手柄.zip" download><div class="game-box"><div>
+        <img src="./icon/手柄.png" alt=""><span>
+        <h2>手柄</h2>
+        <p>每个按键都可自由活动</p></span></div></div>
+    </a>
+
+    <a onclick="html_jump();" href="./models/铁支腿木架子.zip" download><div class="game-box"><div>
+        <img src="./icon/铁支腿木架子.png" alt=""><span>
+        <h2>铁支腿木架子</h2>
+        <p>有玻璃、木板、平滑石三种材质样式</p></span></div></div>
+    </a>
+
+    <a onclick="html_jump();" href="./models/军用越野车.zip" download><div class="game-box"><div>
+        <img src="./icon/军用越野车.png" alt=""><span>
+        <h2>军用越野车</h2>
+        <p></p></span></div></div>
+    </a>
+
+    <a onclick="html_jump();" href="./models/无人机.zip" download><div class="game-box"><div>
+        <img src="./icon/无人机.png" alt=""><span>
+        <h2>无人机</h2>
+        <p></p></span></div></div>
+    </a>
+
             </article>
             <div class="ending">
             </div>
@@ -67,8 +92,8 @@
         background-color: #111;
         --ui_text_color: white;
         --ui_background_color: #212121;
-        --ui_topbar_color: #303030;
-        --ui_main_color: #2e2e2e;
+        --ui_topbar_color: rgba(29, 32, 34);
+        --ui_main_color: rgba(29, 32, 34, 0.877);
         --ui_codeground_color: #45454566;
         --ui_gray: #444;
         --headimg-off: 0px;
@@ -106,10 +131,9 @@
     .main {
         display: flex;
         flex-direction: column;
-        margin-top: -10vh;
         width: 100vw;
         background-color: var(--ui_main_color);
-        /* backdrop-filter: blur(20px); */
+        backdrop-filter: blur(20px);
     }
 
     article p,
@@ -296,7 +320,7 @@
     .headimg {
         z-index: -1;
         position: relative;
-        height: 70vh;
+        height: 60vh;
         object-fit: cover;
         object-position: center;
     }
@@ -311,7 +335,7 @@
         margin: 2px 0 2px 0;
         padding: 0;
         height: 100px;
-        background-color: #151515cc;
+        background-color: #151515b9;
     }
 
     .game-box div {
