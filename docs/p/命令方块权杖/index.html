@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>孤帆Gufandf|梦境世界</title>
-    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <title>孤帆Gufandf|命令方块权杖</title>
+    <link rel="shortcut icon" href="{{icon}}" type="image/x-icon">
 </head>
 
-<body id="scalebox" style="background-image: url('./bg/bg2.jpg');">
+<body id="scalebox" style="background-image: url('./bg.jpg');">
     <div class="body">
         <div class="topbar">
             <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
@@ -18,36 +18,25 @@
             <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
         </div>
         <div class="main">
-            <img class="headimg" src="./bg/bg2.jpg" alt="">
+            <img class="headimg" src="./bg.jpg" alt="">
             <article>
                 
-        <img class="heroimg" src="./img/DREAMWROLD.png" alt="">
+    <a onclick="html_jump();" href="https://www.bilibili.com/video/BV1EK411k7N2"><div class="game-box"><div>
+        <img src="./command_block.png" alt=""><span>
+        <h2>宣传视频</h2>
+        <p>Bilibili</p></span></div></div>
+    </a>
+
+    <a class="download-button" href="https://gufandf.lanzoue.com/b03vo1kmh">下载</a>
+
+
     <h1>信息</h1>
-    <p>
-        <li>地图版本 Classic 1.3.1 (2022/10/27更新)</li>
-        <li>游戏版本 Java 1.18.2</li>
-        <li>地图时长 50-80min</li>
+        <li>数据包版本 v2</li>
         <li>下载密码 1234</li>
-        <li>开启 移动光源</li>
-        <li>粒子效果 全部</li>
-        <li>如是服务端需要将 server.properties 中的 enable-command-block 改为 true</li>
-        <li>如想参观或炸图, 请使用以下两条指令：</li>
-        <li>/team join op @s</li>
-        <li>/gamemode creative</li>
-    </p>
-    <h1>制作</h1>
-    <p>
-        策划：孤帆<br>
-        建筑：酷晨、猫酱、凉猫、大海、炎霜、白云<br>
-        技术：木上、鹿瑶<br>
-        攻略：猫酱<br>
-    </p>
     <h1>反馈</h1>
-    <p>
-        如出现bug请通过B站私信联系<br>
-        资源包仅包含：OuterWilds飞船模型，可选择不加资源包，不影响解密<br>
-    </p>
-    <a class="download-button" href="https://gufandf.lanzoue.com/b03vbsref">下载</a>
+        <li>如出现bug请通过B站私信联系</li>
+        <li>地图带有资源包和数据包，如果因为各种原因没有正确加载，可以自行下载后手动加装。</li>
+
 
             </article>
             <div class="ending">
@@ -214,7 +203,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 5px 3px 5px 4px;
+        margin: 15px 4px 5px 4px;
         height: 75px;
         width: 220px;
         font-size: 1.7rem;
@@ -224,6 +213,22 @@
 
     a.download-button:hover {
         background-color: #4084e2;
+    }
+
+    a.link-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 4px 5px 4px;
+        height: 75px;
+        width: 220px;
+        font-size: 1.7rem;
+        color: var(--ui_text_color);
+        background-color: #3d3d3d;
+    }
+
+    a.link-button:hover {
+        background-color: #555555;
     }
 
     .body {
@@ -384,6 +389,12 @@
         align-self: center;
         margin: auto;
         margin-top: -60px;
+    }
+    .flex{
+        display: flex;
+    }
+    .flex.space-between{
+        justify-content: space-between;
     }
 
 </style>

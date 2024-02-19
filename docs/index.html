@@ -29,7 +29,7 @@
     </a> -->
 
     <h1>地图</h1>
-    <a onclick="html_jump();" href="./p/dreamworld/"><div class="game-box"><div>
+    <a onclick="html_jump();" href="./p/梦境世界/index.html"><div class="game-box"><div>
         <img src="./assets/imgs/封面/梦境世界小封面.png" alt=""><span>
         <h2>梦境世界</h2>
         <p>挖掘公司的秘密</p></span></div></div>
@@ -41,7 +41,7 @@
     </a>
 
     <h1>数据包</h1>
-    <a onclick="html_jump();" href="./p/command_block_sceptre/"><div class="game-box"><div>
+    <a onclick="html_jump();" href="./p/命令方块权杖/index.html"><div class="game-box"><div>
         <img src="./assets/imgs/封面/命令方块权杖小封面.png" alt=""><span>
         <h2>命令方块权杖</h2>
         <p>来自 火柴人vs我的世界</p></span></div></div>
@@ -219,7 +219,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 5px 3px 5px 4px;
+        margin: 15px 4px 5px 4px;
         height: 75px;
         width: 220px;
         font-size: 1.7rem;
@@ -229,6 +229,22 @@
 
     a.download-button:hover {
         background-color: #4084e2;
+    }
+
+    a.link-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 4px 5px 4px;
+        height: 75px;
+        width: 220px;
+        font-size: 1.7rem;
+        color: var(--ui_text_color);
+        background-color: #3d3d3d;
+    }
+
+    a.link-button:hover {
+        background-color: #555555;
     }
 
     .body {
@@ -389,6 +405,12 @@
         align-self: center;
         margin: auto;
         margin-top: -60px;
+    }
+    .flex{
+        display: flex;
+    }
+    .flex.space-between{
+        justify-content: space-between;
     }
 
 </style>

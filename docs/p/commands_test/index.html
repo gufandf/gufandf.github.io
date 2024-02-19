@@ -193,7 +193,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 5px 3px 5px 4px;
+        margin: 15px 4px 5px 4px;
         height: 75px;
         width: 220px;
         font-size: 1.7rem;
@@ -203,6 +203,22 @@
 
     a.download-button:hover {
         background-color: #4084e2;
+    }
+
+    a.link-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 4px 5px 4px;
+        height: 75px;
+        width: 220px;
+        font-size: 1.7rem;
+        color: var(--ui_text_color);
+        background-color: #3d3d3d;
+    }
+
+    a.link-button:hover {
+        background-color: #555555;
     }
 
     .body {
@@ -363,6 +379,12 @@
         align-self: center;
         margin: auto;
         margin-top: -60px;
+    }
+    .flex{
+        display: flex;
+    }
+    .flex.space-between{
+        justify-content: space-between;
     }
 
 </style>
