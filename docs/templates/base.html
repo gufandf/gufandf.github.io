@@ -11,11 +11,11 @@
 <body id="scalebox" style="background-image: url('{{headimg}}');">
     <div class="body">
         <div class="topbar">
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/mcc/">MCC</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/www.gufandf.top\/')">HOME</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/www.gufandf.top\/mcc\/')">MCC</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/github.com\/gufandf')">Github</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/space.bilibili.com\/449104347')">哔哩哔哩</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/afdian.net\/a\/gufandf')">爱发电</a>
         </div>
         <div class="main">
             <img class="headimg" src="{{headimg}}" alt="">
@@ -382,9 +382,21 @@
 
 </style>
 <script>
-    function html_jump() {
+    function sleep(time){
+        var timeStamp = new Date().getTime();
+        var endTime = timeStamp+time;
+        while(true){
+            if(new Date().getTime() > endTime){
+                return;
+            }
+        }
+    }
+    function html_jump(url) {
         var div = document.getElementById('scalebox');
         div.classList.add("html_jump");
+        console.log(url);
+        sleep(1000);
+        window.location.href = url;
     }
 
 </script>

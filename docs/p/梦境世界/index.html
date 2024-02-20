@@ -11,11 +11,11 @@
 <body id="scalebox" style="background-image: url('./bg/bg2.jpg');">
     <div class="body">
         <div class="topbar">
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/mcc/">MCC</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/www.gufandf.top\/')">HOME</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/www.gufandf.top\/mcc\/')">MCC</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/github.com\/gufandf')">Github</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/space.bilibili.com\/449104347')">哔哩哔哩</a>
+            <a class="topbar-button" onclick="html_jump('https\:\/\/afdian.net\/a\/gufandf')">爱发电</a>
         </div>
         <div class="main">
             <img class="headimg" src="./bg/bg2.jpg" alt="">
@@ -24,8 +24,8 @@
         <img class="heroimg" src="./img/DREAMWROLD.png" alt="">
         <div class="flex space-between">
             <a class="download-button" href="https://gufandf.lanzoue.com/b03vbsref">下载</a>
-            <a class="link-button" href="">宣传视频</a>
-            <a class="link-button" href="">图文攻略</a>
+            <a class="link-button" href="https://www.bilibili.com/video/BV1LR4y1Q7ZB/">宣传视频</a>
+            <a class="link-button" href="https://www.bilibili.com/read/cv20102228/">图文攻略</a>    
         </div>
         <div class="flex">
             <div style="width: 50%;">
@@ -421,9 +421,21 @@
 
 </style>
 <script>
-    function html_jump() {
+    function sleep(time){
+        var timeStamp = new Date().getTime();
+        var endTime = timeStamp+time;
+        while(true){
+            if(new Date().getTime() > endTime){
+                return;
+            }
+        }
+    }
+    function html_jump(url) {
         var div = document.getElementById('scalebox');
         div.classList.add("html_jump");
+        console.log(url);
+        sleep(1000);
+        window.location.href = url;
     }
 
 </script>
