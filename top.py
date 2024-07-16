@@ -36,6 +36,10 @@ def walkPath(Path):
             files.append(filePath)
     return files
 
+def buildFile(filePath):
+    pass
+
+
 def build():
     shutil.rmtree(buildRoot)
     shutil.copytree(siteRoot, buildRoot, True)
@@ -45,7 +49,7 @@ def build():
 
     # print("[build] building...")
     for fileOrg in os.walk(buildRoot):
-        # print(f"[build] build {fileOrg[0]}...")
+        # print(f"[build] build {fileOrg}...")
         # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
         for fileName in fileOrg[2]:
             fileType = fileName.split(".")[-1]
@@ -85,7 +89,7 @@ def build():
                 f.close()
 
 watchList = {}
-# build()
+build()
 # while True:
 #     filePaths = walkPath(siteRoot)
 #     for filePath in filePaths:
@@ -104,5 +108,5 @@ watchList = {}
 #             print(nowTime+" [Error] 文件被占用: "+filePath)
 #         except:
 #             print(nowTime+" [Error] 未知错误: "+filePath)
-#     time.sleep(0.5)
-build()
+#     time.sleep(1)
+# build()
