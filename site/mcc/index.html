@@ -8,7 +8,7 @@
         <script type="text/javascript">
             window.onload = function () {
                 countTime();
-            }
+            };
             function countTime() {
                 var date = new Date();
                 var now = date.getTime();
@@ -43,14 +43,13 @@
                     s = 0
                     document.getElementById("_timeTitle").innerHTML = "比赛已结束"
                 };
-                //将倒计时赋值到div中  
+
                 document.getElementById("_d").innerHTML = String(d).padStart(2, '0');
                 document.getElementById("_h").innerHTML = String(h).padStart(2, '0');
                 document.getElementById("_m").innerHTML = String(m).padStart(2, '0');
                 document.getElementById("_s").innerHTML = String(s).padStart(2, '0');
-                //递归每秒调用countTime方法，显示动态时间效果  
+
                 setTimeout(countTime, 1000);
-                console.log(1);
             }
         </script>
         <h1 id="_timeTitle">距离比赛开始还有</h1>
