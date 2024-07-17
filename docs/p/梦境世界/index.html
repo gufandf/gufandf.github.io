@@ -69,14 +69,6 @@
 
 </html>
 
-
-<!-- <a onclick="html_jump()" href=""><div class="game-box"><div>
-    <img src="./test/outer wilds.jpg" alt=""><span>
-    <h2>梦境世界</h2>
-    <p>探索</p></span></div></div>
-</a> -->
-
-
 <style>
     :root {
         background-color: #111;
@@ -206,7 +198,8 @@
         align-self: left;
     }
 
-    article code,article .toc {
+    article code,
+    article .toc {
         font-family: 'Consolas';
         display: block;
         width: calc(100% - 2rem);
@@ -375,61 +368,66 @@
         height: 200px;
     }
 
-    .cb,.chain-cb,.repeating-cb,.cb-c,.chain-cb-c,.repeating-cb-c{
+    .cb,
+    .chain-cb,
+    .repeating-cb,
+    .cb-c,
+    .chain-cb-c,
+    .repeating-cb-c {
         margin: 0;
         padding: 0;
         background-color: #151515cc;
         height: 80px;
         background-repeat: no-repeat;
     }
-    .cb{
+
+    .cb {
         background-image: url("https://www.gufandf.top/assets/imgs/cbs/cb.png");
     }
-    .chain-cb{
+
+    .chain-cb {
         background-image: url("https://www.gufandf.top/assets/imgs/cbs/chain_cb.png");
     }
-    .repeating-cb{
+
+    .repeating-cb {
         background-image: url("https://www.gufandf.top/assets/imgs/cbs/repeating_cb.png");
     }
-    .cb-c{
+
+    .cb-c {
         background-image: url("https://www.gufandf.top/assets/imgs/cbs/cb_condition.png");
     }
-    .chain-cb-c{
+
+    .chain-cb-c {
         background-image: url("https://www.gufandf.top/assets/imgs/cbs/chain_cb_condition.png");
     }
-    .repeating-cb-c{
+
+    .repeating-cb-c {
         background-image: url("https://www.gufandf.top/assets/imgs/cbs/repeating_cb_condition.png");
     }
-    .commands{
+
+    .commands {
         height: 100%;
         margin-left: 88px;
         display: flex;
         align-items: center;
     }
-    .heroimg{
-        width: min(500px,90%);
+
+    .heroimg {
+        width: min(500px, 90%);
         align-self: center;
         margin: auto;
         margin-top: -60px;
     }
-    .flex{
+
+    .flex {
         display: flex;
     }
-    .flex.space-between{
+
+    .flex.space-between {
         justify-content: space-between;
     }
-
 </style>
 <script>
-    // function sleep(time){
-    //     var timeStamp = new Date().getTime();
-    //     var endTime = timeStamp+time;
-    //     while(true){
-    //         if(new Date().getTime() > endTime){
-    //             return;
-    //         }
-    //     }
-    // }
     function html_jump() {
         var div = document.getElementById('scalebox');
         div.classList.add("html_jump");
