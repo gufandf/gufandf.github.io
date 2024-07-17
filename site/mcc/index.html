@@ -12,11 +12,11 @@
             function countTime() {
                 var date = new Date();
                 var now = date.getTime();
-                //设置开始截止时间  
+                //设置开始截止时间
                 var start_time = "2024/7/25 10:00:00";
+                var end_time = "2024/7/28 10:00:00";
                 var start_Date = new Date(start_time);
                 var start = start_Date.getTime();
-                var end_time = "2024/7/28 10:00:00";
                 var end_Date = new Date(end_time);
                 var end = end_Date.getTime();
 
@@ -43,8 +43,6 @@
                     s = 0
                     document.getElementById("_timeTitle").innerHTML = "比赛已结束"
                 };
-
-
                 //将倒计时赋值到div中  
                 document.getElementById("_d").innerHTML = String(d).padStart(2, '0');
                 document.getElementById("_h").innerHTML = String(h).padStart(2, '0');
@@ -89,26 +87,32 @@
                 padding: 0;
             }
         </style>
+
         <h1>大赛介绍</h1>
         <p>MCC Game Jam (Minecraft Creativity Game Jam) 是由 <a target="_blank"
                 href="https://space.bilibili.com/449104347">孤帆Gufandf</a> 和 <a target="_blank"
                 href="https://space.bilibili.com/491930441">甜橙猫酱Cat_Sauce</a>
             主办的我的世界小游戏地图制作大赛，旨在促进我的世界小游戏地图社区的发展和制作者的交流。参赛选手需要围绕主题，在 72 小时内做出一张我的世界游戏地图。</p>
+        
         <h1>比赛时间</h1>
+        <p>MCC2 7月25日至28日。</p>
         <p>常规比赛时间为寒假一届、暑假两届，长假日额外开设。</p>
         <!-- <p>MCC1 2月5日至8日</p> -->
+        
+        <h1>比赛报名</h1>
+        <p>请加入参赛群：<a href="https://qm.qq.com/q/i4tdSh6xiw">点击加入群聊【MCC Game Jam 参赛群】</a>，填写报名表单。参赛选手可自由选择队友或独自完成比赛。</p>
+        
         <h1>比赛规则</h1>
-        <p>请以 <a target="_blank" href="https://docs.qq.com/doc/DVG5BTFNGT3JaS0JH">参赛手册</a> 为准</p>
-        <ul>
-            <li>围绕本届主题进行小游戏地图制作。</li>
-            <li>使用最新的Java正式版（1.21）制作游戏。</li>
-            <li>每小队人数不得超过3人。</li>
-            <li>地图中需要包含制作小组的信息。</li>
-            <li>禁止抄袭、偷盗、毁坏他人劳动成果。</li>
-            <li>地图中禁止包含违反中华人民共和国法律的内容。</li>
-            <li>如无违反规则的情况，地图版权归参赛者所有。</li>
-            <li>素材即做即用，不可以使用之前制作好的素材。</li>
-        </ul>
+        <p>请以 <a target="_blank" href="https://docs.qq.com/doc/DVG5BTFNGT3JaS0JH">参赛手册</a> 为准。</p>
+        <li>围绕本届主题进行小游戏地图制作。</li>
+        <li>使用最新的Java正式版（1.21）制作游戏。</li>
+        <li>每小队人数不得超过3人。</li>
+        <li>地图中需要包含制作小组的信息。</li>
+        <li>禁止抄袭、偷盗、毁坏他人劳动成果。</li>
+        <li>地图中禁止包含违反中华人民共和国法律的内容。</li>
+        <li>如无违反规则的情况，地图版权归参赛者所有。</li>
+        <li>素材即做即用，不可以使用之前制作好的素材。</li>
+        
         <h1>作品回顾</h1>
         <h2>MCC1 种子</h2>
         <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Qz421R7e7/">
