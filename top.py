@@ -67,7 +67,10 @@ def build():
                 # 填充模版
                 html = templates[templateName]
                 for child in childs:
+                    print(child)
                     html = html.replace(f'{{{{{child[0]}}}}}', child[1])
+                for child in re.findall("{{(.*?)}}", html):# 清除未填充的模版
+                    html = html.replace(f'{{{{{child}}}}}', "") 
                 f = open(coPath(fileOrg[0], fileName), "w", encoding="UTF-8")
                 f.write(html)
                 f.close()
@@ -84,6 +87,9 @@ def build():
                 html = templates["base"]
                 for child in childs:
                     html = html.replace(f'{{{{{child}}}}}', childs[child])
+                for child in re.findall("{{(.*?)}}", html):# 清除未填充的模版
+                    html = html.replace(f'{{{{{child}}}}}', "") 
+                # print(re.findall("{{(.*?)}}", html)) # 清除未填充的模版
                 f = open(coPath(fileOrg[0], fileName)[:-3]+".html", "w", encoding="UTF-8")
                 f.write(html)
                 f.close()
