@@ -67,7 +67,7 @@ def build():
                 # 填充模版
                 html = templates[templateName]
                 for child in childs:
-                    print(child)
+                    # print(child)
                     html = html.replace(f'{{{{{child[0]}}}}}', child[1])
                 for child in re.findall("{{(.*?)}}", html):# 清除未填充的模版
                     html = html.replace(f'{{{{{child}}}}}', "") 
@@ -93,6 +93,7 @@ def build():
                 f = open(coPath(fileOrg[0], fileName)[:-3]+".html", "w", encoding="UTF-8")
                 f.write(html)
                 f.close()
+    print("<!> 构建完成|Build Complete")
 
 watchList = {}
 build()

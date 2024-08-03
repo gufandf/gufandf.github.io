@@ -1,0 +1,159 @@
+{
+  "main": {
+    "id": "c6850395f6cd8d41",
+    "type": "split",
+    "children": [
+      {
+        "id": "df33f7aa64d94ed9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "461c3b86d1046dd8",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "site/mcc/imgs/bilibili.png"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c80ac552d7a04d58",
+    "type": "split",
+    "children": [
+      {
+        "id": "39403c320893ada1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a74e1736f177ce85",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "4c63f361a0ff716c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "aeea4136d15ff97d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "64f724030bf3bf44",
+    "type": "split",
+    "children": [
+      {
+        "id": "382f6c88d9550ac3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f352aba729302ae5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "site/mcc/imgs/bilibili.png",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "86d639c5bb6debc6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "site/mcc/imgs/bilibili.png",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "19ec167f1de38f92",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "2f3081d859b5b942",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "site/mcc/imgs/bilibili.png"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "461c3b86d1046dd8",
+  "lastOpenFiles": [
+    "site/mcc/imgs/bilibili.webp",
+    "site/mcc/imgs/bilibili.png",
+    "site/mcc/imgs/健康倒计时.webp",
+    "site/mcc/imgs/健康倒计时.png",
+    "site/mcc/mcc_bg.jpg",
+    "site/p/命令方块权杖/command_block.png",
+    "site/p/tutorials/minecraft_datapack/index.md",
+    "site/p/tutorials/minecraft_datapack/headimg.png",
+    "site/p/commands_test/headimg.png"
+  ]
+}
