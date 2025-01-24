@@ -101,19 +101,13 @@ execute if entity @s[tag=!RayOver] run function ray:step
 execute if entity @s[tag=RayOver] run kill @s
 </code></pre>
 <p>在这里，当步进步数达到 50 时，marker 会给自己添加 RayOver 标签，下一次递归不会运行，本 marker 也会在最后删除。</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">恭喜你成功发射了一条射线！ （虽然它还没有任何功能</div>
-<script type="math/tex; mode=display">恭喜你成功发射了一条射线！ （虽然它还没有任何功能</script>
-</div>
+<p>$$恭喜你成功发射了一条射线！ （虽然它还没有任何功能$$</p>
 <p>接下来，我们要添加一些判断条件让这变得更有趣。</p>
 <pre><code class="language-mcfunction"># 条件判断
 execute if block ~ ~ ~ grass_block run say this is grass_block!
 execute if block ~ ~ ~ grass_block run tag @s add RayOver
 </code></pre>
-<div class="arithmatex">
-<div class="MathJax_Preview"> /execute是非常强大的指令，在判断方面我们有求于他</div>
-<script type="math/tex; mode=display"> /execute是非常强大的指令，在判断方面我们有求于他</script>
-</div>
+<p>$$ /execute是非常强大的指令，在判断方面我们有求于他$$</p>
 <p>在这条指令中，当 marker 所在方块为草方块时（可以理解为射线和草方块发生了碰撞），marker 会发送一句话，同时给自己添加 RayOver 标签。</p>
 <p>由于这两句的判断条件相同，可以考虑把这两行整合进同一个函数。</p>
 <pre><code class="language-mcfunction"># 条件判断

@@ -81,7 +81,7 @@ def build():
                 childs = {}
                 for i in re.findall("<!-- (.*): (.*) -->", file):
                     childs[i[0]] = i[1].strip()
-                childs["content"] = markdown.markdown(file,extensions=['markdown.extensions.toc','markdown.extensions.fenced_code','markdown.extensions.tables','pymdownx.arithmatex'])
+                childs["content"] = markdown.markdown(file,extensions=['markdown.extensions.toc','markdown.extensions.fenced_code','markdown.extensions.tables'])
 
                 # 填充模版
                 html = templates["base"]
