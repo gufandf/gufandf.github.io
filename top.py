@@ -97,23 +97,23 @@ def build():
 
 watchList = {}
 build()
-# while True:
-#     filePaths = walkPath(siteRoot)
-#     for filePath in filePaths:
-#         nowTime = f"{str(time.localtime().tm_hour).ljust(2,'0')}:{str(time.localtime().tm_min).ljust(2,'0')}:{str(time.localtime().tm_sec).ljust(2,'0')}"
-#         try:
-#             if watchList[filePath] != os.path.getmtime(filePath):
-#                 print(nowTime+" [Change] "+filePath)
-#                 watchList[filePath] = os.path.getmtime(filePath)
-#                 build()
-#         except FileNotFoundError:
-#             print(nowTime+" [Change] "+filePath)
-#             build()
-#         except KeyError:
-#             watchList[filePath] = os.path.getmtime(filePath)
-#         except PermissionError:
-#             print(nowTime+" [Error] 文件被占用: "+filePath)
-#         except:
-#             print(nowTime+" [Error] 未知错误: "+filePath)
-#     time.sleep(1)
+while True:
+    filePaths = walkPath(siteRoot)
+    for filePath in filePaths:
+        nowTime = f"{str(time.localtime().tm_hour).ljust(2,'0')}:{str(time.localtime().tm_min).ljust(2,'0')}:{str(time.localtime().tm_sec).ljust(2,'0')}"
+        try:
+            if watchList[filePath] != os.path.getmtime(filePath):
+                print(nowTime+" [Change] "+filePath)
+                watchList[filePath] = os.path.getmtime(filePath)
+                build()
+        except FileNotFoundError:
+            print(nowTime+" [Change] "+filePath)
+            build()
+        except KeyError:
+            watchList[filePath] = os.path.getmtime(filePath)
+        except PermissionError:
+            print(nowTime+" [Error] 文件被占用: "+filePath)
+        except:
+            print(nowTime+" [Error] 未知错误: "+filePath)
+    time.sleep(3)
 # build()
