@@ -6,6 +6,7 @@ modelsRoot = "./models/"
 postsRoot = "./site/p/"
 siteRoot = "./site/"
 buildRoot = "./docs/"
+modsRoot = "./site/mods/"
 
 def coPath(path1: str, path2: str):
     path1 = path1.replace("./", "")
@@ -45,6 +46,7 @@ def build():
     shutil.copytree(siteRoot, buildRoot, True)
 
     templates = readFileIn(templatesRoot)
+    mods = readFileIn(modsRoot)
     # models = readFileIn(modelsRoot)
 
     # print("[build] building...")
@@ -53,6 +55,7 @@ def build():
         # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
         for fileName in fileOrg[2]:
             fileType = fileName.split(".")[-1]
+            
             if fileType == "html":
                 f = open(coPath(fileOrg[0], fileName), "r", encoding="UTF-8")
                 file = f.read()
@@ -71,6 +74,9 @@ def build():
                     html = html.replace(f'{{{{{child[0]}}}}}', child[1])
                 for child in re.findall("{{(.*?)}}", html):# 清除未填充的模版
                     html = html.replace(f'{{{{{child}}}}}', "") 
+                # 替换模组
+                for mod in mods:
+                    html = html.replace(f"<mod src=\"{mod}\">",mods[mod])
                 f = open(coPath(fileOrg[0], fileName), "w", encoding="UTF-8")
                 f.write(html)
                 f.close()
@@ -82,7 +88,6 @@ def build():
                 for i in re.findall("<!-- (.*): (.*) -->", file):
                     childs[i[0]] = i[1].strip()
                 childs["content"] = markdown.markdown(file,extensions=['markdown.extensions.toc','markdown.extensions.fenced_code','markdown.extensions.tables'])
-
                 # 填充模版
                 html = templates["base"]
                 for child in childs:
@@ -90,17 +95,21 @@ def build():
                 for child in re.findall("{{(.*?)}}", html):# 清除未填充的模版
                     html = html.replace(f'{{{{{child}}}}}', "") 
                 # print(re.findall("{{(.*?)}}", html)) # 清除未填充的模版
+                # 替换模组
+                for mod in mods:
+                    html = html.replace(f"<mod src=\"{mod}\">",mods[mod])
                 f = open(coPath(fileOrg[0], fileName)[:-3]+".html", "w", encoding="UTF-8")
                 f.write(html)
                 f.close()
-    print("<!> 构建完成|Build Complete")
+    print(nowTime+" [Build] 构建完成")
 
 watchList = {}
+nowTime = ""
 build()
 while True:
+    nowTime = f"{str(time.localtime().tm_hour).ljust(2,'0')}:{str(time.localtime().tm_min).ljust(2,'0')}:{str(time.localtime().tm_sec).ljust(2,'0')}"
     filePaths = walkPath(siteRoot)
     for filePath in filePaths:
-        nowTime = f"{str(time.localtime().tm_hour).ljust(2,'0')}:{str(time.localtime().tm_min).ljust(2,'0')}:{str(time.localtime().tm_sec).ljust(2,'0')}"
         try:
             if watchList[filePath] != os.path.getmtime(filePath):
                 print(nowTime+" [Change] "+filePath)
