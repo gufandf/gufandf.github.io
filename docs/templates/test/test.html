@@ -329,7 +329,7 @@
 
     .game-box img {
         height: 100%;
-        width: 230px;
+        width: min(230px,30%);
         object-fit: cover;
         object-position: center;
     }
@@ -340,6 +340,7 @@
         margin: 7px 0px 0 0;
         object-fit: cover;
         object-position: center;
+        white-space: nowrap;
     }
 
     .ending {
