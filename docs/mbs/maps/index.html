@@ -23,142 +23,174 @@
             <article>
                 
         <h1><a href="../">返回上级</a></h1>
-        <h2>MCC3 <a onclick="" target="_blank" href="">硬币</a></h2>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-夢樂園1930.webp" alt=""><span>
-                    <h2>夢樂園1930</h2>
-                    <p>16bit Samurai</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-命运硬币.webp" alt=""><span>
-                    <h2>命运硬币</h2>
-                    <p>DYM</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-超电磁炮大乱斗.webp" alt=""><span>
-                    <h2>超电磁炮大乱斗</h2>
-                    <p>甘蔗铜西瓜</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-疯狂的硬币.webp" alt=""><span>
-                    <h2>疯狂的硬币</h2>
-                    <p>鸽子窝</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-机会硬币.webp" alt=""><span>
-                    <h2>机会硬币</h2>
-                    <p>无限水</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-硬币之咒.webp" alt=""><span>
-                    <h2>硬币之咒</h2>
-                    <p>薛定谔的冠军</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-硬币收集.webp" alt=""><span>
-                    <h2>硬币收集</h2>
-                    <p>落雪队</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC3-地区贸易.webp" alt=""><span>
-                    <h2>地区贸易</h2>
-                    <p>煎蛋的小队</p>
-                </span>
-            </div>
-        </div>
+        <style>
+            .game-box:hover {
+                height: 250px;
+                transition: all 0.2s ease-out;
+            }
 
+            .game-box {
+                transition: all 0.2s ease-out;
+            }
 
-        <h2>MCC2 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1XHvYe8EpC/">照片</a></h2>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC2-红沙发照相馆.webp" alt=""><span>
-                    <h2>红沙发照相馆</h2>
-                    <p>16-bit</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC2-梦境摄手.webp" alt=""><span>
-                    <h2>梦境摄手</h2>
-                    <p>UNDERLINE</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC2-时光相片.webp" alt=""><span>
-                    <h2>时光相片</h2>
-                    <p>不简单的小队</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC2-Photo Scared.webp" alt=""><span>
-                    <h2>Photo Scared</h2>
-                    <p>DYM</p>
-                </span>
-            </div>
-        </div>
+            .game-box p {
+                padding: 15px;
+                margin: 0;
+                box-sizing: border-box;
+            }
+        </style>
+        <script>
+            function fillTemplate(templateString, data) {
+                return templateString.replace(/\${(.*?)}/g, (match, p1) => {
+                    return data[p1] || '';
+                });
+            }
+            const template = '<div class="game-box"><div><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div><p>${lore}</p></div>'
 
-        <h2>MCC1 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Qz421R7e7/">种子</a></h2>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC1-大富翁.webp" alt=""><span>
-                    <h2>大富翁</h2>
-                    <p>鸽子窝</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC1-种子基因库.webp" alt=""><span>
-                    <h2>种子基因库</h2>
-                    <p>無限水</p>
-                </span>
-            </div>
-        </div>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/MCC1-洞穴之种.webp" alt=""><span>
-                    <h2>洞窟之种</h2>
-                    <p>一个单单简简の小队</p>
-                </span>
-            </div>
-        </div>
+            maps = [
+                '<h2>MCC3 1.21.4 <a onclick="" target="_blank" href="">硬币</a></h2>',
+                {
+                    "title": "夢樂園1930",
+                    "author": "16bit Samurai",
+                    "img": "./imgs/MCC3-夢樂園1930.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B16-bit%20Samurai%5D%20%E5%A4%A2%E6%A8%82%E5%9C%921930%20Jam%20ver.zip",
+                    "lore": "16bit Samurai 将赌场做进了游戏中。在这个赌场，玩家需要通过投掷特性各不相同的硬币，达成每一关的通关条件。有的硬币两面都是正面，有的硬币正反始终和它前一枚硬币相同，还有的硬币会直接掀翻桌子。本张地图将主题与玩法完美地融合到了一起，同时建筑、动画赏心悦目，是一张质量非常高的游戏地图，获得各位玩家的一致好评。"
+                }, {
+                    "title": "命运硬币",
+                    "author": "DYM",
+                    "img": "./imgs/MCC3-命运硬币.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5BDYM%5D%20%E5%91%BD%E8%BF%90%E7%A1%AC%E5%B8%81%20Jam%20ver.zip",
+                    "lore": "DYM队利用我的世界极高的自由度，制作了一款卡牌桌游。游戏中有粉蓝两种颜色的卡牌，硬币也有粉蓝两面。玩家有掷硬币后，便可以使用场上所有已经翻开的同色卡牌。攻击牌只能对同色的生命造成伤害，而心形卡牌可已经生命值转换为卡牌的颜色。道具牌则可以获得各种道具。本张地图的动画效果也十分优秀，硬币的旋转，卡牌的翻转，以及玩家失败后被幽匿块包裹的动画给玩家带来了优秀的游玩体验。"
+                }, {
+                    "title": "超电磁炮大乱斗",
+                    "author": "甘蔗铜西瓜",
+                    "img": "./imgs/MCC3-超电磁炮大乱斗.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B%E7%94%98%E8%94%97%E9%93%9C%E8%A5%BF%E7%93%9C%5D%20%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AE%E5%A4%A7%E4%B9%B1%E6%96%97%20Jam%20ver.zip",
+                    "lore": "甘蔗铜西瓜队由硬币发散到《某科学的超电磁炮》中御坂美琴使用电磁力发射硬币的攻击手段，为我们制作了这张《超电磁炮大乱斗》。游戏中玩家各自为营，击杀数最多的玩家赢下比赛。然而在六种硬币中，铜币因其射速快的特性，成功成为当前版本T0硬币，令人忍俊不禁。而其他硬币的射速较慢或蓄力时间较长，平衡性有待优化。总之，本张地图是一张爽快的射击游戏地图。"
+                }, {
+                    "title": "疯狂的硬币",
+                    "author": "鸽子窝",
+                    "img": "./imgs/MCC3-疯狂的硬币.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B%E9%B8%BD%E5%AD%90%E7%AA%9D%5D%20Coin%20Mania%20Jam%20ver.zip",
+                    "lore": "本张地图从硬币出发，联想到投币街机，便在游戏大厅中加入了许多街机元素。玩家需要在游戏中用枪械迎击尸潮，收集硬币。同时，本张地图为玩家添加了滑铲动作，只要双击潜行即可向前滑铲。"
+                }, {
+                    "title": "机会硬币",
+                    "author": "无限水",
+                    "img": "./imgs/MCC3-机会硬币.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B%E6%97%A0%E9%99%90%E6%B0%B4%5D%20%E6%9C%BA%E4%BC%9A%E7%A1%AC%E5%B8%81%20Jam%20ver.zip",
+                    "lore": "《机会硬币》借助抛硬币的随机性，激励玩家通过不断投掷硬币，拿到更好的装备，与其他玩家进行战斗。玩家投掷时，如果运气非常好掷出立着的硬币，就可以获得一枚至尊硬币。地图中的的硬币分为几个等级，等级越高，奖励越丰厚，当然，掷出反面后的惩罚也越严重。甚至有可能直接毙命。"
+                }, {
+                    "title": "硬币之咒",
+                    "author": "薛定谔的冠军",
+                    "img": "./imgs/MCC3-硬币之咒.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B%E8%96%9B%E5%AE%9A%E8%B0%94%E7%9A%84%E5%86%A0%E5%86%9B%5D%20%E7%A1%AC%E5%B8%81%E4%B9%8B%E5%92%92%20Jam%20ver.zip",
+                    "lore": "这是一座古老的神殿，传闻有一支冒险团队进入了此神殿，只有一人生还。他只是带出了一枚硬币，就换来了财宝无数。《硬币之咒》为一张PVPVE地图，玩家在游戏中需要探索硬币神殿，收集硬币，提防潜在的危险和难测的人心。"
+                }, {
+                    "title": "硬币收集",
+                    "author": "落雪队",
+                    "img": "./imgs/MCC3-硬币收集.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B%E8%90%BD%E9%9B%AA%E9%98%9F%5D%20%E7%A1%AC%E5%B8%81%E6%94%B6%E9%9B%86%20Jam%20ver.zip",
+                    "lore": "从名字就可以看出，本张地图的玩法就是收集硬币，杀手玩家的任务就是阻止其他玩家收集硬币。本张地图的特色是地图随机生成，每一次游玩的地图都不相同。"
+                }, {
+                    "title": "地区贸易",
+                    "author": "煎蛋的小队",
+                    "img": "./imgs/MCC3-地区贸易.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B%E7%85%8E%E8%9B%8B%E7%9A%84%E5%B0%8F%E9%98%9F%5D%20%E5%9C%B0%E5%8C%BA%E8%B4%B8%E6%98%93%20Jam%20ver.zip",
+                    "lore": "在《地区贸易》中玩家需要辗转于不同地区，收集原材料或与村民交易，最终赚到100块钱。在不同区域之间通行需要过路费，玩家需要缜密地计算每一笔收支以免破产。"
+                },
+                '<h2>MCC2 1.21 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1XHvYe8EpC/">照片</a></h2>',
 
-        <h2>MCC0 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Ep421f7EL/">倒计时</a></h2>
-        <div class="game-box">
-            <div>
-                <img src="./imgs/健康倒计时.webp" alt=""><span>
-                    <h2>健康倒计时</h2>s
-                    <p>鸽子窝</p>
-                </span>
-            </div>
-        </div>
+                {
+                    "title": "夢樂红沙发照相馆園1930",
+                    "author": "16bit Samurai",
+                    "img": "./imgs/MCC2-红沙发照相馆.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC2/%5B16-bit%20Samurai%5D%20%E7%BA%A2%E6%B2%99%E5%8F%91%E7%85%A7%E7%9B%B8%E9%A6%86%EF%BC%881~3%E4%BA%BA%EF%BC%89.zip",
+                    "lore": "由 16-Bit 制作的《红沙发照相馆》以高超的技术力与美术力获得各位玩家的青睐。"
+                },
+                {
+                    "title": "梦境摄手",
+                    "author": "UNDERLINE",
+                    "img": "./imgs/MCC2-梦境摄手.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC2/%E6%A2%A6%E5%A2%83%E6%91%84%E6%89%8B%EF%BC%88%E5%8D%95%E4%BA%BA%EF%BC%89.zip",
+                    "lore": "由UNDERLINE团队制作的单人PVE地图《梦境摄手》将玩法与剧情很好的融合在了一起，玩家将扮演梦境管理局的员工，使用记忆扫除专用摄影设备清除梦境中的梦魇，逐渐挖掘故事的背景和自己的身世。"
+                },
+                {
+                    "title": "时光相片",
+                    "author": "不简单的小队",
+                    "img": "./imgs/MCC2-时光相片.webp",
+                    "link": "",
+                    "lore": "《时光相片》由参加过两届 MCC 的元老级选手 Tom 独立制作。故事发生在一座老旧的城堡周围，玩家可以使用照片穿越到照片所在的时代。古代的城堡充满生机，而现在的城堡只是断壁残垣。"
+                },
+                {
+                    "title": "Photo Scared",
+                    "author": "DYM",
+                    "img": "./imgs/MCC2-Photo Scared.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC2/DYM-Photo%20Scare%EF%BC%88%E4%BA%94%E4%BA%BA%EF%BC%89.zip",
+                    "lore": "作者由照片联想到恶灵附身二中的变态艺术家并参考了黎明杀机的玩法制作出这张地图。幸存者需要在地图中找到并摧毁指定的照片。幸存者有三种职业，还有各种道具可以帮助他们躲避恐怖摄影师的追杀。"
+                },
+                '<h2>MCC1 1.20.4 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Qz421R7e7/">种子</a></h2>',
+                {
+                    "title": "大富翁",
+                    "author": "鸽子窝",
+                    "img": "./imgs/MCC1-大富翁.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC1/%E5%A4%A7%E5%AF%8C%E7%BF%81_%E7%A7%8D%E5%AD%90%E5%8F%91%E8%8A%BD%E8%B5%9B_%E9%B8%BD%E5%AD%90%E7%AA%9D.zip",
+                    "lore": ""
+                },
+                {
+                    "title": "种子基因库",
+                    "author": "無限水",
+                    "img": "./imgs/MCC1-种子基因库.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC1/%E7%A7%8D%E5%AD%90%E5%9F%BA%E5%9B%A0%E5%BA%93_%E7%84%A1%E9%99%90%E6%B0%B4_PVP(+PVE).zip",
+                    "lore": ""
+                },
+                {
+                    "title": "洞窟之种",
+                    "author": "一个单单简简の小队",
+                    "img": "./imgs/MCC1-洞穴之种.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC1/%E6%B4%9E%E7%AA%9F%E4%B9%8B%E7%A7%8D%E5%9C%B0%E5%9B%BE+%E6%9D%90%E8%B4%A8%E5%8C%85%E2%80%94%E2%80%94%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95.zip",
+                    "lore": ""
+                },
+                '<h2>MCC0 1.20.1 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Ep421f7EL/">倒计时</a></h2>',
+                {
+                    "title": "健康倒计时",
+                    "author": "鸽子窝",
+                    "img": "./imgs/健康倒计时.webp",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC0/%E9%B8%BD%E5%AD%90%E7%AA%9D.zip",
+                    "lore": ""
+                }, {
+                    "title": "健康倒计时",
+                    "author": "ZIP",
+                    "img": "",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC0/ZIP%20(3).zip",
+                    "lore": ""
+                }, {
+                    "title": "生命倒计时 Life Countdown",
+                    "author": "简简单单の小队",
+                    "img": "",
+                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC0/%E7%94%9F%E5%91%BD%E5%80%92%E8%AE%A1%E6%97%B6%20Life%20Countdown%E2%80%94%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95%E3%81%AE%E5%B0%8F%E9%98%9F.zip",
+                    "lore": ""
+                },
+            ]
+
+            maps.forEach(element => {
+                if (typeof element == "string") {
+                    document.getElementsByTagName('article')[0].innerHTML += element;
+
+                }
+                else {
+                    const filled = fillTemplate(template, {
+                        title: element.title,
+                        img: element.img,
+                        link: element.link,
+                        author: element.author,
+                        lore: element.lore
+                    });
+                    document.getElementsByTagName('article')[0].innerHTML += filled;
+                }
+            });
+
+        </script>
+
     
             </article>
             <div class="ending">
@@ -435,6 +467,7 @@
         padding: 0;
         height: 100px;
         background-color: #151515b9;
+        overflow: hidden;
     }
 
     .game-box div {
@@ -457,9 +490,9 @@
     }
 
     .game-box h2,
-    .game-box p {
+    .game-box h3 {
         border: 0;
-        margin: 7px 0px 0 0;
+        margin: 4px 0px 0 0;
         object-fit: cover;
         object-position: center;
         white-space: nowrap;

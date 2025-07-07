@@ -29,7 +29,7 @@ def readFileIn(root):
             f.close()
         except PermissionError:
             pass
-    return d
+    return d.copy()
 
 def walkPath(Path):
     files = []
@@ -50,11 +50,12 @@ def buildFile(filePath):
         if len(re.findall('<template src=".+?">', file)) == 0:
             return
         templateName = re.findall('<template src=".+?">', file)[0][15:-2]
-        childs = re.findall('<child id="(.+?)">([^*]*?)</child>', file)
+        childs = re.findall('<child id="(.+?)">(.*?)</child>', file,re.DOTALL)
         # logging.info("childs: "+json.dumps(childs))
-
         # 填充模版
         html = templates[templateName]
+        # if filePath == "./docs/mbs\maps/index.html":
+        #     print(childs)
         for child in childs:
             # logging.info(child)
             html = html.replace(f'{{{{{child[0]}}}}}', child[1])
@@ -102,7 +103,6 @@ def build():
             buildFile(coPath(fileOrg[0], fileName))
     logging.info(nowTime+"构建完成")
 
-
 templates = readFileIn(templatesRoot)
 mods = readFileIn(modsRoot)
 
@@ -111,6 +111,7 @@ if __name__ == "__main__":
     nowTime = ""
     build()
     while True:
+        
         nowTime = f"{str(time.localtime().tm_hour).ljust(2,'0')}:{str(time.localtime().tm_min).ljust(2,'0')}:{str(time.localtime().tm_sec).ljust(2,'0')}"
         filePaths = walkPath(siteRoot)
         for filePath in filePaths:
