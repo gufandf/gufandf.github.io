@@ -408,18 +408,15 @@ execute if entity @s[tag=RayOver] run kill @s
         object-position: center;
     }
 
-
     .game-box {
         width: 100%;
-    }
-
-    .game-box {
         color: var(--ui_text_color);
         margin: 2px 0 2px 0;
         padding: 0;
         height: 100px;
         background-color: #151515b9;
         overflow: hidden;
+
     }
 
     .game-box div {
@@ -448,6 +445,11 @@ execute if entity @s[tag=RayOver] run kill @s
         object-fit: cover;
         object-position: center;
         white-space: nowrap;
+    }
+    .game-box p {
+        padding: 15px;
+        margin: 0;
+        box-sizing: border-box;
     }
 
     .ending {

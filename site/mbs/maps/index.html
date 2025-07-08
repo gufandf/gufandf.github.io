@@ -5,30 +5,22 @@
     <child id="headimg">../bgs/MBS_Cover_Lossy.png</child>
 
     <child id="content">
+        <mod src="mbs_countdown"></mod>
         <h1><a href="../">返回上级</a></h1>
         <style>
-            .game-box:hover {
-                height: 250px;
-                transition: all 0.2s ease-out;
-            }
-
-            .game-box {
-                transition: all 0.2s ease-out;
-            }
-
-            .game-box p {
-                padding: 15px;
-                margin: 0;
-                box-sizing: border-box;
-            }
+            /* .game-box:hover{
+                height: auto;
+            } */
         </style>
         <script>
+            
+
             function fillTemplate(templateString, data) {
                 return templateString.replace(/\${(.*?)}/g, (match, p1) => {
                     return data[p1] || '';
                 });
             }
-            const template = '<div class="game-box"><div><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div><p>${lore}</p></div>'
+            const template = '<div class="game-box"><div class="info"><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div><p>${lore}</p></div>'
 
             maps = [
                 '<h2>MCC3 1.21.4 <a onclick="" target="_blank" href="">硬币</a></h2>',
@@ -36,7 +28,7 @@
                     "title": "夢樂園1930",
                     "author": "16bit Samurai",
                     "img": "./imgs/MCC3-夢樂園1930.webp",
-                    "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC3/%5B16-bit%20Samurai%5D%20%E5%A4%A2%E6%A8%82%E5%9C%921930%20Jam%20ver.zip",
+                    "link": "./file/MCC3/MCC3 [16-bit Samurai] 夢樂園1930 Jam ver",
                     "lore": "16bit Samurai 将赌场做进了游戏中。在这个赌场，玩家需要通过投掷特性各不相同的硬币，达成每一关的通关条件。有的硬币两面都是正面，有的硬币正反始终和它前一枚硬币相同，还有的硬币会直接掀翻桌子。本张地图将主题与玩法完美地融合到了一起，同时建筑、动画赏心悦目，是一张质量非常高的游戏地图，获得各位玩家的一致好评。"
                 }, {
                     "title": "命运硬币",
@@ -84,7 +76,7 @@
                 '<h2>MCC2 1.21 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1XHvYe8EpC/">照片</a></h2>',
 
                 {
-                    "title": "夢樂红沙发照相馆園1930",
+                    "title": "红沙发照相馆",
                     "author": "16bit Samurai",
                     "img": "./imgs/MCC2-红沙发照相馆.webp",
                     "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC2/%5B16-bit%20Samurai%5D%20%E7%BA%A2%E6%B2%99%E5%8F%91%E7%85%A7%E7%9B%B8%E9%A6%86%EF%BC%881~3%E4%BA%BA%EF%BC%89.zip",
@@ -137,19 +129,19 @@
                 {
                     "title": "健康倒计时",
                     "author": "鸽子窝",
-                    "img": "./imgs/健康倒计时.webp",
+                    "img": "./imgs/MCC0-健康倒计时.webp",
                     "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC0/%E9%B8%BD%E5%AD%90%E7%AA%9D.zip",
                     "lore": ""
                 }, {
-                    "title": "健康倒计时",
+                    "title": "杀狼人",
                     "author": "ZIP",
-                    "img": "",
+                    "img": "./imgs/MCC0-杀狼人.webp",
                     "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC0/ZIP%20(3).zip",
                     "lore": ""
                 }, {
-                    "title": "生命倒计时 Life Countdown",
+                    "title": "生命倒计时",
                     "author": "简简单单の小队",
-                    "img": "",
+                    "img": "./imgs/MCC0-生命倒计时.webp",
                     "link": "https://gitee.com/gufandf/mc-maps/raw/master/MCC0/%E7%94%9F%E5%91%BD%E5%80%92%E8%AE%A1%E6%97%B6%20Life%20Countdown%E2%80%94%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95%E3%81%AE%E5%B0%8F%E9%98%9F.zip",
                     "lore": ""
                 },
@@ -171,7 +163,15 @@
                     document.getElementsByTagName('article')[0].innerHTML += filled;
                 }
             });
-
+            var info = document.getElementsByClassName("info")
+            for (let index = 0; index < info.length; index++) {
+                info[index].addEventListener('mouseover', function () {
+                    this.parentElement.style.height = 'auto';
+                });
+                info[index].addEventListener('mouseleave', function () {
+                    this.parentElement.style.height = '100px';
+                })
+                
+            };
         </script>
-
     </child>
