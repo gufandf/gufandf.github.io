@@ -91,6 +91,7 @@ def buildFile(filePath):
 
 
 def build():
+    nowTime = time.asctime()
     shutil.rmtree(buildRoot)
     shutil.copytree(siteRoot, buildRoot, True)
 
