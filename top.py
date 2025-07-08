@@ -112,7 +112,6 @@ if __name__ == "__main__":
     nowTime = ""
     build()
     while True:
-        
         nowTime = f"{str(time.localtime().tm_hour).ljust(2,'0')}:{str(time.localtime().tm_min).ljust(2,'0')}:{str(time.localtime().tm_sec).ljust(2,'0')}"
         filePaths = walkPath(siteRoot)
         for filePath in filePaths:
