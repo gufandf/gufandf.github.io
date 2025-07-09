@@ -105,9 +105,16 @@
 </style></mod>
         <h1><a href="../">返回上级</a></h1>
         <style>
-            /* .game-box:hover{
-                height: auto;
-            } */
+            .game-box {
+                max-height: 100px;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+            }
+
+            .game-box:hover {
+                max-height: 1000px; /* 设置为足够大的值 */
+                transition: max-height 0.5s ease-in-out;
+            }
         </style>
         <script>
             
@@ -117,7 +124,7 @@
                     return data[p1] || '';
                 });
             }
-            const template = '<div class="game-box"><div class="info"><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div><p>${lore}</p></div>'
+            const template = '<div class="game-box" style="height: auto;"><div class="info"><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div><p>${lore}</p></div>'
 
             maps = [
                 '<h2>MCC3 1.21.4 <a onclick="" target="_blank" href="">硬币</a></h2>',
@@ -143,7 +150,7 @@
                     "title": "Coin Mania",
                     "author": "鸽子窝",
                     "img": "./imgs/MCC3-疯狂的硬币.webp",
-                    "link": "./files/MCC3/MCC3 [鸽子窝] Coin Mania Jam ver",
+                    "link": "./files/MCC3/MCC3 [鸽子窝] Coin Mania Jam ver.zip",
                     "lore": "本张地图从硬币出发，联想到投币街机，便在游戏大厅中加入了许多街机元素。玩家需要在游戏中用枪械迎击尸潮，收集硬币。同时，本张地图为玩家添加了滑铲动作，只要双击潜行即可向前滑铲。"
                 }, {
                     "title": "机会硬币",
@@ -260,16 +267,16 @@
                     document.getElementsByTagName('article')[0].innerHTML += filled;
                 }
             });
-            var info = document.getElementsByClassName("info")
-            for (let index = 0; index < info.length; index++) {
-                info[index].addEventListener('mouseover', function () {
-                    this.parentElement.style.height = 'auto';
-                });
-                info[index].addEventListener('mouseleave', function () {
-                    this.parentElement.style.height = '100px';
-                })
+            // var info = document.getElementsByClassName("info")
+            // for (let index = 0; index < info.length; index++) {
+            //     info[index].addEventListener('mouseover', function () {
+            //         this.parentElement.style.height = 'auto';
+            //     });
+            //     info[index].addEventListener('mouseleave', function () {
+            //         this.parentElement.style.height = '100px';
+            //     })
                 
-            };
+            // };
         </script>
     
             </article>
