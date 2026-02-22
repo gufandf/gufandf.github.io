@@ -2,13 +2,14 @@ import markdown
 import shutil, os, re, time
 import logging
 
+logging.basicConfig(level=logging.DEBUG)
+
 templatesRoot = "./site/templates/"
 modelsRoot = "./models/"
 postsRoot = "./site/p/"
 siteRoot = "./site/"
 buildRoot = "./docs/"
 modsRoot = "./site/mods/"
-
 
 def coPath(path1: str, path2: str):
     path1 = path1.replace("./", "")
@@ -29,6 +30,8 @@ def readFileIn(root):
             f.close()
         except PermissionError:
             pass
+        except IsADirectoryError:
+            pass
     return d.copy()
 
 def walkPath(Path):
@@ -46,24 +49,25 @@ def buildFile(filePath):
         f = open(filePath, "r", encoding="UTF-8")
         file = f.read()
         f.close()
+        html = file
         # 如果使用模板
-        if len(re.findall('<template src=".+?">', file)) == 0:
-            return
-        templateName = re.findall('<template src=".+?">', file)[0][15:-2]
-        childs = re.findall('<child id="(.+?)">(.*?)</child>', file,re.DOTALL)
-        # logging.info("childs: "+json.dumps(childs))
-        # 填充模版
-        html = templates[templateName]
-        # if filePath == "./docs/mbs\maps/index.html":
-        #     print(childs)
-        for child in childs:
-            # logging.info(child)
-            html = html.replace(f'{{{{{child[0]}}}}}', child[1])
-        for child in re.findall("{{(.*?)}}", html):# 清除未填充的模版
-            html = html.replace(f'{{{{{child}}}}}', "") 
+        if len(re.findall('<template src=".+?">', file)) > 0:
+            templateName = re.findall('<template src=".+?">', file)[0][15:-2]
+            childs = re.findall('<child id="(.+?)">(.*?)</child>', file,re.DOTALL)
+            # logging.info("childs: "+json.dumps(childs))
+            # 填充模版
+            html = templates[templateName]
+            # if filePath == "./docs/mbs\maps/index.html":
+            #     print(childs)
+            for child in childs:
+                # logging.info(child)
+                html = html.replace(f'{{{{{child[0]}}}}}', child[1])
+            for child in re.findall("{{(.*?)}}", html):# 清除未填充的模版
+                html = html.replace(f'{{{{{child}}}}}', "") 
         # 替换模组
-        for mod in mods:
-            html = html.replace(f"<mod src=\"{mod}\">",mods[mod])
+        if len(re.findall('<mod src=', file)) > 0:
+            for mod in mods:
+                html = html.replace(f"<mod src=\"{mod}\">",mods[mod])
         f = open(target_filename, "w", encoding="UTF-8")
         f.write(html)
         f.close()
@@ -91,14 +95,18 @@ def buildFile(filePath):
 
 
 def build():
+    global templates,mods
+    
     nowTime = time.asctime()
     shutil.rmtree(buildRoot)
     shutil.copytree(siteRoot, buildRoot, True)
 
+    templates = readFileIn(templatesRoot)
+    mods = readFileIn(modsRoot)
     # models = readFileIn(modelsRoot)
 
     for fileOrg in os.walk(buildRoot):
-        # logging.info(f"[build] build {fileOrg}...")
+        logging.info(f"[build] build {fileOrg}...")
         # fileOrg ('./build', ['p'], ['index copy.html', 'index.html'])
         for fileName in fileOrg[2]:
             buildFile(coPath(fileOrg[0], fileName))
@@ -119,14 +127,18 @@ if __name__ == "__main__":
                 if watchList[filePath] != os.path.getmtime(filePath):
                     logging.info(nowTime+" [Change] "+filePath)
                     watchList[filePath] = os.path.getmtime(filePath)
-                    buildFile(filePath)
+                    time.sleep(1)
+                    if watchList[filePath] == os.path.getmtime(filePath):
+                        buildFile(filePath)
+                        if templatesRoot in filePath:
+                            build()
             except FileNotFoundError:
                 logging.info(nowTime+"[Change]"+filePath)
                 build()
             except KeyError:
                 watchList[filePath] = os.path.getmtime(filePath)
             except PermissionError:
-                # logging.warning(nowTime+"文件被占用: "+filePath)
+                logging.warning(nowTime+"文件被占用: "+filePath)
                 pass
             except:
                 logging.warning(nowTime+"未知错误: "+filePath)

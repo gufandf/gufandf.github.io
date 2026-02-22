@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>MBS GAME JAM</title>
+</head>
+<body>
+    <main>
+        <div class="viewport" id="part1">
+            <img id="headimg" src="./bgs/MBS_logo_Alpha.png" alt="">
+        </div>
+        <div class="viewport" id="part2">
+            <span class="table-list">
+                <span class="table">
+                    <img src="./bgs/MBS_logo.png" alt="">
+                    <h2>MBS Game Jam介绍</h2>
+                </span>
+            </span>
+
+            <div class="editor">
+                <div class="linenum">
+                    <p>1</p>
+                </div>
+                <div>
+                    <p>MBS Game Jam (Minecraft Brain Storm Game Jam) 是由 <a target="_blank" href="https://space.bilibili.com/449104347">孤帆Gufandf</a> 和 <a target="_blank" href="https://space.bilibili.com/491930441">甜橙猫酱Cat_Sauce</a>主办的我的世界小游戏地图制作大赛，旨在促进我的世界小游戏地图社区的发展和制作者的交流。参赛选手需要围绕主题，在 72 小时内做出一张我的世界游戏地图。</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="viewport" id="part2">
+            <span class="table-list">
+                <span class="table">
+                    <img src="./bgs/MBS_logo.png" alt="">
+                    <h2>MBS Game Jam介绍</h2>
+                </span>
+            </span>
+
+            <div class="editor">
+                <div class="linenum">
+                    <p>1</p>
+                </div>
+                <div>
+                    <p>MBS Game Jam (Minecraft Brain Storm Game Jam) 是由 <a target="_blank" href="https://space.bilibili.com/449104347">孤帆Gufandf</a> 和 <a target="_blank" href="https://space.bilibili.com/491930441">甜橙猫酱Cat_Sauce</a>主办的我的世界小游戏地图制作大赛，旨在促进我的世界小游戏地图社区的发展和制作者的交流。参赛选手需要围绕主题，在 72 小时内做出一张我的世界游戏地图。</p>
+                    
+                </div>
+            </div>
+        </div>
+        <footer>
+            
+            <div class="linklist">
+                <div class="flex center">
+                    <h2>© MBS GAME JAM 2026</h2>
+                </div>
+                
+            </div>
+            <!-- <div class="linklist">
+                <div class="flex center">
+                    <h2></h2>
+                </div>
+            </div> -->
+        </footer>
+    </main>
+</body>
+</html>
+
+<style>
+
+    *{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+:root{
+    --border-color : rgb(51,57,63);
+    --background-color : rgb(6,12,17);
+    --editor-color : rgb(21,24,29);
+    --darkfont-color : rgb(128,128,128);
+    --vs-blue : rgb(36,111,234);
+}
+
+html{
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 767px) {
+    html{
+        font-size: 10px;
+    }
+}
+
+body{
+    background-color: var(--background-color);
+    color: aliceblue;
+    /* background-color: black; */
+}
+
+main{
+    border: solid calc((1/12)*2rem) var(--border-color);
+    border-radius: calc((1/12)*10rem);
+
+    overflow: hidden;
+    
+    box-shadow: 0 0 10px var(--editor-color);
+    background-color: var(--editor-color);
+    width: calc(min(95vw,1100px)) ;
+    margin: auto;
+    margin-top: calc(min(2.5vw,20px));
+}
+
+.viewport{
+    width: 100%;
+    /* border: solid var(--border-color); */
+    border-bottom: 0;
+}
+
+
+.flex{
+    display: flex;
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+h1{
+    font-size: 2rem;
+}
+
+h2{
+    font-size: 1.5rem;
+}
+
+p{
+    text-align: justify;
+    font-size: 1.5rem;
+}
+
+
+
+#part1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#part1 img{
+    width: 700px;
+    max-width: 80%;
+}
+
+span{
+    display: flex;
+    flex-direction: row;
+}
+
+.table-list{
+    height: calc((1/12)*50rem);
+    overflow: visible;
+    background-color: var(--background-color);
+    border-bottom: solid calc((1/12)*2rem) var(--border-color);
+    border-top: solid calc((1/12)*2rem) var(--border-color);
+}
+
+.table{
+    height: calc((1/12)*52rem);
+    background-color: var(--editor-color);
+    min-width: calc((1/12)*150rem);
+    border-right:  solid calc((1/12)*2rem) var(--border-color);
+    align-items: center;
+    
+}
+
+.editor{
+    overflow: hidden;
+    padding-right: calc((1/12)*20rem);
+    padding-left: calc((1/12)*20rem);
+    display: flex;
+}
+.linenum{
+    padding: 0 calc((1/12)*10rem) 0 0px;
+    margin-right: calc((1/12)*10rem);
+    border-right: solid calc((1/12)*2rem) var(--border-color);
+    color: var(--darkfont-color);
+}
+
+.linenum p {
+    width: calc((1/12)*20rem);
+    text-align: right;
+}
+
+.table img{
+    height: calc((1/12)*30rem);
+    width: calc((1/12)*30rem);
+    margin-left: calc((1/12)*10rem);
+}
+.table h2{
+    margin-left: calc((1/12)*10rem);
+}
+
+.table::after{
+    content: "✕";
+    font-size: 1.1rem;
+    margin-left: calc((1/12)*10rem);
+    margin-right: calc((1/12)*10rem);
+}
+a{
+    color:var(--vs-blue);
+    text-decoration: underline;
+}
+
+footer{
+    width: 100%;
+    min-height: 10rem;
+    border-top: solid calc((1/12)*2rem) var(--border-color);
+    justify-content: space-evenly;
+    display: flex;
+}
+footer .linklist{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+}
+footer img{
+    height: calc((1/12)*100rem);
+}
+
+footer p{
+    font-size: 0.75rem;
+}
+</style>

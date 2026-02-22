@@ -11,10 +11,10 @@
 <body id="scalebox" style="background-image: url('../bgs/MBS_Cover_Lossy.png');">
     <div class="body">
         <div class="topbar">
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/">HOME</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/mbs/">MBS</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf">Github</a>
-            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347">哔哩哔哩</a>
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/"><p>HOME</p></a>
+            <a class="topbar-button" onclick="html_jump()" href="https://www.gufandf.top/mbs/"><p>MBS</p></a>
+            <a class="topbar-button" onclick="html_jump()" href="https://github.com/gufandf"><p>Github</p></a>
+            <a class="topbar-button" onclick="html_jump()" href="https://space.bilibili.com/449104347"><p>哔哩哔哩</p></a>
             <!-- <a class="topbar-button" onclick="html_jump()" href="https://afdian.net/a/gufandf">爱发电</a> -->
         </div>
         <div class="main">
@@ -124,188 +124,252 @@
                     return data[p1] || '';
                 });
             }
-            const template = '<div class="game-box" style="height: auto;"><div class="info"><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div><p>${lore}</p></div>'
+            const template = '<div class="game-box" style="height: auto;"><div class="info"><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div><p>${lore}</p></div>';
+            const template_nop = '<div class="game-box" style="height: auto;"><div class="info"><img src="${img}" alt=""><span><a href="${link}"><h2>${title}</h2></a><h3>${author}</h3></span></div></div>';
 
-            maps = [
-                '<h2>MBS4 1.21.8 <a onclick="" target="_blank" href="">废墟电台</a></h2>',
-                {
-                    "title": "「NAGI」",
-                    "author": "16bit Samurai",
-                    "img": "./imgs/MBS4-「NAGI」.webp",
-                    "link": "./files/MBS4/MBS4 [16-bit Samurai]「NAGI」demo ver..zip",
-                    "lore": ""
-                },{
-                    "title": "电码",
-                    "author": "Calculus",
-                    "img": "./imgs/MBS4-电码.webp",
-                    "link": "./files/MBS4/MBS4 [Calculus] 电码.zip",
-                    "lore": ""
-                },{
-                    "title": "废墟电台",
-                    "author": "蓝色行星队",
-                    "img": "./imgs/MBS4-废墟电台.webp",
-                    "link": "./files/MBS4/MBS4 [蓝色行星队] 废墟电台 单人剧情地图.zip",
-                    "lore": ""
-                },{
-                    "title": "最后的电台",
-                    "author": "深藏blue",
-                    "img": "./imgs/MBS4-最后的电台.webp",
-                    "link": "https://pan.baidu.com/s/1kN7uUdRZ9HD6z7RP49kbUQ?pwd=uek6",
-                    "lore": ""
-                },{
-                    "title": "末日电台",
-                    "author": "DYM",
-                    "img": "./imgs/MBS4-末日电台.webp",
-                    "link": "./files/MBS4/MBS4 [DYM] 末日电台.zip",
-                    "lore": ""
-                },{
-                    "title": "美好的前途",
-                    "author": "泥土商馆",
-                    "img": "./imgs/MBS4-美好的前途.webp",
-                    "link": "https://pan.baidu.com/s/1Cz73IpFnFlM0NE_rNjef7g?pwd=1eb9",
-                    "lore": ""
-                },{
-                    "title": "荒野遗迹",
-                    "author": "無限水",
-                    "img": "./imgs/MBS4-荒野遗迹.webp",
-                    "link": "./files/MBS4/MBS4 [無限水] 荒野遗迹.zip",
-                    "lore": ""
-                },{
-                    "title": "废墟希望地图",
-                    "author": "间单的小队",
-                    "img": "./imgs/MBS4-废墟希望地图.webp",
-                    "link": "./files/MBS4/MBS4 [间单的小队] 废墟希望地图.zip",
-                    "lore": ""
-                },{
-                    "title": "失明",
-                    "author": "皮革厂",
-                    "img": "./imgs/MBS4-失明.webp",
-                    "link": "./files/MBS4/MBS4 [皮革厂] 失明.zip",
-                    "lore": ""
-                },
-                '<h2>MCC3 1.21.4 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV12AuuzyEU7/">硬币</a></h2>',
-                {
-                    "title": "夢樂園1930",
-                    "author": "16bit Samurai",
-                    "img": "./imgs/MCC3-夢樂園1930.webp",
-                    "link": "./files/MCC3/MCC3 [16-bit Samurai] 夢樂園1930 Jam ver.zip",
-                    "lore": "16bit Samurai 将赌场做进了游戏中。在这个赌场，玩家需要通过投掷特性各不相同的硬币，达成每一关的通关条件。有的硬币两面都是正面，有的硬币正反始终和它前一枚硬币相同，还有的硬币会直接掀翻桌子。本张地图将主题与玩法完美地融合到了一起，同时建筑、动画赏心悦目，是一张质量非常高的游戏地图，获得各位玩家的一致好评。"
-                }, {
-                    "title": "命运硬币",
-                    "author": "DYM",
-                    "img": "./imgs/MCC3-命运硬币.webp",
-                    "link": "./files/MCC3/MCC3 [DYM] 命运硬币 Jam ver.zip",
-                    "lore": "DYM队利用我的世界极高的自由度，制作了一款卡牌桌游。游戏中有粉蓝两种颜色的卡牌，硬币也有粉蓝两面。玩家有掷硬币后，便可以使用场上所有已经翻开的同色卡牌。攻击牌只能对同色的生命造成伤害，而心形卡牌可已经生命值转换为卡牌的颜色。道具牌则可以获得各种道具。本张地图的动画效果也十分优秀，硬币的旋转，卡牌的翻转，以及玩家失败后被幽匿块包裹的动画给玩家带来了优秀的游玩体验。"
-                }, {
-                    "title": "超电磁炮大乱斗",
-                    "author": "甘蔗铜西瓜",
-                    "img": "./imgs/MCC3-超电磁炮大乱斗.webp",
-                    "link": "./files/MCC3/MCC3 [甘蔗铜西瓜] 超电磁炮大乱斗 Jam ver.zip",
-                    "lore": "甘蔗铜西瓜队由硬币发散到《某科学的超电磁炮》中御坂美琴使用电磁力发射硬币的攻击手段，为我们制作了这张《超电磁炮大乱斗》。游戏中玩家各自为营，击杀数最多的玩家赢下比赛。然而在六种硬币中，铜币因其射速快的特性，成功成为当前版本T0硬币，令人忍俊不禁。而其他硬币的射速较慢或蓄力时间较长，平衡性有待优化。总之，本张地图是一张爽快的射击游戏地图。"
-                }, {
-                    "title": "Coin Mania",
-                    "author": "鸽子窝",
-                    "img": "./imgs/MCC3-疯狂的硬币.webp",
-                    "link": "./files/MCC3/MCC3 [鸽子窝] Coin Mania Jam ver.zip",
-                    "lore": "本张地图从硬币出发，联想到投币街机，便在游戏大厅中加入了许多街机元素。玩家需要在游戏中用枪械迎击尸潮，收集硬币。同时，本张地图为玩家添加了滑铲动作，只要双击潜行即可向前滑铲。"
-                }, {
-                    "title": "机会硬币",
-                    "author": "无限水",
-                    "img": "./imgs/MCC3-机会硬币.webp",
-                    "link": "./files/MCC3/MCC3 [无限水] 机会硬币 Jam ver.zip",
-                    "lore": "《机会硬币》借助抛硬币的随机性，激励玩家通过不断投掷硬币，拿到更好的装备，与其他玩家进行战斗。玩家投掷时，如果运气非常好掷出立着的硬币，就可以获得一枚至尊硬币。地图中的的硬币分为几个等级，等级越高，奖励越丰厚，当然，掷出反面后的惩罚也越严重。甚至有可能直接毙命。"
-                }, {
-                    "title": "硬币之咒",
-                    "author": "薛定谔的冠军",
-                    "img": "./imgs/MCC3-硬币之咒.webp",
-                    "link": "./files/MCC3/MCC3 [薛定谔的冠军] 硬币之咒 Jam ver.zip",
-                    "lore": "这是一座古老的神殿，传闻有一支冒险团队进入了此神殿，只有一人生还。他只是带出了一枚硬币，就换来了财宝无数。《硬币之咒》为一张PVPVE地图，玩家在游戏中需要探索硬币神殿，收集硬币，提防潜在的危险和难测的人心。"
-                }, {
-                    "title": "硬币收集",
-                    "author": "落雪队",
-                    "img": "./imgs/MCC3-硬币收集.webp",
-                    "link": "./files/MCC3/MCC3 [落雪队] 硬币收集 Jam ver.zip",
-                    "lore": "从名字就可以看出，本张地图的玩法就是收集硬币，杀手玩家的任务就是阻止其他玩家收集硬币。本张地图的特色是地图随机生成，每一次游玩的地图都不相同。"
-                }, {
-                    "title": "地区贸易",
-                    "author": "煎蛋的小队",
-                    "img": "./imgs/MCC3-地区贸易.webp",
-                    "link": "./files/MCC3/MCC3 [煎蛋的小队] 地区贸易 Jam ver.zip",
-                    "lore": "在《地区贸易》中玩家需要辗转于不同地区，收集原材料或与村民交易，最终赚到100块钱。在不同区域之间通行需要过路费，玩家需要缜密地计算每一笔收支以免破产。"
-                },
-                '<h2>MCC2 1.21 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1XHvYe8EpC/">照片</a></h2>',
+maps = 
+[
+'<h2>MBS5 1.21.11 <a onclick="" target="_blank" href="">平衡</a></h2>',
+{
+    "title": "生态平衡",
+    "author": "函数氢弹",
+    "img": "./imgs/MBS5/[函数氢弹] 生态平衡.webp",
+    "link": "./files/MBS5/MBS5 [函数氢弹] 生态平衡.zip",
+    "lore": "你在一个小温室里，模拟着一座小岛的生态平衡。<br>你可以与区块和建筑互动，通过运营改变环境。<br>地图一共有6种不同结局，等待你来达成。"
+},{
+    "title": "钢索骑士",
+    "author": "LAY Studio",
+    "img": "./imgs/MBS5/钢索骑士.webp",
+    "link": "./files/MBS5/MBS5 [LAY Studio] TightRope Rider.zip",
+    "lore": "以走钢丝为灵感的跑酷小游戏。你将在无尽的钢索上运输建材，需要尽力保持载具的平衡，走的更远。"
+},{
+    "title": "GOODS",
+    "author": "AAA来自搞牌",
+    "img": "./imgs/MBS5/GOODS.webp",
+    "link": "./files/MBS5/MBS5 [AAA来自搞牌] GOODS.zip",
+    "lore": "一款供多人游玩的小游戏地图，你的目标是将木桶扔到对面方使其获得扭矩，一队扭矩过大则该队失败。"
+},{
+    "title": "《校准》",
+    "author": "泥土商馆-接待派",
+    "img": "./imgs/MBS5/校准.webp",
+    "link": "./files/MBS5/MBS5 [泥土商馆-接待派] 校准.zip",
+    "lore": "在清醒与沉睡的边界，每日重复的行为，维持着脆弱的平衡。但平衡之下，人们维护的究竟是什么"
+},{
+    "title": "其上其下，平衡太一",
+    "author": "喵喵喵喵队",
+    "img": "./imgs/MBS5/其上其下，平衡太一.webp",
+    "link": "./files/MBS5/MBS5 [喵喵喵喵队] 其上其下，平衡太一（可游玩版）.zip",
+    "lore": "你将扮演一个炼金术士，探索配方，添加药物来平衡底物的温度和质量，学习前人的研究成果并加以验证（是的资料有可能是错的awa），使游戏推动下去"
+},{
+    "title": "财富即正义",
+    "author": "UNDERLINE",
+    "img": "./imgs/MBS5/财富即正义.webp",
+    "link": "./files/MBS5/MBS5 [UNDERLINE] 财富即正义.zip",
+    "lore": "你现在是商业公司的老总，要打官司来搞跨你的竞争对手。法官是一个老油条，经常贪污受贿，于是你决定..."
+},{
+    "title": "平衡棍木",
+    "author": "呼喵",
+    "img": "./imgs/MBS5/平衡棍木.webp",
+    "link": "./files/MBS5/MBS5 [呼喵] 平衡棍木.zip",
+    "lore": "利用棍(tian)木(ping)的平衡来跑酷吧！与队友一起通过平衡棍木两边的重量制造或切断通路，攀登到更高处，同时干扰对手前进！<br>(注：游玩人数太多可能会体验不佳 虽然也没具体测试过 但推荐4-6人游玩 上限10人)"
+},{
+    "title": "生态平衡",
+    "author": "发光恼鬼队",
+    "img": "./imgs/MBS5/[发光恼鬼队] 生态平衡.png",
+    "link": "./files/MBS5/MBS5 [发光恼鬼] 生态平衡.zip",
+    "lore": "在一个小小的生态盒中，到底能维持多久的生态平衡呢……"
+},{
+    "title": "平衡与试炼",
+    "author": "简单的小队",
+    "img": "./imgs/MBS5/平衡与试炼.webp",
+    "link": "./files/MBS5/MBS5 [简单的小队] 平衡与试炼.zip",
+    "lore": "”阴差阳错进入了一处建筑，是机遇，还是灾祸？“地图为解谜+闯关冒险类题材吗，在关卡内找到材料，平衡重量，拿到最终大奖"
+},{
+    "title": "质能之差",
+    "author": "DYM",
+    "img": "./imgs/MBS5/质能之差.webp",
+    "link": "./files/MBS5/MBS5 [DYM] 质能之差.zip",
+    "lore": "这是一个被重塑的世界，你作为物质实体需控制自身的物质与能量的差处于一个较小的值，并试图摧毁非己的异族物质实体。"
+},
+'<h2>MBS4 1.21.8 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1os6tB3ERM/">废墟电台</a></h2>',
+{
+    "title": "「NAGI」",
+    "author": "16bit Samurai",
+    "img": "./imgs/MBS4-「NAGI」.webp",
+    "link": "./files/MBS4/MBS4 [16-bit Samurai]「NAGI」demo ver..zip",
+    "lore": "被困于破败的教学楼中，电台是你们唯一的希望，生存的压力迫使你每天出去探索，收集食物、工具、以及最重要的给电台供电的电池。将电台调整到特定频率时，可以获得一些有关游戏背景的信息片段。在探索过程中，可以找到许多工具与武器，使得我们有与感染者有一战之力。<br>地图的画面进行了精心设计，即使不开光影，画面效果也赏心悦目。"
+},{
+    "title": "电码",
+    "author": "Calculus",
+    "img": "./imgs/MBS4-电码.webp",
+    "link": "./files/MBS4/MBS4 [Calculus] 电码.zip",
+    "lore": "一阵爆炸声在周围响起，你刚刚出门挖矿，你所在的村落就惨遭轰炸，为了向外界求救，你需要收集之前接收到的电报，尝试破译出电台密码。如果你对密码学感兴趣，那么这个地图或许非常适合你。其中密码的破译过程非常硬核，欢迎大家来挑战。"
+},{
+    "title": "废墟电台",
+    "author": "蓝色行星队",
+    "img": "./imgs/MBS4-废墟电台.webp",
+    "link": "./files/MBS4/MBS4 [蓝色行星队] 废墟电台 单人剧情地图.zip",
+    "lore": "你是一个幸存者，在这片巨大的废墟中，你躲藏在小小避难所中。避难所中的电台收到了信号，你能否跟随信号的指引成功获救。《废墟电台》为一张剧情向的Pve地图，你需要击败在你周围游荡的怪物，根据雷达提供的信号源，排除干扰源，并最终找到废墟中设置专门频段的另外一个电台，调至对应的频段来寻求救援。"
+},{
+    "title": "最后的电台",
+    "author": "深藏blue",
+    "img": "./imgs/MBS4-最后的电台.webp",
+    "link": "https://pan.baidu.com/s/1kN7uUdRZ9HD6z7RP49kbUQ?pwd=uek6",
+    "lore": "如果你喜欢《文明》系列，那么你一定也喜欢这张地图，地图《最后的电台》中，你每天都会收到民众发来的信息，你需要使用电台，维持目前的社会秩序，保护民众的安全。屏幕上会显示各个地区的基本信息，而你要根据这些信息制定下一步动作。你能否消灭叛军，保护这座城市呢？"
+},{
+    "title": "末日电台",
+    "author": "DYM",
+    "img": "./imgs/MBS4-末日电台.webp",
+    "link": "./files/MBS4/MBS4 [DYM] 末日电台.zip",
+    "lore": "在茫茫大漠中的一座破败建筑中，你收到了一个奇怪的信号，但这里存在着怪物的威胁，你能否找到信号源并发现信号被后的真相。地图带有简单的解谜元素，但碍于篇幅问题，没法较好的向玩家展示，希望制作团队能继续制作更多内容。"
+},{
+    "title": "美好的前途",
+    "author": "泥土商馆",
+    "img": "./imgs/MBS4-美好的前途.webp",
+    "link": "https://pan.baidu.com/s/1Cz73IpFnFlM0NE_rNjef7g?pwd=1eb9",
+    "lore": "地图《美好的前途》通过出色的配音与剧情演出向我们展示了曾经的那个时代。地图中有着极具特色的赫鲁晓夫楼与冰天雪地下庄严雕塑。地下室中的电台向外广播着这个世界的最后信息。"
+},{
+    "title": "荒野遗迹",
+    "author": "無限水",
+    "img": "./imgs/MBS4-荒野遗迹.webp",
+    "link": "./files/MBS4/MBS4 [無限水] 荒野遗迹.zip",
+    "lore": "搜打撤的玩法大部分人都合熟悉，但如果是在MC中呢。《荒野遗迹》是一张多人PvPvE地图。玩家可以在地图中探索数十个区域，击败怪物，使用怪物的掉落物来增强自己的电台信号。同时也要提防其他玩家的攻击。当玩家信号达到百分百时，会被全图标记，前往地图上唯一的撤离点位——缠结树梢撤离即可获得胜利，当然，时刻提防堵撤离点的玩家。"
+},{
+    "title": "废墟希望地图",
+    "author": "间单的小队",
+    "img": "./imgs/MBS4-废墟希望地图.webp",
+    "link": "./files/MBS4/MBS4 [间单的小队] 废墟希望地图.zip",
+    "lore": "如何在废墟中建立起人类的根据地？在《废墟希望》这张地图中，电台为玩家的保护对象，又作为与外界信息沟通的手段，可以获得特别的补给。而与此同时，玩家需要收集各种材料并建造工事抵御怪物一波又一波的进攻。"
+},{
+    "title": "失明",
+    "author": "皮革厂",
+    "img": "./imgs/MBS4-失明.webp",
+    "link": "./files/MBS4/MBS4 [皮革厂] 失明.zip",
+    "lore": "玩家需在黑暗中找到遗留在各处的电台，获取密码并从黑暗中逃出。"
+},
+'<h2>MCC3 1.21.4 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV12AuuzyEU7/">硬币</a></h2>',
+{
+    "title": "夢樂園1930",
+    "author": "16bit Samurai",
+    "img": "./imgs/MCC3-夢樂園1930.webp",
+    "link": "./files/MCC3/MCC3 [16-bit Samurai] 夢樂園1930 Jam ver.zip",
+    "lore": "16bit Samurai 将赌场做进了游戏中。在这个赌场，玩家需要通过投掷特性各不相同的硬币，达成每一关的通关条件。有的硬币两面都是正面，有的硬币正反始终和它前一枚硬币相同，还有的硬币会直接掀翻桌子。本张地图将主题与玩法完美地融合到了一起，同时建筑、动画赏心悦目，是一张质量非常高的游戏地图，获得各位玩家的一致好评。"
+}, {
+    "title": "命运硬币",
+    "author": "DYM",
+    "img": "./imgs/MCC3-命运硬币.webp",
+    "link": "./files/MCC3/MCC3 [DYM] 命运硬币 Jam ver.zip",
+    "lore": "DYM队利用我的世界极高的自由度，制作了一款卡牌桌游。游戏中有粉蓝两种颜色的卡牌，硬币也有粉蓝两面。玩家有掷硬币后，便可以使用场上所有已经翻开的同色卡牌。攻击牌只能对同色的生命造成伤害，而心形卡牌可已经生命值转换为卡牌的颜色。道具牌则可以获得各种道具。本张地图的动画效果也十分优秀，硬币的旋转，卡牌的翻转，以及玩家失败后被幽匿块包裹的动画给玩家带来了优秀的游玩体验。"
+}, {
+    "title": "超电磁炮大乱斗",
+    "author": "甘蔗铜西瓜",
+    "img": "./imgs/MCC3-超电磁炮大乱斗.webp",
+    "link": "./files/MCC3/MCC3 [甘蔗铜西瓜] 超电磁炮大乱斗 Jam ver.zip",
+    "lore": "甘蔗铜西瓜队由硬币发散到《某科学的超电磁炮》中御坂美琴使用电磁力发射硬币的攻击手段，为我们制作了这张《超电磁炮大乱斗》。游戏中玩家各自为营，击杀数最多的玩家赢下比赛。然而在六种硬币中，铜币因其射速快的特性，成功成为当前版本T0硬币，令人忍俊不禁。而其他硬币的射速较慢或蓄力时间较长，平衡性有待优化。总之，本张地图是一张爽快的射击游戏地图。"
+}, {
+    "title": "Coin Mania",
+    "author": "鸽子窝",
+    "img": "./imgs/MCC3-疯狂的硬币.webp",
+    "link": "./files/MCC3/MCC3 [鸽子窝] Coin Mania Jam ver.zip",
+    "lore": "本张地图从硬币出发，联想到投币街机，便在游戏大厅中加入了许多街机元素。玩家需要在游戏中用枪械迎击尸潮，收集硬币。同时，本张地图为玩家添加了滑铲动作，只要双击潜行即可向前滑铲。"
+}, {
+    "title": "机会硬币",
+    "author": "无限水",
+    "img": "./imgs/MCC3-机会硬币.webp",
+    "link": "./files/MCC3/MCC3 [无限水] 机会硬币 Jam ver.zip",
+    "lore": "《机会硬币》借助抛硬币的随机性，激励玩家通过不断投掷硬币，拿到更好的装备，与其他玩家进行战斗。玩家投掷时，如果运气非常好掷出立着的硬币，就可以获得一枚至尊硬币。地图中的的硬币分为几个等级，等级越高，奖励越丰厚，当然，掷出反面后的惩罚也越严重。甚至有可能直接毙命。"
+}, {
+    "title": "硬币之咒",
+    "author": "薛定谔的冠军",
+    "img": "./imgs/MCC3-硬币之咒.webp",
+    "link": "./files/MCC3/MCC3 [薛定谔的冠军] 硬币之咒 Jam ver.zip",
+    "lore": "这是一座古老的神殿，传闻有一支冒险团队进入了此神殿，只有一人生还。他只是带出了一枚硬币，就换来了财宝无数。《硬币之咒》为一张PVPVE地图，玩家在游戏中需要探索硬币神殿，收集硬币，提防潜在的危险和难测的人心。"
+}, {
+    "title": "硬币收集",
+    "author": "落雪队",
+    "img": "./imgs/MCC3-硬币收集.webp",
+    "link": "./files/MCC3/MCC3 [落雪队] 硬币收集 Jam ver.zip",
+    "lore": "从名字就可以看出，本张地图的玩法就是收集硬币，杀手玩家的任务就是阻止其他玩家收集硬币。本张地图的特色是地图随机生成，每一次游玩的地图都不相同。"
+}, {
+    "title": "地区贸易",
+    "author": "煎蛋的小队",
+    "img": "./imgs/MCC3-地区贸易.webp",
+    "link": "./files/MCC3/MCC3 [煎蛋的小队] 地区贸易 Jam ver.zip",
+    "lore": "在《地区贸易》中玩家需要辗转于不同地区，收集原材料或与村民交易，最终赚到100块钱。在不同区域之间通行需要过路费，玩家需要缜密地计算每一笔收支以免破产。"
+},
+'<h2>MCC2 1.21 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1XHvYe8EpC/">照片</a></h2>',
 
-                {
-                    "title": "红沙发照相馆",
-                    "author": "16bit Samurai",
-                    "img": "./imgs/MCC2-红沙发照相馆.webp",
-                    "link": "./files/MCC2/MCC2 [16-bit Samurai] 红沙发照相馆（1~3人） Jam ver.zip",
-                    "lore": "由 16-Bit 制作的《红沙发照相馆》以高超的技术力与美术力获得各位玩家的青睐。"
-                },
-                {
-                    "title": "梦境摄手",
-                    "author": "UNDERLINE",
-                    "img": "./imgs/MCC2-梦境摄手.webp",
-                    "link": "./files/MCC2/MCC2 [UNDERLINE] 梦境摄手（单人） Jam ver.zip",
-                    "lore": "由UNDERLINE团队制作的单人PVE地图《梦境摄手》将玩法与剧情很好的融合在了一起，玩家将扮演梦境管理局的员工，使用记忆扫除专用摄影设备清除梦境中的梦魇，逐渐挖掘故事的背景和自己的身世。"
-                },
-                {
-                    "title": "时光相片",
-                    "author": "不简单的小队",
-                    "img": "./imgs/MCC2-时光相片.webp",
-                    "link": "./files/MCC2/MCC2 [不简单的小队] 时光相片 Jam ver.zip",
-                    "lore": "《时光相片》由参加过两届 MCC 的元老级选手 Tom 独立制作。故事发生在一座老旧的城堡周围，玩家可以使用照片穿越到照片所在的时代。古代的城堡充满生机，而现在的城堡只是断壁残垣。"
-                },
-                {
-                    "title": "Photo Scared",
-                    "author": "DYM",
-                    "img": "./imgs/MCC2-Photo Scared.webp",
-                    "link": "./files/MCC2/MCC2 [DYM] Photo Scare（五人） Jam ver.zip",
-                    "lore": "作者由照片联想到恶灵附身二中的变态艺术家并参考了黎明杀机的玩法制作出这张地图。幸存者需要在地图中找到并摧毁指定的照片。幸存者有三种职业，还有各种道具可以帮助他们躲避恐怖摄影师的追杀。"
-                },
-                '<h2>MCC1 1.20.4 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Qz421R7e7/">种子</a></h2>',
-                {
-                    "title": "大富翁",
-                    "author": "鸽子窝",
-                    "img": "./imgs/MCC1-大富翁.webp",
-                    "link": "./files/MCC1/MCC1 [鸽子窝] 大富翁 Jam ver.zip",
-                    "lore": ""
-                },
-                {
-                    "title": "种子基因库",
-                    "author": "無限水",
-                    "img": "./imgs/MCC1-种子基因库.webp",
-                    "link": "./files/MCC1/MCC1 [無限水] 种子基因库 Jam ver.zip",
-                    "lore": ""
-                },
-                {
-                    "title": "洞窟之种",
-                    "author": "一个单单简简の小队",
-                    "img": "./imgs/MCC1-洞穴之种.webp",
-                    "link": "./files/MCC1/MCC1 [简简单单] 洞窟之种 Jam ver.zip",
-                    "lore": ""
-                },
-                '<h2>MCC0 1.20.1 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Ep421f7EL/">倒计时</a></h2>',
-                {
-                    "title": "健康倒计时",
-                    "author": "鸽子窝",
-                    "img": "./imgs/MCC0-健康倒计时.webp",
-                    "link": "./files/MCC0/MCC0 [鸽子窝] 健康倒计时 Jam ver.zip",
-                    "lore": ""
-                }, {
-                    "title": "杀狼人",
-                    "author": "ZIP",
-                    "img": "./imgs/MCC0-杀狼人.webp",
-                    "link": "./files/MCC0/MCC0 [ZIP] 杀狼人 Jam ver.zip",
-                    "lore": ""
-                }, {
-                    "title": "生命倒计时",
-                    "author": "简简单单の小队",
-                    "img": "./imgs/MCC0-生命倒计时.webp",
-                    "link": "./files/MCC0/MCC0 [简简单单の小队] 生命倒计时 Jam ver.zip",
-                    "lore": ""
-                },
-            ]
+{
+    "title": "红沙发照相馆",
+    "author": "16bit Samurai",
+    "img": "./imgs/MCC2-红沙发照相馆.webp",
+    "link": "./files/MCC2/MCC2 [16-bit Samurai] 红沙发照相馆（1~3人） Jam ver.zip",
+    "lore": "由 16-Bit 制作的《红沙发照相馆》以高超的技术力与美术力获得各位玩家的青睐。"
+},
+{
+    "title": "梦境摄手",
+    "author": "UNDERLINE",
+    "img": "./imgs/MCC2-梦境摄手.webp",
+    "link": "./files/MCC2/MCC2 [UNDERLINE] 梦境摄手（单人） Jam ver.zip",
+    "lore": "由UNDERLINE团队制作的单人PVE地图《梦境摄手》将玩法与剧情很好的融合在了一起，玩家将扮演梦境管理局的员工，使用记忆扫除专用摄影设备清除梦境中的梦魇，逐渐挖掘故事的背景和自己的身世。"
+},
+{
+    "title": "时光相片",
+    "author": "不简单的小队",
+    "img": "./imgs/MCC2-时光相片.webp",
+    "link": "./files/MCC2/MCC2 [不简单的小队] 时光相片 Jam ver.zip",
+    "lore": "《时光相片》由参加过两届 MCC 的元老级选手 Tom 独立制作。故事发生在一座老旧的城堡周围，玩家可以使用照片穿越到照片所在的时代。古代的城堡充满生机，而现在的城堡只是断壁残垣。"
+},
+{
+    "title": "Photo Scared",
+    "author": "DYM",
+    "img": "./imgs/MCC2-Photo Scared.webp",
+    "link": "./files/MCC2/MCC2 [DYM] Photo Scare（五人） Jam ver.zip",
+    "lore": "作者由照片联想到恶灵附身二中的变态艺术家并参考了黎明杀机的玩法制作出这张地图。幸存者需要在地图中找到并摧毁指定的照片。幸存者有三种职业，还有各种道具可以帮助他们躲避恐怖摄影师的追杀。"
+},
+'<h2>MCC1 1.20.4 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Qz421R7e7/">种子</a></h2>',
+{
+    "title": "大富翁",
+    "author": "鸽子窝",
+    "img": "./imgs/MCC1-大富翁.webp",
+    "link": "./files/MCC1/MCC1 [鸽子窝] 大富翁 Jam ver.zip",
+    "lore": ""
+},
+{
+    "title": "种子基因库",
+    "author": "無限水",
+    "img": "./imgs/MCC1-种子基因库.webp",
+    "link": "./files/MCC1/MCC1 [無限水] 种子基因库 Jam ver.zip",
+    "lore": ""
+},
+{
+    "title": "洞窟之种",
+    "author": "一个单单简简の小队",
+    "img": "./imgs/MCC1-洞穴之种.webp",
+    "link": "./files/MCC1/MCC1 [简简单单] 洞窟之种 Jam ver.zip",
+    "lore": ""
+},
+'<h2>MCC0 1.20.1 <a onclick="" target="_blank" href="https://www.bilibili.com/video/BV1Ep421f7EL/">倒计时</a></h2>',
+{
+    "title": "健康倒计时",
+    "author": "鸽子窝",
+    "img": "./imgs/MCC0-健康倒计时.webp",
+    "link": "./files/MCC0/MCC0 [鸽子窝] 健康倒计时 Jam ver.zip",
+    "lore": ""
+}, {
+    "title": "杀狼人",
+    "author": "ZIP",
+    "img": "./imgs/MCC0-杀狼人.webp",
+    "link": "./files/MCC0/MCC0 [ZIP] 杀狼人 Jam ver.zip",
+    "lore": ""
+}, {
+    "title": "生命倒计时",
+    "author": "简简单单の小队",
+    "img": "./imgs/MCC0-生命倒计时.webp",
+    "link": "./files/MCC0/MCC0 [简简单单の小队] 生命倒计时 Jam ver.zip",
+    "lore": ""
+},
+]
 
             maps.forEach(element => {
                 if (typeof element == "string") {
@@ -313,7 +377,13 @@
 
                 }
                 else {
-                    const filled = fillTemplate(template, {
+                    var fill_template;
+                    if (element.lore == ""){
+                        fill_template = template_nop;
+                    }else{
+                        fill_template = template;
+                    }
+                    const filled = fillTemplate(fill_template, {
                         title: element.title,
                         img: element.img,
                         link: element.link,
@@ -355,7 +425,14 @@
         --ui_gray: #444;
         --headimg-off: 0px;
     }
-
+    html{
+        font-size: 12px;
+    }
+    @media only screen and (max-width: 767px) {
+        html{
+            font-size: 50%;
+        }
+    }
     body {
         margin: 0;
         padding: 0;
@@ -410,7 +487,7 @@
         margin: auto;
         width: min(90%, 900px);
         height: 100%;
-        padding: 1rem;
+        padding: 10px;
         display: flex;
         flex-direction: column;
     }
@@ -419,15 +496,21 @@
     h2 {
         margin-bottom: 10px;
         border-style: solid;
-        border-width: 0 0 1.5px 0;
+        border-width: 0 0 2px 0;
         border-color: var(--ui_gray);
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     h2 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 1.5rem;
+    }
+    li {
         font-size: 1.5rem;
     }
 
