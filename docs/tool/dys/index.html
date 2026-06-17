@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学生打印社排班系统</title>
+<script>
+window._xlsxReady = false;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+  onload="window._xlsxReady=true" onerror="window._xlsxReady=false"></script>
+<style>
+/* ============================================================
+   Design System — Clean scheduling tool
+   Primary: #2563EB  |  Success: #059669  |  Radius: 10px
+   ============================================================ */
+:root {
+  --primary: #2563EB;
+  --primary-light: #EFF6FF;
+  --primary-dark: #1D4ED8;
+  --success: #059669;
+  --success-light: #ECFDF5;
+  --warning: #D97706;
+  --warning-light: #FFFBEB;
+  --danger: #DC2626;
+  --danger-light: #FEF2F2;
+  --bg: #F1F5F9;
+  --card: #FFFFFF;
+  --border: #E2E8F0;
+  --text: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.1);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 0.15s ease;
+  --cell-bg: #FFFFFF;
+  --cell-wd: #F8FAFC;
+  --cell-we: #FFF7ED;
+  --modal-overlay: rgba(15,23,42,.5);
+  --status-loading-text: #92400E;
+  --status-ready-text: #065F46;
+  --status-error-text: #991B1B;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --primary: #3B82F6; --primary-light: #1E3A5F; --primary-dark: #60A5FA;
+    --success: #10B981; --success-light: #064E3B;
+    --warning: #F59E0B; --warning-light: #78350F;
+    --danger: #EF4444; --danger-light: #7F1D1D;
+    --bg: #0F172A; --card: #1E293B; --border: #334155;
+    --text: #F1F5F9; --text-secondary: #94A3B8; --text-muted: #64748B;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.3); --shadow: 0 1px 3px rgba(0,0,0,.4);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,.5);
+    --cell-bg: #1E293B; --cell-wd: #1A2332; --cell-we: #2D1F1A;
+    --modal-overlay: rgba(0,0,0,.6);
+    --status-loading-text: #FCD34D; --status-ready-text: #6EE7B7; --status-error-text: #FCA5A5;
+  }
+}
+[data-theme="dark"] {
+  --primary: #3B82F6; --primary-light: #1E3A5F; --primary-dark: #60A5FA;
+  --success: #10B981; --success-light: #064E3B;
+  --warning: #F59E0B; --warning-light: #78350F;
+  --danger: #EF4444; --danger-light: #7F1D1D;
+  --bg: #0F172A; --card: #1E293B; --border: #334155;
+  --text: #F1F5F9; --text-secondary: #94A3B8; --text-muted: #64748B;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3); --shadow: 0 1px 3px rgba(0,0,0,.4);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.5);
+  --cell-bg: #1E293B; --cell-wd: #1A2332; --cell-we: #2D1F1A;
+  --modal-overlay: rgba(0,0,0,.6);
+  --status-loading-text: #FCD34D; --status-ready-text: #6EE7B7; --status-error-text: #FCA5A5;
+}
+[data-theme="light"] {
+  --primary: #2563EB; --primary-light: #EFF6FF; --primary-dark: #1D4ED8;
+  --success: #059669; --success-light: #ECFDF5;
+  --warning: #D97706; --warning-light: #FFFBEB;
+  --danger: #DC2626; --danger-light: #FEF2F2;
+  --bg: #F1F5F9; --card: #FFFFFF; --border: #E2E8F0;
+  --text: #0F172A; --text-secondary: #64748B; --text-muted: #94A3B8;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05); --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.1);
+  --cell-bg: #FFFFFF; --cell-wd: #F8FAFC; --cell-we: #FFF7ED;
+  --modal-overlay: rgba(15,23,42,.5);
+  --status-loading-text: #92400E; --status-ready-text: #065F46; --status-error-text: #991B1B;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh; overflow: hidden;
+  font-size: 14px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container { display:flex; height:100vh; }
+
+/* ── Left Panel ── */
+.left-panel {
+  width: 348px; min-width: 348px;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+}
+.panel-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff; font-size: 16px; font-weight: 700;
+  letter-spacing: .5px;
+  display: flex; align-items: center; gap: 8px;
+}
+.panel-header .badge {
+  font-size: 10px; background: rgba(255,255,255,.2);
+  padding: 2px 8px; border-radius: 10px; font-weight: 500;
+}
+.theme-btn {
+  margin-left: auto; min-width: 52px; height: 30px; border-radius: 15px;
+  border: 1.5px solid rgba(255,255,255,.35); background: rgba(255,255,255,.10);
+  color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; line-height: 1; padding: 0 12px;
+  transition: all .2s ease; flex-shrink: 0; white-space: nowrap;
+  font-family: inherit; letter-spacing: .5px;
+}
+.theme-btn:hover { background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.55); }
+.theme-btn:active { transform: scale(.96); }
+.panel-body { flex:1; overflow:hidden; padding:12px; display:flex; flex-direction:column; gap:10px; }
+
+.section-title {
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+textarea#sidInput {
+  width: 100%; height: 64px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  padding: 8px 10px; font-size: 12px; font-family: 'SF Mono','Consolas',monospace;
+  resize: vertical; outline: none; line-height: 1.5;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  background: var(--card); color: var(--text);
+}
+textarea#sidInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+.btn-group { display:flex; gap:8px; }
+.btn {
+  padding: 9px 16px; border: none; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all var(--transition);
+  display: inline-flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+  outline: none;
+}
+.btn:active { transform: scale(.97); }
+.btn:disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
+.btn:focus-visible { box-shadow: 0 0 0 3px rgba(37,99,235,.25); }
+
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+.btn-success { background: var(--success); color: #fff; }
+.btn-success:hover:not(:disabled) { background: #047857; }
+.btn-warning { background: var(--warning); color: #fff; }
+.btn-warning:hover:not(:disabled) { background: #B45309; }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover:not(:disabled) { background: #B91C1C; }
+.btn-outline {
+  background: transparent; color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover:not(:disabled) { background: var(--bg); border-color: var(--border); }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+
+.student-list {
+  flex: 1; overflow-y: auto; min-height: 60px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--card);
+}
+.student-item {
+  display: flex; align-items: center;
+  padding: 5px 10px; border-bottom: 1px solid var(--border);
+  font-size: 12px; cursor: grab; user-select: none;
+  transition: background var(--transition);
+}
+.student-item:active { cursor: grabbing; }
+.student-item:last-child { border-bottom: none; }
+.student-item:hover { background: var(--primary-light); }
+.student-item .sid { font-family: 'SF Mono',monospace; }
+.student-item .name { font-weight: 600; margin-left: 8px; }
+.student-item .meta { margin-left: auto; display:flex; align-items:center; gap:8px; }
+.student-item .remove-btn {
+  cursor: pointer; color: var(--text-muted); font-size: 16px;
+  width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; transition: all var(--transition);
+}
+.student-item .remove-btn:hover { color: var(--danger); background: var(--danger-light); }
+
+.status {
+  font-size: 11px; font-weight: 600; padding: 2px 8px;
+  border-radius: 10px; white-space: nowrap;
+}
+.status-pending { background: var(--bg); color: var(--text-secondary); }
+.status-loading { background: var(--warning-light); color: var(--status-loading-text); }
+.status-ready { background: var(--success-light); color: var(--status-ready-text); }
+.status-error { background: var(--danger-light); color: var(--status-error-text); }
+
+
+.shift-badge {
+  font-size: 10px; font-weight: 700; padding: 1px 7px;
+  border-radius: 8px; background: var(--primary); color: #fff;
+}
+.student-count { font-size: 11px; color: var(--text-muted); text-align: right; }
+
+.progress-bar {
+  display: none; height: 4px; background: var(--border);
+  border-radius: 2px; overflow: hidden;
+}
+.progress-bar.active { display: block; }
+.progress-bar .fill {
+  height: 100%; background: var(--primary);
+  border-radius: 2px; transition: width .3s ease; width: 0%;
+}
+
+/* ── Right Panel ── */
+.right-panel { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+.right-header {
+  padding: 10px 20px; background: var(--card);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: var(--shadow-sm); flex-wrap: wrap;
+}
+.view-toggle { display: flex; gap: 0; border-radius: var(--radius-sm); overflow: hidden; border: 1.5px solid var(--border); }
+.view-toggle button {
+  padding: 8px 20px; border: none; background: var(--card);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: all var(--transition); color: var(--text-secondary);
+  border-right: 1px solid var(--border);
+}
+.view-toggle button:last-child { border-right: none; }
+.view-toggle button.active { background: var(--primary); color: #fff; }
+.view-toggle button:hover:not(.active) { background: var(--bg); }
+
+.header-sep { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
+
+.week-toggle { display: flex; gap: 4px; }
+.week-toggle button {
+  padding: 5px 14px; border: 1.5px solid var(--border); border-radius: 6px;
+  background: var(--card); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all var(--transition); color: var(--text-secondary);
+}
+.week-toggle button.active { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+.week-toggle button:hover:not(.active) { background: var(--bg); }
+
+.header-actions { display:flex; gap:8px; margin-left:auto; }
+
+/* ── Schedule ── */
+.schedule-wrapper { flex:1; overflow:auto; padding:16px 20px; }
+.schedule-grid {
+  display: grid; gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); overflow: hidden;
+}
+.schedule-grid .day-header {
+  background: var(--primary); color: #fff;
+  padding: 7px 4px; text-align: center;
+  font-weight: 700; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.schedule-grid .day-header.weekend-header { background: var(--danger); }
+.schedule-grid .time-label {
+  background: #F8FAFC; padding: 4px 6px;
+  font-size: 11px; color: var(--text-secondary);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; font-weight: 600; min-height: 56px;
+}
+[data-theme="dark"] .schedule-grid .time-label { background: #1A2332; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .schedule-grid .time-label { background: #1A2332; }
+}
+.schedule-grid .time-label strong { font-size: 11px; color: var(--text); }
+
+.schedule-grid .shift-cell {
+  background: var(--cell-bg); min-height: 56px; padding: 3px 4px;
+  transition: background var(--transition);
+  display: flex; flex-direction: column; gap: 2px;
+  justify-content: flex-start;
+}
+.schedule-grid .shift-cell.weekday-cell { background: var(--cell-wd); }
+.schedule-grid .shift-cell.weekend-cell { background: var(--cell-we); }
+.schedule-grid .shift-cell.drag-over {
+  background: #DBEAFE !important;
+  outline: 2px dashed var(--primary); outline-offset: -2px;
+}
+.schedule-grid .shift-cell.drop-available {
+  background: #DCFCE7 !important;
+  outline: 2px solid #22C55E; outline-offset: -2px;
+}
+.schedule-grid .shift-cell.drop-conflict {
+  background: #FEE2E2 !important;
+  outline: 2px dashed var(--danger); outline-offset: -2px;
+}
+.schedule-grid .shift-cell.warn {
+  outline: 2px solid var(--danger); outline-offset: -2px;
+  position: relative;
+}
+.schedule-grid .shift-cell.warn::after {
+  content: '!';
+  position: absolute; top: 1px; left: 4px;
+  color: var(--danger); font-weight: 900; font-size: 14px;
+  line-height: 1; pointer-events: none;
+}
+[data-theme="dark"] .shift-cell.highlight-linked { background: #1E3050 !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .shift-cell.highlight-linked { background: #1E3050 !important; }
+}
+[data-theme="dark"] .shift-cell.drag-over { background: #1E3050 !important; }
+[data-theme="dark"] .shift-cell.drop-available { background: #0F3D2E !important; }
+[data-theme="dark"] .shift-cell.drop-conflict { background: #5C1A1A !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .shift-cell.drag-over { background: #1E3050 !important; }
+  :root:not([data-theme="light"]) .shift-cell.drop-available { background: #0F3D2E !important; }
+  :root:not([data-theme="light"]) .shift-cell.drop-conflict { background: #5C1A1A !important; }
+}
+.schedule-grid .shift-cell .capacity {
+  font-size: 10px; font-weight: 600; color: var(--text-muted);
+  align-self: flex-end; padding: 0 4px; line-height: 1.4;
+}
+.schedule-grid .shift-cell .capacity.full { color: var(--danger); font-weight: 700; }
+
+/* ── Student Tag ── */
+.student-tag {
+  display: flex; align-items: center; padding: 3px 7px;
+  border-radius: 4px; font-size: 12px; font-weight: 600;
+  cursor: grab; user-select: none;
+  transition: all var(--transition); white-space: nowrap;
+  background: var(--primary); color: #fff;
+  box-shadow: 0 1px 2px rgba(37,99,235,.25);
+}
+.student-tag:active { cursor: grabbing; }
+.student-tag.dragging { opacity: .4; }
+.student-tag .remove-btn {
+  margin-left: auto; cursor: pointer; font-size: 14px;
+  opacity: .6; transition: opacity var(--transition);
+}
+.student-tag .remove-btn:hover { opacity: 1; }
+
+.student-item.highlight-linked,
+.student-tag.highlight-linked {
+  outline: 3px solid var(--primary); outline-offset: 2px;
+  border-radius: 4px; z-index: 5; position: relative;
+}
+.shift-cell.highlight-linked { background: #DBEAFE !important; box-shadow: inset 0 0 0 2px var(--primary); }
+.student-item.highlight-linked { background: var(--primary-light) !important; }
+
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 100%; color: var(--text-muted); gap: 16px;
+}
+.empty-state .icon { font-size: 56px; opacity: .25; }
+.empty-state h3 { font-size: 16px; color: var(--text-secondary); font-weight: 600; }
+.empty-state p { font-size: 13px; max-width: 360px; text-align: center; line-height: 1.6; }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  padding: 10px 22px; border-radius: 8px; color: #fff;
+  font-size: 13px; font-weight: 600; z-index: 10000;
+  opacity: 0; transition: opacity .3s, transform .3s;
+  pointer-events: none;
+  box-shadow: var(--shadow-lg);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+.toast.success { background: var(--success); }
+.toast.error { background: var(--danger); }
+.toast.info { background: var(--primary); }
+
+/* ── Modal ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: var(--modal-overlay); z-index: 9998;
+  align-items: center; justify-content: center;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: var(--card); border-radius: var(--radius);
+  width: 92%; max-width: 700px; max-height: 82vh;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  animation: modalIn .2s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-header h3 { font-size: 16px; font-weight: 700; }
+.modal-header .close-btn {
+  width: 34px; height: 34px; border: none; background: none;
+  font-size: 22px; cursor: pointer; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); transition: all var(--transition);
+}
+.modal-header .close-btn:hover { background: var(--bg); color: var(--text); }
+.modal-body { flex: 1; overflow: auto; padding: 20px; }
+.modal-footer {
+  padding: 12px 20px; border-top: 1px solid var(--border);
+  display: flex; gap: 8px; justify-content: flex-end;
+}
+.modal-body pre {
+  font-family: 'SF Mono','Consolas',monospace;
+  font-size: 12px; line-height: 1.5; white-space: pre-wrap;
+  background: var(--cell-wd); padding: 16px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); max-height: 400px; overflow: auto;
+}
+
+/* ── Course Modal ── */
+.course-modal { max-width: 960px; width: 95%; max-height: 86vh; }
+.course-grid-wrapper { overflow: auto; max-height: 58vh; }
+.course-grid {
+  display: grid; grid-template-columns: 64px repeat(7, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  overflow: hidden; min-width: 720px;
+}
+.course-grid .cg-header {
+  background: var(--primary); color: #fff;
+  padding: 8px 4px; text-align: center;
+  font-weight: 700; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.course-grid .cg-header.weekend { background: var(--danger); }
+.course-grid .cg-period {
+  background: var(--cell-wd); padding: 4px;
+  font-size: 10px; color: var(--text-muted);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 50px; font-weight: 600;
+}
+[data-theme="dark"] .course-grid .cg-period { background: #1A2332; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .course-grid .cg-period { background: #1A2332; }
+}
+.course-grid .cg-cell {
+  background: var(--cell-bg); min-height: 50px; padding: 2px; position: relative;
+}
+.course-grid .cg-cell.odd-week { background: var(--bg); }
+.course-grid .cg-course-block {
+  border-left: 3px solid var(--primary); border-radius: 3px;
+  padding: 5px 7px; margin: 1px 0; font-size: 11px;
+  cursor: pointer; transition: all var(--transition); position: relative;
+  background: var(--primary-light);
+}
+.course-grid .cg-course-block:hover {
+  filter: brightness(.97); transform: scale(1.02);
+  box-shadow: 0 3px 12px rgba(0,0,0,.1); z-index: 2;
+}
+[data-theme="dark"] .cg-course-block:hover { box-shadow: 0 3px 12px rgba(0,0,0,.4); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cg-course-block:hover { box-shadow: 0 3px 12px rgba(0,0,0,.4); }
+}
+.course-grid .cg-course-block.ignored {
+  opacity: .45; text-decoration: line-through;
+  border-left-color: #CBD5E1; background: var(--bg);
+}
+.course-grid .cg-course-block.continued {
+  opacity: .55; font-size: 10px;
+  border-left-style: dashed;
+}
+.course-grid .cg-course-name { font-weight: 700; line-height: 1.3; }
+.course-grid .cg-course-info { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+.course-grid .cg-course-location { font-size: 10px; color: var(--primary-dark); }
+.course-grid .cg-course-block.color-0 { border-left-color:#2563EB; background:#EFF6FF; }
+.course-grid .cg-course-block.color-1 { border-left-color:#059669; background:#ECFDF5; }
+.course-grid .cg-course-block.color-2 { border-left-color:#D97706; background:#FFFBEB; }
+.course-grid .cg-course-block.color-3 { border-left-color:#DC2626; background:#FEF2F2; }
+.course-grid .cg-course-block.color-4 { border-left-color:#7C3AED; background:#F5F3FF; }
+.course-grid .cg-course-block.color-5 { border-left-color:#0891B2; background:#ECFEFF; }
+.course-grid .cg-course-block.color-6 { border-left-color:#DB2777; background:#FDF2F8; }
+.course-grid .cg-course-block.color-7 { border-left-color:#78716C; background:#FAFAF9; }
+[data-theme="dark"] .cg-course-block { background: #1A2740; }
+[data-theme="dark"] .cg-course-block.color-0 { border-left-color:#60A5FA; background:#1E3050; }
+[data-theme="dark"] .cg-course-block.color-1 { border-left-color:#34D399; background:#0F3D2E; }
+[data-theme="dark"] .cg-course-block.color-2 { border-left-color:#FBBF24; background:#5C3D0E; }
+[data-theme="dark"] .cg-course-block.color-3 { border-left-color:#F87171; background:#5C1A1A; }
+[data-theme="dark"] .cg-course-block.color-4 { border-left-color:#A78BFA; background:#2D1B5E; }
+[data-theme="dark"] .cg-course-block.color-5 { border-left-color:#22D3EE; background:#0F3D4A; }
+[data-theme="dark"] .cg-course-block.color-6 { border-left-color:#F472B6; background:#5C1A3C; }
+[data-theme="dark"] .cg-course-block.color-7 { border-left-color:#A8A29E; background:#2D2822; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cg-course-block { background: #1A2740; }
+  :root:not([data-theme="light"]) .cg-course-block.color-0 { border-left-color:#60A5FA; background:#1E3050; }
+  :root:not([data-theme="light"]) .cg-course-block.color-1 { border-left-color:#34D399; background:#0F3D2E; }
+  :root:not([data-theme="light"]) .cg-course-block.color-2 { border-left-color:#FBBF24; background:#5C3D0E; }
+  :root:not([data-theme="light"]) .cg-course-block.color-3 { border-left-color:#F87171; background:#5C1A1A; }
+  :root:not([data-theme="light"]) .cg-course-block.color-4 { border-left-color:#A78BFA; background:#2D1B5E; }
+  :root:not([data-theme="light"]) .cg-course-block.color-5 { border-left-color:#22D3EE; background:#0F3D4A; }
+  :root:not([data-theme="light"]) .cg-course-block.color-6 { border-left-color:#F472B6; background:#5C1A3C; }
+  :root:not([data-theme="light"]) .cg-course-block.color-7 { border-left-color:#A8A29E; background:#2D2822; }
+}
+
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+@media (max-width: 860px) {
+  .app-container { flex-direction: column; }
+  .left-panel { width: 100%; min-width: auto; max-height: 45vh; border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- ===== 左侧面板 ===== -->
+  <div class="left-panel">
+    <div class="panel-header">
+      学生打印社排班系统
+      <button class="theme-btn" onclick="toggleTheme()" title="切换主题" id="themeToggle">自动</button>
+    </div>
+    <div class="panel-body">
+      <div class="section-title">学号录入</div>
+      <textarea id="sidInput" placeholder="每行一个学号，例如：&#10;2025220039&#10;2025213062"></textarea>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="loadStudents()">导入学号</button>
+        <button class="btn btn-outline" onclick="clearAll()">清空</button>
+      </div>
+
+      <div class="section-title">学号列表</div>
+      <div id="studentList" class="student-list"></div>
+      <div id="studentCount" class="student-count">共 0 人</div>
+
+      <div class="progress-bar" id="progressBar">
+        <div class="fill" id="progressFill"></div>
+      </div>
+
+      <div class="btn-group" style="flex-direction:column;gap:6px;margin-top:auto;">
+        <button class="btn btn-success" id="btnSchedule" onclick="runSchedule()" disabled style="width:100%;justify-content:center;padding:12px;">
+          开始排班
+        </button>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-primary" id="btnExportDuty" onclick="exportDutySchedule()" disabled style="flex:1;justify-content:center;">
+            导出值班表
+          </button>
+          <button class="btn btn-warning" id="btnExportFree" onclick="exportFreeSchedule()" disabled style="flex:1;justify-content:center;">
+            导出空课表
+          </button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <button class="btn btn-outline btn-sm" onclick="refreshCourses()" id="btnRefreshCourses" disabled style="flex:1;justify-content:center;">
+            刷新课表
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="exportData()" style="flex:1;justify-content:center;">
+            导出数据
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="importData()" style="flex:1;justify-content:center;">
+            导入数据
+          </button>
+          <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleImportFile(event)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 右侧面板 ===== -->
+  <div class="right-panel">
+    <div class="right-header">
+      <div class="view-toggle" id="viewToggle">
+        <button class="active" data-view="duty" onclick="switchView('duty')">值班表</button>
+        <button data-view="free" onclick="switchView('free')">空课表</button>
+      </div>
+      <span class="header-sep"></span>
+      <div class="week-toggle" id="weekToggle">
+        <button class="active" data-week="odd" onclick="switchWeek('odd')">单周</button>
+        <button data-week="even" onclick="switchWeek('even')">双周</button>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline btn-sm" onclick="openGuide()">使用指南</button>
+        <button class="btn btn-outline btn-sm" onclick="resetSchedule()">重置排班</button>
+      </div>
+    </div>
+
+    <div class="schedule-wrapper" id="scheduleWrapper">
+      <div class="empty-state" id="emptyState">
+        <div class="icon">📅</div>
+        <p>请先在左侧导入学号并点击「开始排班」<br>系统将自动获取课表并分配值班表</p>
+      </div>
+      <div id="scheduleContainer" style="display:none;"></div>
+      <div id="freeContainer" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 课表可视化弹窗 ===== -->
+<div class="modal-overlay" id="courseModal">
+  <div class="modal course-modal">
+    <div class="modal-header">
+      <h3 id="courseModalTitle">课表预览</h3>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="font-size:12px;color:var(--text-secondary);" id="courseModalWeek"></span>
+        <button class="btn btn-outline btn-sm" onclick="refreshSingleCourse()" title="重新获取该同学的课表">刷新</button>
+        <button class="btn btn-outline btn-sm" onclick="resetIgnoredCourses()" title="重置该同学的忽略课程">重置忽略</button>
+        <button class="close-btn" onclick="closeCourseModal()">×</button>
+      </div>
+    </div>
+    <div class="modal-body" id="courseModalBody">
+      <div class="course-grid-wrapper">
+        <div class="course-grid" id="courseGrid"></div>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--text-secondary);text-align:center;">
+        点击课程块可<strong>忽略</strong>该课程（排班时不考虑该时段冲突）
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeCourseModal()">关闭</button>
+      <button class="btn btn-primary" onclick="closeCourseModal();runSchedule()">重新排班</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 确认弹窗 ===== -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="max-width:400px;">
+    <div class="modal-header">
+      <h3 id="confirmTitle">确认操作</h3>
+      <button class="close-btn" onclick="closeConfirm()">×</button>
+    </div>
+    <div class="modal-body">
+      <p id="confirmMessage" style="color:var(--text-secondary);line-height:1.6;"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeConfirm()">取消</button>
+      <button class="btn btn-danger" id="confirmOkBtn">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 使用指南弹窗 ===== -->
+<div class="modal-overlay" id="guideModal">
+  <div class="modal" style="max-width:600px;">
+    <div class="modal-header">
+      <h3>使用指南</h3>
+      <button class="close-btn" onclick="closeGuide()">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="line-height:1.8;color:var(--text-secondary);">
+        <p><strong>1. 导入学号</strong>：在左侧输入框中输入10位学号（每行一个），点击「导入学号」。</p>
+        <p><strong>2. 获取课表</strong>：系统自动从红岩网校/教务在线获取课表。</p>
+        <p><strong>3. 开始排班</strong>：点击「开始排班」，系统根据课表自动分配值班。</p>
+        <p><strong>4. 查看/调整</strong>：右侧表格展示排班结果，可<strong>拖拽</strong>学生标签调整班次。</p>
+        <p><strong>5. 课表管理</strong>：点击学生姓名查看课表，可<strong>忽略</strong>特定课程后重新排班。</p>
+        <p><strong>6. 导出</strong>：支持导出值班表/空课表为 Excel（需联网加载XLSX库），导出/导入排班数据为 JSON。</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">
+          <strong>提示</strong>：含"实训""实习""课程设计"等关键词的课程会被自动忽略。<br>
+          左上角按钮可切换暗色/亮色主题。
+        </p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeGuide()">我明白了！</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 导出预览弹窗 ===== -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">导出预览</h3>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <pre id="modalContent"></pre>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal()">关闭</button>
+      <button class="btn btn-primary" onclick="copyModalContent()">复制</button>
+      <button class="btn btn-success" onclick="downloadModalContent()">下载</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Toast 通知 ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+//  配置
+// ============================================================
+const CONFIG = {
+  courseTimes: {
+    1: { start: '8:00', end: '8:45' },
+    2: { start: '8:55', end: '9:40' },
+    3: { start: '10:15', end: '11:00' },
+    4: { start: '11:10', end: '11:55' },
+    5: { start: '14:00', end: '14:45' },
+    6: { start: '14:55', end: '15:40' },
+    7: { start: '16:15', end: '17:00' },
+    8: { start: '17:10', end: '17:55' },
+    9: { start: '19:00', end: '19:45' },
+    10: { start: '19:55', end: '20:40' }
+  },
+  shifts: {
+    weekday: [
+      { id: 'wd0', label: '早班', time: '10:00-12:05', capacity: 2, conflictPeriods: [3, 4] },
+      { id: 'wd1', label: '午班①', time: '12:05-13:45', capacity: 3, conflictPeriods: [] },
+      { id: 'wd2', label: '午班②', time: '13:45-15:50', capacity: 2, conflictPeriods: [5, 6] },
+      { id: 'wd3', label: '下午班', time: '15:50-18:00', capacity: 2, conflictPeriods: [7, 8] },
+      { id: 'wd4', label: '晚班①', time: '18:00-19:45', capacity: 2, conflictPeriods: [9] },
+      { id: 'wd5', label: '晚班②', time: '19:45-21:35', capacity: 1, conflictPeriods: [10] }
+    ],
+    weekend: [
+      { id: 'we0', label: '早班', time: '10:00-12:00', capacity: 2, conflictPeriods: [3, 4] },
+      { id: 'we1', label: '午班①', time: '12:00-14:00', capacity: 2, conflictPeriods: [] },
+      { id: 'we2', label: '午班②', time: '14:00-16:00', capacity: 2, conflictPeriods: [5, 6] },
+      { id: 'we3', label: '下午班', time: '16:00-18:00', capacity: 1, conflictPeriods: [7, 8] }
+    ]
+  },
+  dayNames: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+  weekdays: [0, 1, 2, 3, 4],
+  weekendDays: [5, 6],
+  ignoreCourseKeywords: ['实训', '实习', '课程设计', '毕业设计']
+};
+
+// ============================================================
+//  状态
+// ============================================================
+const state = {
+  students: [],
+  currentWeek: 'odd',
+  currentView: 'duty',
+  assignments: { odd: {}, even: {} },
+  isScheduling: false,
+  studentNames: {},
+  ignoredCourses: {},
+  currentCourseModalSid: null
+};
+
+// ============================================================
+//  localStorage 持久化
+// ============================================================
+function loadIgnoredCourses() {
+  try {
+    const saved = localStorage.getItem('shift_ignored_courses');
+    if (saved) {
+      const data = JSON.parse(saved);
+      for (const sid in data) {
+        state.ignoredCourses[sid] = new Set(data[sid]);
+      }
+    }
+  } catch(e) { state.ignoredCourses = {}; }
+}
+
+function saveIgnoredCourses() {
+  try {
+    const data = {};
+    for (const sid in state.ignoredCourses) {
+      data[sid] = [...state.ignoredCourses[sid]];
+    }
+    localStorage.setItem('shift_ignored_courses', JSON.stringify(data));
+  } catch(e) {}
+}
+
+// ============================================================
+//  主题切换
+// ============================================================
+function getTheme() { return localStorage.getItem('theme') || 'auto'; }
+function applyTheme(theme) {
+  const html = document.documentElement;
+  if (theme === 'auto') html.removeAttribute('data-theme');
+  else html.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  updateThemeIcon();
+}
+function toggleTheme() {
+  const current = getTheme();
+  if (current === 'auto') applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark');
+  else if (current === 'dark') applyTheme('light');
+  else applyTheme('auto');
+}
+function updateThemeIcon() {
+  const icon = document.getElementById('themeToggle');
+  if (!icon) return;
+  const theme = getTheme();
+  icon.textContent = theme === 'dark' ? '暗色' : theme === 'light' ? '亮色' : '自动';
+}
+applyTheme(getTheme());
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (getTheme() === 'auto') updateThemeIcon();
+});
+
+// ============================================================
+//  工具函数
+// ============================================================
+function showToast(msg, type) {
+  type = type || 'info';
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  void t.offsetWidth;
+  t.classList.add('show');
+  clearTimeout(t._hideTimer);
+  t._hideTimer = setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function highlightStudent(sid, show) {
+  const listItem = document.querySelector('.student-item[data-sid="' + sid + '"]');
+  if (listItem) listItem.classList.toggle('highlight-linked', show);
+  const tags = document.querySelectorAll('.student-tag[data-sid="' + sid + '"]');
+  tags.forEach(function(tag) {
+    tag.classList.toggle('highlight-linked', show);
+    const cell = tag.closest('.shift-cell');
+    if (cell) cell.classList.toggle('highlight-linked', show);
+  });
+}
+
+// ============================================================
+//  学生管理
+// ============================================================
+function loadStudents() {
+  const text = document.getElementById('sidInput').value.trim();
+  if (!text) { showToast('请先输入学号', 'error'); return; }
+
+  const sids = [];
+  const seen = new Set();
+  text.split('\n').forEach(function(s) {
+    s = s.trim();
+    if (s && /^\d{10}$/.test(s) && !seen.has(s)) {
+      sids.push(s);
+      seen.add(s);
+    }
+  });
+
+  if (sids.length === 0) { showToast('未找到有效的10位学号', 'error'); return; }
+
+  const existingSids = new Set(state.students.map(function(s) { return s.sid; }));
+  for (const sid of sids) {
+    if (!existingSids.has(sid)) {
+      state.students.push({ sid: sid, name: '同学' + sid.slice(-4), status: 'pending', courses: null });
+      existingSids.add(sid);
+    }
+  }
+
+  renderStudentList();
+  updateButtons();
+  showToast('成功导入 ' + sids.length + ' 个学号');
+  document.getElementById('sidInput').value = '';
+}
+
+function clearAll() {
+  if (state.students.length === 0) return;
+  showConfirm('清空数据', '确定清空所有学号和排班数据吗？此操作不可撤销。', function() {
+    state.students = [];
+    state.assignments = { odd: {}, even: {} };
+    renderStudentList();
+    refreshView();
+    updateButtons();
+    showToast('已清空');
+  });
+}
+
+function removeStudent(sid) {
+  state.students = state.students.filter(function(s) { return s.sid !== sid; });
+  for (const weekType of ['odd', 'even']) {
+    for (const shiftId in state.assignments[weekType]) {
+      state.assignments[weekType][shiftId] = state.assignments[weekType][shiftId].filter(function(s) { return s !== sid; });
+    }
+  }
+  renderStudentList();
+  refreshView();
+  updateButtons();
+}
+
+function getStudentShiftCount(sid) {
+  let count = 0;
+  for (const weekType of ['odd', 'even']) {
+    for (const key in state.assignments[weekType]) {
+      if (state.assignments[weekType][key].includes(sid)) count++;
+    }
+  }
+  return count;
+}
+
+function getTotalShiftCount() {
+  let total = 0;
+  for (const weekType of ['odd', 'even']) {
+    for (const key in state.assignments[weekType]) {
+      total += state.assignments[weekType][key].length;
+    }
+  }
+  return total;
+}
+
+function renderStudentList() {
+  const container = document.getElementById('studentList');
+  const count = document.getElementById('studentCount');
+
+  if (state.students.length === 0) {
+    container.innerHTML = '<div style="padding:20px;text-align:center;color:#999;">暂无学号</div>';
+    count.textContent = '共 0 人';
+    return;
+  }
+
+  const hasAssignments = getTotalShiftCount() > 0;
+  const sorted = state.students.slice().sort(function(a, b) {
+    const ca = hasAssignments ? getStudentShiftCount(a.sid) : 0;
+    const cb = hasAssignments ? getStudentShiftCount(b.sid) : 0;
+    return cb - ca;
+  });
+
+  container.innerHTML = sorted.map(function(s) {
+    const shiftCount = hasAssignments ? getStudentShiftCount(s.sid) : 0;
+    const escSid = escapeHtml(s.sid);
+    const escName = escapeHtml(s.name);
+    return '<div class="student-item" onclick="showStudentCourse(\'' + escSid + '\')" ' +
+      'title="点击查看课表 | 拖拽到值班表" draggable="true" data-sid="' + escSid + '" ' +
+      'ondragstart="onStudentDragStart(event)" ondragend="onStudentDragEnd(event)" ' +
+      'onmouseenter="highlightStudent(\'' + escSid + '\', true)" onmouseleave="highlightStudent(\'' + escSid + '\', false)">' +
+      '<span class="sid" style="color:var(--text-muted);font-size:12px;">' + escSid + '</span>' +
+      '<span class="name">' + escName + '</span>' +
+      '<span class="meta">' +
+      (hasAssignments ? '<span class="shift-badge">' + shiftCount + '</span>' : '') +
+      '<span class="status status-' + s.status + '">' + statusLabel(s.status) + '</span>' +
+      '<span class="remove-btn" onclick="event.stopPropagation();removeStudent(\'' + escSid + '\')" title="移除">×</span>' +
+      '</span></div>';
+  }).join('');
+
+  if (hasAssignments) {
+    count.textContent = '共 ' + state.students.length + ' 人 · 总排班 ' + getTotalShiftCount() + ' 次';
+  } else {
+    count.textContent = '共 ' + state.students.length + ' 人';
+  }
+}
+
+function statusLabel(status) {
+  const map = { pending: '待获取', loading: '获取中', ready: '已就绪', error: '失败' };
+  return map[status] || status;
+}
+
+function updateButtons() {
+  const hasStudents = state.students.length > 0;
+  const hasSchedule = hasStudents && state.students.every(function(s) {
+    return s.status === 'ready';
+  });
+  const hasAssignments = Object.keys(state.assignments.odd).length > 0 || Object.keys(state.assignments.even).length > 0;
+
+  document.getElementById('btnSchedule').disabled = !hasStudents || state.isScheduling;
+  document.getElementById('btnExportDuty').disabled = !hasAssignments;
+  document.getElementById('btnExportFree').disabled = !hasSchedule;
+  const refreshBtn = document.getElementById('btnRefreshCourses');
+  if (refreshBtn) refreshBtn.disabled = !hasStudents || state.isScheduling;
+}
+
+// ============================================================
+//  课表解析（移植自 Python parseCourses）
+// ============================================================
+function parseCourses(data, sid, skipAutoIgnore) {
+  const courses = [];
+  const ignoredSet = state.ignoredCourses[sid] || new Set();
+
+  for (const item of data) {
+    const courseName = item.course || '未知课程';
+    const firstWeek = (item.week && item.week.length > 0) ? item.week[0] : 0;
+    const courseId = item.class_id
+      ? item.class_id + '_d' + item.hash_day + '_p' + item.begin_lesson + '_w' + firstWeek
+      : (item.course_num || courseName) + '_d' + item.hash_day + '_p' + item.begin_lesson + '_w' + firstWeek;
+
+    const isManuallyIgnored = ignoredSet.has(courseId);
+    let isAutoIgnored = false;
+    if (!skipAutoIgnore) {
+      isAutoIgnored = CONFIG.ignoreCourseKeywords.some(function(kw) { return courseName.indexOf(kw) !== -1; }) ||
+        (item.week && item.week.length > 0 && item.week.every(function(w) { return w >= 18; }));
+    }
+
+    const weekday = (item.hash_day !== undefined ? item.hash_day + 1 : 0);
+    const begin = item.begin_lesson || 1;
+    const period = item.period || 1;
+    const weeks = item.week || [];
+
+    const oddWeeks = weeks.filter(function(w) { return w % 2 === 1; });
+    const evenWeeks = weeks.filter(function(w) { return w % 2 === 0; });
+    const isFullDay = period >= 8;
+
+    courses.push({
+      name: courseName,
+      courseId: courseId,
+      courseNum: item.course_num || '',
+      teacher: item.teacher || '',
+      type: item.type || '',
+      location: item.classroom || '',
+      rawWeek: item.rawWeek || '',
+      weekday: weekday,
+      beginPeriod: begin,
+      endPeriod: begin + period - 1,
+      periods: Array.from({length: period}, function(_, i) { return begin + i; }),
+      weeks: weeks,
+      oddWeeks: oddWeeks,
+      evenWeeks: evenWeeks,
+      hasOdd: oddWeeks.length > 0,
+      hasEven: evenWeeks.length > 0,
+      isFullDay: isFullDay,
+      ignored: ignoredSet.has(courseId) ? !isAutoIgnored : isAutoIgnored,
+      autoIgnored: isAutoIgnored
+    });
+  }
+  return courses;
+}
+
+// ============================================================
+//  冲突检测
+// ============================================================
+function hasConflict(courses, weekday, shiftConflictPeriods, weekType) {
+  if (!shiftConflictPeriods || shiftConflictPeriods.length === 0) return false;
+  for (const course of courses) {
+    if (course.ignored) continue;
+    if (course.weekday !== weekday) continue;
+    if (weekType === 'odd' && !course.hasOdd) continue;
+    if (weekType === 'even' && !course.hasEven) continue;
+    if (course.isFullDay) return true;
+    for (const sp of shiftConflictPeriods) {
+      if (course.periods.indexOf(sp) !== -1) return true;
+    }
+  }
+  return false;
+}
+
+function getConflictCourses(student, weekday, conflictPeriods, weekType) {
+  const conflicting = [];
+  for (const course of student.courses) {
+    if (course.ignored) continue;
+    if (course.weekday !== weekday) continue;
+    if (weekType === 'odd' && !course.hasOdd) continue;
+    if (weekType === 'even' && !course.hasEven) continue;
+    if (course.isFullDay) { conflicting.push(course); continue; }
+    for (const sp of conflictPeriods) {
+      if (course.periods.indexOf(sp) !== -1) { conflicting.push(course); break; }
+    }
+  }
+  return conflicting;
+}
+
+// ============================================================
+//  排班算法
+// ============================================================
+function generateShiftKey(weekType, dayIdx, shiftIdx) {
+  const isWeekend = dayIdx >= 5;
+  const prefix = isWeekend ? 'we' : 'wd';
+  return weekType + '_d' + dayIdx + '_' + prefix + shiftIdx;
+}
+
+function initAssignments() {
+  state.assignments = { odd: {}, even: {} };
+  for (const weekType of ['odd', 'even']) {
+    for (let dayIdx = 0; dayIdx < 7; dayIdx++) {
+      const isWeekend = dayIdx >= 5;
+      const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+      for (let si = 0; si < shifts.length; si++) {
+        const key = generateShiftKey(weekType, dayIdx, si);
+        state.assignments[weekType][key] = [];
+      }
+    }
+  }
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+}
+
+async function runSchedule() {
+  if (state.isScheduling) return;
+
+  const pendingStudents = state.students.filter(function(s) {
+    return s.status === 'pending' || s.status === 'error';
+  });
+  if (pendingStudents.length > 0) {
+    showToast('正在获取课表数据...', 'info');
+    await fetchAllSchedules();
+  }
+
+  const readyStudents = state.students.filter(function(s) {
+    return s.status === 'ready';
+  });
+
+  if (readyStudents.length === 0) {
+    showToast('没有可用学生，请检查学号或网络连接', 'error');
+    return;
+  }
+
+  state.isScheduling = true;
+  updateButtons();
+  showToast('正在排班...', 'info');
+
+  initAssignments();
+  const allSids = readyStudents.map(function(s) { return s.sid; });
+
+  for (const weekType of ['odd', 'even']) {
+    const studentLoad = {};
+    for (const sid of allSids) studentLoad[sid] = 0;
+
+    const allShifts = [];
+    for (let dayIdx = 0; dayIdx < 7; dayIdx++) {
+      const isWeekend = dayIdx >= 5;
+      const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+      for (let si = 0; si < shifts.length; si++) {
+        allShifts.push({
+          dayIdx: dayIdx, si: si, shift: shifts[si],
+          difficulty: shifts[si].conflictPeriods.length
+        });
+      }
+    }
+    allShifts.sort(function(a, b) { return b.difficulty - a.difficulty; });
+
+    for (const item of allShifts) {
+      const dayIdx = item.dayIdx, si = item.si, shift = item.shift;
+      const key = generateShiftKey(weekType, dayIdx, si);
+      const weekday = dayIdx + 1;
+
+      const candidates = [];
+      for (const sid of allSids) {
+        const student = state.students.find(function(s) { return s.sid === sid; });
+        if (!student || !student.courses) continue;
+        if (hasConflict(student.courses, weekday, shift.conflictPeriods, weekType)) continue;
+        if (studentLoad[sid] >= 3) continue;
+        candidates.push(sid);
+      }
+
+      if (candidates.length === 0) continue;
+
+      candidates.sort(function(a, b) { return studentLoad[a] - studentLoad[b]; });
+      const pool = candidates.slice(0, Math.max(1, Math.min(candidates.length, shift.capacity * 3)));
+      shuffleArray(pool);
+
+      const selected = [];
+      for (let i = 0; i < Math.min(shift.capacity, pool.length); i++) {
+        const sid = pool[i];
+        selected.push(sid);
+        studentLoad[sid]++;
+      }
+      state.assignments[weekType][key] = selected;
+    }
+
+    // 均衡调整
+    const loads = Object.entries(studentLoad);
+    const maxLoad = Math.max.apply(null, loads.map(function(l) { return l[1]; }));
+    const minLoad = Math.min.apply(null, loads.map(function(l) { return l[1]; }));
+
+    if (maxLoad - minLoad > 1) {
+      const overloaded = loads.filter(function(l) { return l[1] >= maxLoad; }).map(function(l) { return l[0]; });
+      const underloaded = loads.filter(function(l) { return l[1] <= minLoad; }).map(function(l) { return l[0]; });
+
+      for (const key in state.assignments[weekType]) {
+        const slot = state.assignments[weekType][key];
+        if (slot.length === 0) continue;
+        const parts = parseShiftKey(key);
+        if (!parts) continue;
+        const dayIdx = parts.dayIdx, shiftIdx = parts.shiftIdx;
+        const isWeekend = dayIdx >= 5;
+        const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+        const shift = shifts[shiftIdx];
+        const weekday = dayIdx + 1;
+
+        const toReplace = slot.find(function(sid) { return overloaded.indexOf(sid) !== -1; });
+        if (!toReplace) continue;
+        for (const newSid of underloaded) {
+          if (slot.indexOf(newSid) !== -1) continue;
+          const student = state.students.find(function(s) { return s.sid === newSid; });
+          if (!student || !student.courses) continue;
+          if (hasConflict(student.courses, weekday, shift.conflictPeriods, weekType)) continue;
+          const idx = slot.indexOf(toReplace);
+          slot[idx] = newSid;
+          studentLoad[toReplace]--;
+          studentLoad[newSid]++;
+          break;
+        }
+      }
+    }
+  }
+
+  // 统计
+  const oddCounts = allSids.map(function(sid) {
+    let c = 0;
+    for (const key in state.assignments.odd) {
+      if (state.assignments.odd[key].indexOf(sid) !== -1) c++;
+    }
+    return c;
+  });
+  const evenCounts = allSids.map(function(sid) {
+    let c = 0;
+    for (const key in state.assignments.even) {
+      if (state.assignments.even[key].indexOf(sid) !== -1) c++;
+    }
+    return c;
+  });
+
+  state.isScheduling = false;
+  renderStudentList();
+  refreshView();
+  updateButtons();
+
+  showToast(
+    '排班完成，单周' + Math.min.apply(null, oddCounts) + '-' + Math.max.apply(null, oddCounts) + '班，双周' +
+    Math.min.apply(null, evenCounts) + '-' + Math.max.apply(null, evenCounts) + '班',
+    'success'
+  );
+}
+
+// ============================================================
+//  渲染值班表
+// ============================================================
+function renderSchedule() {
+  const container = document.getElementById('scheduleContainer');
+  const emptyState = document.getElementById('emptyState');
+  const hasAssignments = Object.values(state.assignments.odd).some(function(a) { return a.length > 0; }) ||
+                         Object.values(state.assignments.even).some(function(a) { return a.length > 0; });
+
+  if (!hasAssignments && state.currentView === 'duty') {
+    container.style.display = 'none';
+    emptyState.style.display = 'flex';
+    return;
+  }
+
+  emptyState.style.display = 'none';
+  container.style.display = 'block';
+
+  const weekType = state.currentWeek;
+  const assignments = state.assignments[weekType];
+
+  let html = '<div class="schedule-grid" style="grid-template-columns:80px repeat(7,1fr);">';
+  html += '<div class="time-label" style="background:var(--primary);color:white;font-weight:600;">时间段</div>';
+  for (let d = 0; d < 7; d++) {
+    html += '<div class="day-header' + (d >= 5 ? ' weekend-header' : '') + '">' + CONFIG.dayNames[d] + '</div>';
+  }
+
+  const maxRows = Math.max(CONFIG.shifts.weekday.length, CONFIG.shifts.weekend.length);
+  for (let si = 0; si < maxRows; si++) {
+    const wd = CONFIG.shifts.weekday[si];
+    const we = CONFIG.shifts.weekend[si];
+    html += '<div class="time-label">';
+    if (wd) html += '<strong>' + wd.label + '</strong><span>' + wd.time + '</span>';
+    if (we && (wd ? wd.time !== we.time : true)) {
+      html += '<span style="color:var(--danger);font-size:10px;text-align:center;">' + we.label + '<br>' + we.time + '</span>';
+    }
+    html += '</div>';
+
+    for (let d = 0; d < 7; d++) {
+      const isWe = d >= 5;
+      const shift = isWe ? CONFIG.shifts.weekend[si] : CONFIG.shifts.weekday[si];
+      if (!shift) { html += '<div class="shift-cell" style="background:var(--border);opacity:.3;"></div>'; continue; }
+      const key = generateShiftKey(weekType, d, si);
+      const assigned = assignments[key] || [];
+      const isOverflow = assigned.length > shift.capacity;
+      html += '<div class="shift-cell ' + (isWe ? 'weekend-cell' : 'weekday-cell') + (isOverflow ? ' warn' : '') +
+        '" data-key="' + key + '"' + (isOverflow ? ' title="超员：' + assigned.length + '/' + shift.capacity + '"' : '') +
+        ' ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)">';
+      html += '<span class="capacity' + (isOverflow ? ' full' : '') + '">' + assigned.length + '/' + shift.capacity + '</span>';
+      for (const sid of assigned) {
+        const st = state.students.find(function(s) { return s.sid === sid; });
+        const nm = st ? st.name : ('同学' + sid.slice(-4));
+        const escSid = escapeHtml(sid);
+        const escName = escapeHtml(nm);
+        html += '<span class="student-tag" draggable="true" data-sid="' + escSid + '" data-key="' + key +
+          '" ondragstart="onDragStart(event)" ondragend="onDragEnd(event)" ' +
+          'onclick="showStudentCourse(\'' + escSid + '\')" ' +
+          'onmouseenter="highlightStudent(\'' + escSid + '\', true)" onmouseleave="highlightStudent(\'' + escSid + '\', false)" ' +
+          'title="' + escSid + '">' + escName +
+          '<span class="remove-btn" onclick="event.stopPropagation();removeFromShift(\'' + key + '\',\'' + escSid + '\')">×</span></span>';
+      }
+      html += '</div>';
+    }
+  }
+  html += '</div>';
+  container.innerHTML = html;
+
+  highlightAllConflicts();
+}
+
+// ============================================================
+//  渲染空课表
+// ============================================================
+function renderFreeSchedule() {
+  const freeContainer = document.getElementById('freeContainer');
+  const scheduleContainer = document.getElementById('scheduleContainer');
+  const emptyState = document.getElementById('emptyState');
+
+  const readyStudents = state.students.filter(function(s) {
+    return s.status === 'ready';
+  });
+
+  if (readyStudents.length === 0) {
+    freeContainer.style.display = 'none';
+    if (state.currentView === 'free') {
+      scheduleContainer.style.display = 'none';
+      emptyState.style.display = 'flex';
+    }
+    return;
+  }
+
+  emptyState.style.display = 'none';
+  scheduleContainer.style.display = 'none';
+  freeContainer.style.display = 'block';
+
+  const weekType = state.currentWeek;
+
+  let html = '<div class="schedule-grid" style="grid-template-columns:80px repeat(7,1fr);">';
+  html += '<div class="time-label" style="background:var(--primary);color:white;font-weight:600;">时间段</div>';
+  for (let d = 0; d < 7; d++) {
+    html += '<div class="day-header' + (d >= 5 ? ' weekend-header' : '') + '">' + CONFIG.dayNames[d] + '</div>';
+  }
+
+  const maxRows = Math.max(CONFIG.shifts.weekday.length, CONFIG.shifts.weekend.length);
+  for (let si = 0; si < maxRows; si++) {
+    const wdShift = CONFIG.shifts.weekday[si];
+    const weShift = CONFIG.shifts.weekend[si];
+    html += '<div class="time-label">';
+    if (wdShift) html += '<strong>' + wdShift.label + '</strong><span>' + wdShift.time + '</span>';
+    if (weShift && (!wdShift || wdShift.time !== weShift.time)) {
+      html += '<span style="color:var(--danger);font-size:10px;text-align:center;">' + weShift.label + '<br>' + weShift.time + '</span>';
+    }
+    html += '</div>';
+
+    for (let d = 0; d < 7; d++) {
+      const isWe = d >= 5;
+      const shift = isWe ? CONFIG.shifts.weekend[si] : CONFIG.shifts.weekday[si];
+      if (!shift) { html += '<div class="shift-cell" style="background:var(--border);opacity:.3;"></div>'; continue; }
+      const key = generateShiftKey(weekType, d, si);
+      const weekday = d + 1;
+      const freeStudents = readyStudents.filter(function(s) {
+        if (!s.courses) return true;
+        return !hasConflict(s.courses, weekday, shift.conflictPeriods, weekType);
+      });
+      const names = freeStudents.map(function(s) { return s.name; }).join('、');
+      const cls = isWe ? 'weekend-cell' : 'weekday-cell';
+      html += '<div class="shift-cell ' + cls + '" data-key="' + key + '" style="font-size:11px;padding:4px 6px;">';
+      if (freeStudents.length > 0) {
+        html += '<span style="color:var(--success);font-weight:600;font-size:10px;margin-bottom:2px;">' + freeStudents.length + '人</span>';
+        if (freeStudents.length === readyStudents.length) {
+          html += '<span style="line-height:1.3;color:var(--success);">全员空闲</span>';
+        } else {
+          html += '<span style="line-height:1.3;">' + escapeHtml(names) + '</span>';
+        }
+      } else {
+        html += '<span style="color:var(--text-muted);">—</span>';
+      }
+      html += '</div>';
+    }
+  }
+  html += '</div>';
+  freeContainer.innerHTML = html;
+}
+
+function refreshView() {
+  if (state.currentView === 'duty') {
+    renderSchedule();
+  } else {
+    renderFreeSchedule();
+  }
+  highlightAllConflicts();
+}
+
+function switchWeek(weekType) {
+  state.currentWeek = weekType;
+  document.querySelectorAll('#weekToggle button').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.week === weekType);
+  });
+  refreshView();
+}
+
+function switchView(view) {
+  state.currentView = view;
+  document.querySelectorAll('#viewToggle button').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.view === view);
+  });
+
+  const emptyState = document.getElementById('emptyState');
+  const scheduleContainer = document.getElementById('scheduleContainer');
+  const freeContainer = document.getElementById('freeContainer');
+
+  scheduleContainer.style.display = view === 'duty' ? 'block' : 'none';
+  freeContainer.style.display = view === 'free' ? 'block' : 'none';
+  emptyState.style.display = 'none';
+
+  refreshView();
+}
+
+// ============================================================
+//  拖拽交互
+// ============================================================
+let dragData = null;
+
+function onStudentDragStart(e) {
+  const item = e.target.closest('.student-item');
+  if (!item) return;
+  dragData = { sid: item.dataset.sid, fromKey: null };
+  item.style.opacity = '0.5';
+  markAvailableCells(item.dataset.sid);
+  const img = new Image();
+  img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+  e.dataTransfer.setDragImage(img, 0, 0);
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function onStudentDragEnd(e) {
+  const item = e.target.closest('.student-item');
+  if (item) item.style.opacity = '1';
+  clearAllDragMarkers();
+  dragData = null;
+}
+
+function onDragStart(e) {
+  const tag = e.target.closest('.student-tag');
+  if (!tag) return;
+  dragData = { sid: tag.dataset.sid, fromKey: tag.dataset.key };
+  tag.classList.add('dragging');
+  const img = new Image();
+  img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+  e.dataTransfer.setDragImage(img, 0, 0);
+  e.dataTransfer.effectAllowed = 'move';
+  markAvailableCells(tag.dataset.sid);
+}
+
+function onDragEnd(e) {
+  const tag = e.target.closest('.student-tag');
+  if (tag) tag.classList.remove('dragging');
+  clearAllDragMarkers();
+  dragData = null;
+}
+
+function markAvailableCells(sid) {
+  const student = state.students.find(function(s) { return s.sid === sid; });
+  if (!student || !student.courses) return;
+  const weekType = state.currentWeek;
+  const container = document.getElementById('scheduleContainer');
+  if (!container) return;
+  container.querySelectorAll('.shift-cell').forEach(function(cell) {
+    const key = cell.dataset.key;
+    if (!key) return;
+    const parts = parseShiftKey(key);
+    if (!parts) return;
+    const dayIdx = parts.dayIdx, shiftIdx = parts.shiftIdx;
+    const isWeekend = dayIdx >= 5;
+    const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+    const shift = shifts[shiftIdx];
+    if (!shift) return;
+    const conflict = hasConflict(student.courses, dayIdx + 1, shift.conflictPeriods, weekType);
+    cell.classList.add(conflict ? 'drop-conflict' : 'drop-available');
+  });
+}
+
+function clearAllDragMarkers() {
+  document.querySelectorAll('.shift-cell.drag-over, .shift-cell.drop-available, .shift-cell.drop-conflict')
+    .forEach(function(el) {
+      el.classList.remove('drag-over', 'drop-available', 'drop-conflict');
+      el.title = '';
+      el.style.cursor = '';
+    });
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const cell = e.target.closest('.shift-cell');
+  if (!cell) return;
+  cell.classList.add('drag-over');
+}
+
+function onDragLeave(e) {
+  const cell = e.target.closest('.shift-cell');
+  if (!cell) return;
+  cell.classList.remove('drag-over');
+  cell.title = '';
+  cell.style.cursor = '';
+}
+
+function onDrop(e) {
+  e.preventDefault();
+  const cell = e.target.closest('.shift-cell');
+  if (!cell) return;
+  cell.classList.remove('drag-over');
+  cell.title = '';
+  cell.style.cursor = '';
+
+  if (!dragData) return;
+  const toKey = cell.dataset.key;
+  const fromKey = dragData.fromKey;
+  const sid = dragData.sid;
+  clearAllDragMarkers();
+
+  if (fromKey === toKey) return;
+
+  const weekType = state.currentWeek;
+  const toAssignment = state.assignments[weekType][toKey];
+  if (!toAssignment) { showToast('无效的目标班次', 'error'); return; }
+
+  const keyParts = parseShiftKey(toKey);
+  if (!keyParts) { showToast('无法解析班次', 'error'); return; }
+
+  const dayIdx = keyParts.dayIdx, shiftIdx = keyParts.shiftIdx;
+  const isWeekend = dayIdx >= 5;
+  const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+  const shift = shifts[shiftIdx];
+
+  if (toAssignment.indexOf(sid) !== -1) {
+    showToast('该学生已在此班次中', 'info');
+    return;
+  }
+
+  const student = state.students.find(function(s) { return s.sid === sid; });
+  if (student && student.courses && shift) {
+    const weekday = dayIdx + 1;
+    if (hasConflict(student.courses, weekday, shift.conflictPeriods, weekType)) {
+      const conflictDetail = getConflictCourses(student, weekday, shift.conflictPeriods, weekType);
+      const conflictMsg = conflictDetail.length > 0
+        ? '课程冲突：' + conflictDetail.map(function(c) {
+            return c.name + '(第' + c.beginPeriod + '-' + c.endPeriod + '节 ' + c.rawWeek + ')';
+          }).join('；')
+        : '该时段有课程冲突！';
+      showToast(conflictMsg, 'error');
+      return;
+    }
+  }
+
+  if (fromKey) {
+    const fromAssignment = state.assignments[weekType][fromKey];
+    if (fromAssignment) {
+      const idx = fromAssignment.indexOf(sid);
+      if (idx !== -1) fromAssignment.splice(idx, 1);
+    }
+  }
+
+  toAssignment.push(sid);
+  renderStudentList();
+  refreshView();
+
+  if (shift && toAssignment.length > shift.capacity) {
+    showToast('已添加，但该班次超员（上限' + shift.capacity + '人）', 'error');
+  } else {
+    showToast('班次已调整', 'success');
+  }
+}
+
+function parseShiftKey(key) {
+  const parts = key.split('_');
+  if (parts.length !== 3) return null;
+  const dayIdx = parseInt(parts[1].slice(1));
+  const shiftId = parts[2];
+  const prefix = shiftId.substring(0, 2);
+  const shiftIdx = parseInt(shiftId.slice(2));
+  return { weekType: parts[0], dayIdx: dayIdx, shiftIdx: shiftIdx, prefix: prefix };
+}
+
+// ============================================================
+//  班次管理
+// ============================================================
+function removeFromShift(key, sid) {
+  const weekType = state.currentWeek;
+  const assignment = state.assignments[weekType][key];
+  if (assignment) {
+    const idx = assignment.indexOf(sid);
+    if (idx !== -1) assignment.splice(idx, 1);
+  }
+  renderStudentList();
+  refreshView();
+  updateButtons();
+}
+
+function resetSchedule() {
+  showConfirm('重置排班', '确定要重置所有排班吗？此操作不可撤销。', function() {
+    state.assignments = { odd: {}, even: {} };
+    renderStudentList();
+    refreshView();
+    updateButtons();
+    showToast('排班已重置');
+  });
+}
+
+function showConfirm(title, message, onConfirm) {
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmMessage').textContent = message;
+  const okBtn = document.getElementById('confirmOkBtn');
+  const newBtn = okBtn.cloneNode(true);
+  okBtn.parentNode.replaceChild(newBtn, okBtn);
+  newBtn.addEventListener('click', function() {
+    closeConfirm();
+    onConfirm();
+  });
+  document.getElementById('confirmModal').classList.add('show');
+}
+
+function closeConfirm() {
+  document.getElementById('confirmModal').classList.remove('show');
+}
+
+// ============================================================
+//  课表可视化弹窗
+// ============================================================
+function showStudentCourse(sid) {
+  const student = state.students.find(function(s) { return s.sid === sid; });
+  if (!student) return;
+
+  if (student.status === 'pending' || student.status === 'error') {
+    showToast('正在获取课表...', 'info');
+    fetchStudentSchedule(sid).then(function(data) {
+      if (data && data.courses && data.courses.length > 0) {
+        if (data.name) student.name = data.name;
+        student.nowWeek = data.nowWeek || 0;
+        student.courses = parseCourses(data.courses, student.sid);
+        student.rawCourses = data.courses;
+        student.status = 'ready';
+        renderStudentList();
+        updateButtons();
+        showStudentCourse(sid);
+      } else {
+        showToast('获取课表失败，请检查学号', 'error');
+      }
+    }).catch(function(e) {
+      showToast('网络错误，请稍后重试', 'error');
+    });
+    return;
+  }
+
+  if (!student.courses || student.courses.length === 0) {
+    showToast('暂无课表数据', 'info');
+    return;
+  }
+
+  state.currentCourseModalSid = sid;
+  document.getElementById('courseModalTitle').textContent = student.name + ' (' + sid + ') - 课表';
+  document.getElementById('courseModalWeek').textContent = student.nowWeek ? '当前第' + student.nowWeek + '周' : '';
+  renderCourseGrid(student);
+  document.getElementById('courseModal').classList.add('show');
+}
+
+function closeCourseModal() {
+  document.getElementById('courseModal').classList.remove('show');
+  state.currentCourseModalSid = null;
+}
+
+function renderCourseGrid(student) {
+  const grid = document.getElementById('courseGrid');
+  if (!student.courses) return;
+
+  const colorMap = {};
+  let colorIdx = 0;
+  for (const c of student.courses) {
+    if (!(c.courseId in colorMap)) {
+      colorMap[c.courseId] = colorIdx % 8;
+      colorIdx++;
+    }
+  }
+
+  let html = '<div class="cg-header">节次</div>';
+  for (let d = 0; d < 7; d++) {
+    html += '<div class="cg-header' + (d >= 5 ? ' weekend' : '') + '">' + CONFIG.dayNames[d] + '</div>';
+  }
+
+  const periodPairs = [[1,2], [3,4], [5,6], [7,8], [9,10], [11,12]];
+  for (const pp of periodPairs) {
+    const pStart = pp[0], pEnd = pp[1];
+    const startTime = CONFIG.courseTimes[pStart] ? CONFIG.courseTimes[pStart].start : '';
+    const endTime = CONFIG.courseTimes[pEnd] ? CONFIG.courseTimes[pEnd].end : '';
+    html += '<div class="cg-period">第' + pStart + '-' + pEnd + '节<br><small>' + startTime + '-' + endTime + '</small></div>';
+
+    for (let d = 0; d < 7; d++) {
+      const weekday = d + 1;
+      const cellCourses = student.courses.filter(function(c) {
+        return c.weekday === weekday && c.periods.some(function(p) { return p >= pStart && p <= pEnd; });
+      });
+
+      const isWeekend = d >= 5;
+      html += '<div class="cg-cell' + (isWeekend ? ' odd-week' : '') + '">';
+
+      for (const course of cellCourses) {
+        if (!course.periods.some(function(p) { return p >= pStart && p <= pEnd; })) continue;
+        const courseStartPair = Math.ceil(course.beginPeriod / 2);
+        const currentPair = Math.ceil(pStart / 2);
+        const courseEndPair = Math.ceil(course.endPeriod / 2);
+        const spanRows = courseEndPair - courseStartPair + 1;
+        const isStartRow = courseStartPair === currentPair;
+        const colorClass = 'color-' + (colorMap[course.courseId] || 0);
+        const ignoredClass = course.ignored ? ' ignored' : '';
+
+        const escCid = course.courseId.replace(/'/g, "\\'");
+        html += '<div class="cg-course-block ' + colorClass + ignoredClass + (isStartRow ? '' : ' continued') + '"' +
+          (spanRows > 1 && isStartRow ? ' style="grid-row: span ' + spanRows + ';"' : '') +
+          ' onclick="event.stopPropagation();toggleCourseIgnore(\'' + student.sid + '\', \'' + escCid + '\')"' +
+          ' title="' + (course.ignored ? '已忽略 - 点击取消忽略' : '点击忽略此课程') + '">' +
+          '<div class="cg-course-name">' + escapeHtml(course.name) + (isStartRow ? '' : ' (续)') + '</div>' +
+          (isStartRow ? '<div class="cg-course-info">' + escapeHtml(course.teacher) + ' ' + escapeHtml(course.type) + '</div>' +
+          '<div class="cg-course-location">' + escapeHtml(course.location) + ' | ' + escapeHtml(course.rawWeek) + '</div>' : '') +
+          '</div>';
+      }
+      html += '</div>';
+    }
+  }
+  grid.innerHTML = html;
+}
+
+// ============================================================
+//  课程忽略管理
+// ============================================================
+function toggleCourseIgnore(sid, courseId) {
+  if (!state.ignoredCourses[sid]) state.ignoredCourses[sid] = new Set();
+  const ignoredSet = state.ignoredCourses[sid];
+  const student = state.students.find(function(s) { return s.sid === sid; });
+  if (!student || !student.courses) return;
+  const course = student.courses.find(function(c) { return c.courseId === courseId; });
+  if (!course) return;
+
+  if (ignoredSet.has(courseId)) {
+    ignoredSet.delete(courseId);
+  } else {
+    ignoredSet.add(courseId);
+  }
+
+  course.ignored = ignoredSet.has(courseId) ? !course.autoIgnored : course.autoIgnored;
+  saveIgnoredCourses();
+  showToast(course.ignored ? '已忽略该课程（排班时将不考虑该时段冲突）' : '已取消忽略', 'info');
+
+  if (state.currentCourseModalSid === sid) renderCourseGrid(student);
+  refreshView();
+  highlightAllConflicts();
+  updateButtons();
+}
+
+async function refreshSingleCourse() {
+  const sid = state.currentCourseModalSid;
+  if (!sid) return;
+  const student = state.students.find(function(s) { return s.sid === sid; });
+  if (!student) return;
+
+  showToast('正在刷新课表...', 'info');
+  try {
+    const data = await fetchStudentSchedule(sid);
+    if (data && data.courses && data.courses.length > 0) {
+      if (data.name) student.name = data.name;
+      student.nowWeek = data.nowWeek || 0;
+      student.courses = parseCourses(data.courses, sid);
+      student.rawCourses = data.courses;
+      student.status = 'ready';
+      document.getElementById('courseModalTitle').textContent = student.name + ' (' + sid + ') - 课表';
+      document.getElementById('courseModalWeek').textContent = student.nowWeek ? '当前第' + student.nowWeek + '周' : '';
+      renderCourseGrid(student);
+      renderStudentList();
+      updateButtons();
+      showToast('课表已刷新', 'success');
+    } else {
+      showToast('获取课表失败，请检查学号', 'error');
+    }
+  } catch(e) {
+    student.status = 'error';
+    renderStudentList();
+    showToast('网络错误，请稍后重试', 'error');
+  }
+}
+
+function resetIgnoredCourses() {
+  const sid = state.currentCourseModalSid;
+  if (!sid) return;
+  if (state.ignoredCourses[sid]) state.ignoredCourses[sid].clear();
+  saveIgnoredCourses();
+
+  const student = state.students.find(function(s) { return s.sid === sid; });
+  if (student && student.courses) {
+    for (const course of student.courses) {
+      course.autoIgnored = CONFIG.ignoreCourseKeywords.some(function(kw) { return course.name.indexOf(kw) !== -1; }) ||
+        (course.weeks && course.weeks.length > 0 && course.weeks.every(function(w) { return w >= 18; }));
+      course.ignored = course.autoIgnored;
+    }
+    renderCourseGrid(student);
+  }
+  refreshView();
+  highlightAllConflicts();
+  updateButtons();
+  showToast('已重置该同学的忽略课程', 'info');
+}
+
+function highlightAllConflicts() {
+  document.querySelectorAll('.shift-cell.warn').forEach(function(el) {
+    const oldTitle = el.title || '';
+    const overflowPart = oldTitle.indexOf('超员') === 0 ? oldTitle.split('；')[0] : '';
+    if (overflowPart) { el.title = overflowPart; }
+    else { el.classList.remove('warn'); el.title = ''; }
+  });
+
+  const weekType = state.currentWeek;
+  const container = state.currentView === 'duty'
+    ? document.getElementById('scheduleContainer')
+    : document.getElementById('freeContainer');
+  if (!container) return;
+
+  container.querySelectorAll('.shift-cell').forEach(function(cell) {
+    const key = cell.dataset.key;
+    if (!key) return;
+    const assignment = state.assignments[weekType] && state.assignments[weekType][key];
+    if (!assignment || assignment.length === 0) return;
+
+    const parts = parseShiftKey(key);
+    if (!parts) return;
+    const dayIdx = parts.dayIdx, shiftIdx = parts.shiftIdx;
+    const isWeekend = dayIdx >= 5;
+    const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+    const shift = shifts[shiftIdx];
+    if (!shift || !shift.conflictPeriods || shift.conflictPeriods.length === 0) return;
+
+    const conflicting = [];
+    for (const sid of assignment) {
+      const student = state.students.find(function(s) { return s.sid === sid; });
+      if (!student || !student.courses) continue;
+      if (hasConflict(student.courses, dayIdx + 1, shift.conflictPeriods, weekType)) {
+        conflicting.push(student.name);
+      }
+    }
+
+    if (conflicting.length > 0) {
+      cell.classList.add('warn');
+      const existingTitle = cell.title && cell.title.indexOf('超员') === 0 ? cell.title : '';
+      const conflictTitle = '课程冲突：' + conflicting.join('、');
+      cell.title = existingTitle ? existingTitle + '；' + conflictTitle : conflictTitle;
+    }
+  });
+}
+
+// ============================================================
+// ============================================================
+//  课表获取（API 调用）
+// ============================================================
+async function fetchStudentSchedule(sid) {
+  // 尝试红岩网校 API
+  try {
+    const formData = new URLSearchParams();
+    formData.append('stu_num', sid);
+    const resp = await fetch('https://be-prod.redrock.cqupt.edu.cn/magipoke-jwzx/kebiao', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json, text/plain, */*' },
+      body: formData.toString()
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data && data.data && data.data.length > 0) {
+        const courses = [];
+        for (const item of data.data) {
+          courses.push({
+            course: item.course || '未知课程',
+            teacher: item.teacher || '',
+            type: item.type || '',
+            rawWeek: item.rawWeek || '',
+            classroom: item.classroom || '',
+            course_num: item.course_num || '',
+            week: item.week || [],
+            hash_day: item.hash_day || 0,
+            begin_lesson: item.begin_lesson || 1,
+            period: item.period || 2
+          });
+        }
+        return { sid: sid, name: '同学' + sid.slice(-4), nowWeek: data.nowWeek || 0, courses: courses, source: 'redrock' };
+      }
+    }
+  } catch(e) { /* CORS/network error, fall through */ }
+
+  // 尝试教务在线直连
+  try {
+    const resp = await fetch('http://jwzx.cqupt.edu.cn/kebiao/kb_stu.php?xh=' + sid);
+    if (resp.ok) {
+      const html = await resp.text();
+      const parsed = parseJwzxHtml(html, sid);
+      if (parsed && parsed.courses && parsed.courses.length > 0) return parsed;
+    }
+  } catch(e) { /* CORS/network error, fall through */ }
+
+  throw new Error('所有数据源均无法访问（可能需要校园网或浏览器不支持跨域请求）');
+}
+
+function parseJwzxHtml(html, sid) {
+  const courses = [];
+  let nowWeek = 0;
+  let studentName = '同学' + sid.slice(-4);
+
+  const m = html.match(/第\s*(\d+)\s*周/);
+  if (m) nowWeek = parseInt(m[1]);
+
+  const nameMatch = new RegExp(sid + '\\s*([\\u4e00-\\u9fff]{2,4})').exec(html);
+  if (nameMatch) studentName = nameMatch[1];
+
+  let idx = html.indexOf('id="kbStuTabs-table"');
+  if (idx < 0) idx = html.indexOf("id='kbStuTabs-table'");
+  if (idx < 0) return { sid: sid, name: studentName, nowWeek: nowWeek, courses: courses, source: 'jwzx' };
+
+  const chunk = html.substring(idx);
+  const tm = chunk.match(/<table[^>]*>([\s\S]*?)<\/table>/);
+  if (!tm) return { sid: sid, name: studentName, nowWeek: nowWeek, courses: courses, source: 'jwzx' };
+
+  const tableHtml = tm[1];
+  const rows = [];
+  const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
+  let rowMatch;
+  while ((rowMatch = rowRegex.exec(tableHtml)) !== null) rows.push(rowMatch[1]);
+
+  let classSeq = 0;
+  for (const row of rows) {
+    if (row.indexOf('间歇') !== -1) continue;
+    const kbDivs = row.match(/<div[^>]*kbTd[^>]*>[\s\S]*?<\/div>/g);
+    if (!kbDivs) continue;
+    classSeq++;
+
+    const tds = row.match(/<td[^>]*>[\s\S]*?<\/td>/g);
+    if (!tds || tds.length < 2) continue;
+
+    let weekday = 0;
+    for (const td of tds) {
+      if (weekday === 0) { weekday++; continue; }
+      if (weekday > 7) break;
+
+      const tdKbDivs = td.match(/<div[^>]*kbTd[^>]*>[\s\S]*?<\/div>/g);
+      if (tdKbDivs) {
+        for (const divHtml of tdKbDivs) {
+          const course = parseKbDiv(divHtml, classSeq, weekday);
+          if (course) courses.push(course);
+        }
+      }
+      weekday++;
+    }
+  }
+  return { sid: sid, name: studentName, nowWeek: nowWeek, courses: courses, source: 'jwzx' };
+}
+
+function parseKbDiv(divHtml, classSeq, weekday) {
+  try {
+    const parts = divHtml.split(/<br\s*\/?>/i);
+    const cleaned = [];
+    for (const p of parts) {
+      const text = p.replace(/<[^>]+>/g, '').trim();
+      if (text) cleaned.push(text);
+    }
+    if (cleaned.length < 3) return null;
+
+    let courseName = cleaned[1];
+    if (courseName.indexOf('-') !== -1) courseName = courseName.split('-')[1];
+
+    let location = '';
+    for (const p of cleaned) {
+      if (p.indexOf('地点') !== -1) {
+        location = p.replace(/^地点[：:]\s*/, '').trim();
+        break;
+      }
+    }
+
+    let rawWeek = '';
+    for (const p of cleaned) {
+      if (p.indexOf('周') !== -1 && /\d/.test(p)) { rawWeek = p.trim(); break; }
+    }
+
+    let teacher = '', courseType = '';
+    for (const p of cleaned.slice(3)) {
+      if (p.indexOf('学分') !== -1 && /\d/.test(p)) {
+        const typeMatch = p.match(/[必选]修/);
+        if (typeMatch) courseType = typeMatch[0];
+        teacher = p.replace(/[必选]修|\d+\.?\d*学分/g, '').trim();
+        break;
+      }
+    }
+    if (!teacher) {
+      for (let i = cleaned.length - 1; i >= 0; i--) {
+        const p = cleaned[i];
+        if (p.indexOf('修') !== -1 || p.indexOf('学分') !== -1) {
+          const typeMatch = p.match(/[必选]修/);
+          if (typeMatch) courseType = typeMatch[0];
+          teacher = p.replace(/[必选]修|\d+\.?\d*学分/g, '').trim();
+          break;
+        }
+      }
+    }
+
+    let duration = 2;
+    for (const p of cleaned) {
+      const durMatch = p.match(/(\d+)节连上/);
+      if (durMatch) { duration = parseInt(durMatch[1]); break; }
+    }
+    const durMatch2 = divHtml.match(/(\d+)节连上/);
+    if (durMatch2) duration = parseInt(durMatch2[1]);
+
+    const weeks = parseWeekRange(rawWeek);
+    const begin = classSeq * 2 - 1;
+
+    return {
+      course: courseName, teacher: teacher, type: courseType,
+      rawWeek: rawWeek, classroom: location,
+      course_num: cleaned[1] || '', week: weeks,
+      hash_day: weekday - 1, begin_lesson: begin, period: duration
+    };
+  } catch(e) { return null; }
+}
+
+// 周次解析（从描述中提取周次列表）
+function parseWeekRange(raw) {
+  const weeks = [];
+  const rw = raw.replace(/\d+节连上/g, '').trim();
+  const segments = rw.split(',');
+  for (const seg of segments) {
+    const s = seg.trim();
+    const rangeMatch = s.match(/(\d+)\s*[-–]\s*(\d+)\s*周/);
+    if (rangeMatch) {
+      const start = parseInt(rangeMatch[1]), end = parseInt(rangeMatch[2]);
+      if (s.indexOf('单周') !== -1) {
+        for (let w = start; w <= end; w++) { if (w % 2 === 1) weeks.push(w); }
+      } else if (s.indexOf('双周') !== -1) {
+        for (let w = start; w <= end; w++) { if (w % 2 === 0) weeks.push(w); }
+      } else {
+        for (let w = start; w <= end; w++) weeks.push(w);
+      }
+      continue;
+    }
+    const singleMatch = s.match(/(\d+)\s*周/);
+    if (singleMatch) weeks.push(parseInt(singleMatch[1]));
+  }
+  return weeks.sort(function(a,b) { return a-b; });
+}
+
+async function fetchAllSchedules() {
+  const progressBar = document.getElementById('progressBar');
+  const progressFill = document.getElementById('progressFill');
+  progressBar.classList.add('active');
+
+  const pending = state.students.filter(function(s) { return s.status === 'pending' || s.status === 'error'; });
+  if (pending.length === 0) {
+    progressBar.classList.remove('active');
+    return;
+  }
+
+  const total = state.students.length;
+  let completed = state.students.length - pending.length;
+
+  for (const student of pending) { student.status = 'loading'; }
+  renderStudentList();
+
+  const tasks = pending.map(function(student) {
+    return fetchStudentSchedule(student.sid)
+      .then(function(data) {
+        if (data && data.courses && data.courses.length > 0) {
+          if (data.name) student.name = data.name;
+          student.nowWeek = data.nowWeek || 0;
+          student.courses = parseCourses(data.courses, student.sid);
+          student.rawCourses = data.courses;
+          student.status = 'ready';
+        } else {
+          student.status = 'error';
+        }
+      })
+      .catch(function(e) {
+        console.error('获取 ' + student.sid + ' 课表失败:', e);
+        student.status = 'error';
+      })
+      .finally(function() {
+        completed++;
+        progressFill.style.width = ((completed / total) * 100) + '%';
+        renderStudentList();
+      });
+  });
+
+  await Promise.all(tasks);
+  progressBar.classList.remove('active');
+  progressFill.style.width = '0%';
+  updateButtons();
+
+  const successCount = state.students.filter(function(s) { return s.status === 'ready'; }).length;
+  const failCount = state.students.filter(function(s) { return s.status === 'error'; }).length;
+  showToast('课表获取完成：成功 ' + successCount + ' 人，失败 ' + failCount + ' 人', failCount > 0 ? 'error' : 'success');
+}
+
+async function refreshCourses() {
+  if (state.isScheduling) return;
+  state.isScheduling = true;
+  updateButtons();
+
+  const failedStudents = state.students.filter(function(s) { return s.status === 'error'; });
+  if (failedStudents.length > 0) {
+    showToast('正在重新获取 ' + failedStudents.length + ' 个失败的课表...', 'info');
+    await fetchAllSchedules();
+  } else {
+    showToast('正在刷新全部课表...', 'info');
+    for (const s of state.students) {
+      s.status = 'pending'; s.courses = null; s.rawCourses = null;
+    }
+    await fetchAllSchedules();
+  }
+
+  state.isScheduling = false;
+  renderStudentList();
+  refreshView();
+  updateButtons();
+  const errCount = state.students.filter(function(s) { return s.status === 'error'; }).length;
+  const okCount = state.students.filter(function(s) { return s.status === 'ready'; }).length;
+  showToast('课表刷新完成：成功 ' + okCount + ' 人' + (errCount > 0 ? '，失败 ' + errCount + ' 人' : ''), errCount > 0 ? 'error' : 'success');
+}
+
+// ============================================================
+//  Excel 导出（需要XLSX库）
+// ============================================================
+function getStudentName(sid) {
+  const s = state.students.find(function(st) { return st.sid === sid; });
+  return s ? s.name : sid;
+}
+
+function exportDutySchedule() {
+  if (typeof XLSX === 'undefined') { showToast('XLSX库未加载，请检查网络连接', 'error'); return; }
+  const wb = XLSX.utils.book_new();
+  for (const weekType of ['odd', 'even']) {
+    const sheetName = weekType === 'odd' ? '单周值班表' : '双周值班表';
+    const allShifts = [];
+    for (let dayIdx = 0; dayIdx < 7; dayIdx++) {
+      const isWeekend = dayIdx >= 5;
+      const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+      for (let si = 0; si < shifts.length; si++) {
+        const key = generateShiftKey(weekType, dayIdx, si);
+        const assigned = (state.assignments[weekType][key] || []).map(getStudentName).join('、');
+        allShifts.push({ day: CONFIG.dayNames[dayIdx], time: shifts[si].time, label: shifts[si].label, assigned: assigned });
+      }
+    }
+    const days = CONFIG.dayNames;
+    const timeSlots = [], seen = new Set();
+    for (const s of allShifts) { if (!seen.has(s.time)) { seen.add(s.time); timeSlots.push(s); } }
+    const header = ['时间段'].concat(days);
+    const rows = [header];
+    for (const slot of timeSlots) {
+      const row = [slot.label + ' ' + slot.time];
+      for (let d = 0; d < 7; d++) {
+        const entry = allShifts.find(function(s) { return s.day === days[d] && s.time === slot.time; });
+        row.push(entry ? entry.assigned : '');
+      }
+      rows.push(row);
+    }
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    ws['!cols'] = [{ wch: 22 }].concat(days.map(function() { return { wch: 18 }; }));
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+  }
+  XLSX.writeFile(wb, '值班表_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+  showToast('值班表已导出为 Excel', 'success');
+}
+
+function exportFreeSchedule() {
+  if (typeof XLSX === 'undefined') { showToast('XLSX库未加载，请检查网络连接', 'error'); return; }
+  const wb = XLSX.utils.book_new();
+  const readyStudents = state.students.filter(function(s) { return s.status === 'ready'; });
+  for (const weekType of ['odd', 'even']) {
+    const sheetName = weekType === 'odd' ? '单周空课表' : '双周空课表';
+    const allShifts = [];
+    for (let dayIdx = 0; dayIdx < 7; dayIdx++) {
+      const isWeekend = dayIdx >= 5;
+      const shifts = isWeekend ? CONFIG.shifts.weekend : CONFIG.shifts.weekday;
+      for (let si = 0; si < shifts.length; si++) {
+        const weekday = dayIdx + 1;
+        const freeStudents = readyStudents.filter(function(s) {
+          if (!s.courses) return true;
+          return !hasConflict(s.courses, weekday, shifts[si].conflictPeriods, weekType);
+        });
+        allShifts.push({ day: CONFIG.dayNames[dayIdx], time: shifts[si].time, label: shifts[si].label,
+          names: freeStudents.map(function(s) { return s.name; }).join('、') });
+      }
+    }
+    const days = CONFIG.dayNames;
+    const timeSlots = [], seen = new Set();
+    for (const s of allShifts) { if (!seen.has(s.time)) { seen.add(s.time); timeSlots.push(s); } }
+    const header = ['时间段'].concat(days);
+    const rows = [header];
+    for (const slot of timeSlots) {
+      const row = [slot.label + ' ' + slot.time];
+      for (let d = 0; d < 7; d++) {
+        const entry = allShifts.find(function(s) { return s.day === days[d] && s.time === slot.time; });
+        row.push(entry ? entry.names : '');
+      }
+      rows.push(row);
+    }
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    ws['!cols'] = [{ wch: 22 }].concat(days.map(function() { return { wch: 22 }; }));
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+  }
+  XLSX.writeFile(wb, '空课表_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+  showToast('空课表已导出为 Excel', 'success');
+}
+
+// ============================================================
+//  导入导出 JSON 数据
+// ============================================================
+function exportData() {
+  const data = {
+    version: 2,
+    date: new Date().toISOString(),
+    students: state.students.map(function(s) {
+      const allIgnored = s.courses
+        ? s.courses.filter(function(c) { return c.ignored; }).map(function(c) { return c.courseId; })
+        : (state.ignoredCourses[s.sid] ? Array.from(state.ignoredCourses[s.sid]) : []);
+      return { sid: s.sid, name: s.name, rawCourses: s.rawCourses || null, ignoredCourses: allIgnored };
+    }),
+    assignments: state.assignments
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '排班数据_' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('数据已导出', 'success');
+}
+
+function importData() {
+  document.getElementById('importFileInput').click();
+}
+
+function handleImportFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.students || !data.assignments) { showToast('无效的数据文件', 'error'); return; }
+      data.students.forEach(function(s) {
+        if (s.ignoredCourses && s.ignoredCourses.length > 0) {
+          state.ignoredCourses[s.sid] = new Set(s.ignoredCourses);
+        }
+      });
+      state.students = data.students.map(function(s) {
+        const student = { sid: s.sid, name: s.name || ('同学' + s.sid.slice(-4)), status: 'pending', courses: null, rawCourses: null };
+        if (s.rawCourses && s.rawCourses.length > 0) {
+          student.rawCourses = s.rawCourses;
+          student.courses = parseCourses(s.rawCourses, s.sid, true);
+          student.status = 'ready';
+        }
+        return student;
+      });
+      state.assignments = data.assignments;
+      saveIgnoredCourses();
+      renderStudentList();
+      refreshView();
+      updateButtons();
+      showToast('已导入 ' + state.students.length + ' 名同学及排班数据', 'success');
+    } catch(err) { showToast('文件解析失败', 'error'); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ============================================================
+//  弹窗管理
+// ============================================================
+function openGuide() { document.getElementById('guideModal').classList.add('show'); }
+function closeGuide() { document.getElementById('guideModal').classList.remove('show'); }
+
+function closeModal() { document.getElementById('exportModal').classList.remove('show'); }
+function copyModalContent() {
+  const content = document.getElementById('modalContent').textContent;
+  navigator.clipboard.writeText(content).then(function() { showToast('已复制', 'success'); })
+    .catch(function() { showToast('复制失败', 'error'); });
+}
+function downloadModalContent() {}
+
+// ============================================================
+//  快捷键
+// ============================================================
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (document.getElementById('confirmModal').classList.contains('show')) { closeConfirm(); return; }
+    if (document.getElementById('courseModal').classList.contains('show')) { closeCourseModal(); return; }
+    if (document.getElementById('guideModal').classList.contains('show')) { closeGuide(); return; }
+    closeModal();
+  }
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    if (state.students.length > 0) runSchedule();
+  }
+});
+
+// 点击外部关闭弹窗
+document.getElementById('courseModal').addEventListener('click', function(e) { if (e.target === e.currentTarget) closeCourseModal(); });
+document.getElementById('guideModal').addEventListener('click', function(e) { if (e.target === e.currentTarget) closeGuide(); });
+document.getElementById('confirmModal').addEventListener('click', function(e) { if (e.target === e.currentTarget) closeConfirm(); });
+document.getElementById('exportModal').addEventListener('click', function(e) { if (e.target === e.currentTarget) closeModal(); });
+
+// ============================================================
+//  初始化
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  loadIgnoredCourses();
+  renderStudentList();
+  updateButtons();
+  showToast('欢迎使用学生排班系统！请在左侧导入学号', 'info');
+});
+</script>
+</body>
+</html>
